@@ -26,7 +26,7 @@ const features: Feature[] = [
 
 export const WhyVivoNagpur: React.FC = () => {
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-12 bg-gray-100">
       <h2 className="text-3xl sm:text-4xl text-center font-normal text-black mb-8">
         Why vivo Nagpur
       </h2>

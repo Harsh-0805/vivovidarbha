@@ -39,11 +39,11 @@ const MustHaveProducts: React.FC = () => {
   >("Best Sellers");
 
   return (
-    <section className="py-12 text-black bg-gray-50">
-      <h2 className="text-left pl-6 sm:pl-20 text-3xl font-normal mb-8">
+    <section className="py-12 text-black bg-gray-100">
+      <h2 className="text-left px-6 sm:px-20 text-3xl font-normal mb-8">
         Must-Have Products
       </h2>
-      <div className="flex pl-6 sm:pl-20 justify-start space-x-4 mb-8">
+      <div className="flex px-6 sm:px-20 justify-start space-x-4 mb-8">
         <button
           onClick={() => setActiveTab("Best Sellers")}
           className={`px-4 py-2 rounded-xl max-w-[176px] ${

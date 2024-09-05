@@ -19,7 +19,7 @@ const categories: Category[] = [
 
 export const ShopByCategory: React.FC = () => {
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-12 bg-gray-100">
       <h2 className="text-left pl-6 sm:pl-20 text-black text-3xl font-normal mb-8">
         Shop By Category
       </h2>

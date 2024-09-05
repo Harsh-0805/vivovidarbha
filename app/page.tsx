@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/Carousel"; // Importing Carousel compo
 import { ShopByCategory } from "@/components/Category";
 import { WhyVivoNagpur } from "@/components/WhyVivoNagpur";
 import MustHaveProducts from "@/components/MustHave";
+import DiscoverSection from "@/components/Discover";
 
 const Home: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const Home: React.FC = () => {
       <HeroSection />
       <ShopByCategory />
       <MustHaveProducts />
+      <DiscoverSection />
       <WhyVivoNagpur />
     </div>
   );
