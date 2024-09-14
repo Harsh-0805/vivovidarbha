@@ -110,23 +110,9 @@ const TabbedNavigationWithFilter: React.FC = () => {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col bg-gray-50 w-full">
+      <div className="flex flex-col bg-gray-50 w-full text-black">
         {/* Tabs Section */}
-        {/* <nav className="flex justify-center space-x-20 py-4 bg-[#E9EAEB]">
-          {Object.keys(tabContent).map((tab) => (
-            <button
-              key={tab}
-              className={`pb-2 border-b-[1px] transition-colors duration-300 ${
-                activeTab === tab
-                  ? "border-blue-500 text-blue-500 font-normal"
-                  : "border-transparent text-black hover:text-blue-500"
-              }`}
-              onClick={() => setActiveTab(tab)}
-            >
-              {tab}
-            </button>
-          ))} */}
-        <nav className="flex justify-center space-x-20 py-4 bg-[#E9EAEB]">
+        <nav className="flex justify-center flex-wrap space-x-4 sm:space-x-6 lg:space-x-20 py-4 bg-[#E9EAEB]">
           {Object.keys(tabContent).map((model) => (
             <button
               key={model}
@@ -145,27 +131,10 @@ const TabbedNavigationWithFilter: React.FC = () => {
         </nav>
 
         {/* Main Layout: Filter Section and Content */}
-        <div className="flex flex-col text-black lg:flex-row w-full">
+        <div className="flex flex-col lg:flex-row w-full">
           {/* Filter Section */}
           <div className="flex flex-col lg:w-1/4 py-4 border-r">
-            <h3 className="text-lg flex px-2 font-semibold mb-4">
-              {/* <span>
-                <svg
-                  width="14"
-                  height="15"
-                  viewBox="0 0 14 15"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1 3.31497C1 2.03645 2.03645 1 3.31497 1H10.7228C11.9805 1 13 2.01953 13 3.27718C13 3.94701 12.7051 4.58287 12.1937 5.01555L9.84686 7.00138C9.09836 7.63472 8.66667 8.56549 8.66667 9.546V10.7331C8.66667 11.3196 8.38601 11.8708 7.91165 12.2158L6.61747 13.157C5.94431 13.6466 5 13.1657 5 12.3333V9.46634C5 8.53198 4.60785 7.64053 3.91908 7.00916L1.75069 5.02147C1.27235 4.58299 1 3.96387 1 3.31497Z"
-                    stroke="#2D264B"
-                    stroke-width="1.5"
-                  />
-                </svg>
-              </span> */}
-              Filter
-            </h3>
+            <h3 className="text-lg flex px-2 font-semibold mb-4">Filter</h3>
             <div className="space-y-4">
               {/* Price Filter */}
               <div className="border-b border-gray-300 pb-2">
@@ -512,30 +481,24 @@ const TabbedNavigationWithFilter: React.FC = () => {
 
           {/* Content Section */}
           <div className="flex-1 p-4">
-            {/* <div className="text-lg">
-              <p>{tabContent[activeTab]}</p>
-            </div> */}
-            {/* Model Tabs */}
+            {/* Sort by dropdown */}
             <div className="flex justify-between items-center mb-4">
-              {/* Sort by dropdown */}
-              <div className="relative">
-                <label htmlFor="sort" className="mr-2">
-                  Rank By
-                </label>
-                <select
-                  id="sort"
-                  value={sortOption}
-                  onChange={(e) => setSortOption(e.target.value)}
-                  className="p-2 border rounded-lg"
-                >
-                  <option value="Price (Lowest to Highest)">
-                    Price (Lowest to Highest)
-                  </option>
-                  <option value="Price (Highest to Lowest)">
-                    Price (Highest to Lowest)
-                  </option>
-                </select>
-              </div>
+              <label htmlFor="sort" className="mr-2">
+                Rank By
+              </label>
+              <select
+                id="sort"
+                value={sortOption}
+                onChange={(e) => setSortOption(e.target.value)}
+                className="p-2 border rounded-lg"
+              >
+                <option value="Price (Lowest to Highest)">
+                  Price (Lowest to Highest)
+                </option>
+                <option value="Price (Highest to Lowest)">
+                  Price (Highest to Lowest)
+                </option>
+              </select>
             </div>
 
             {/* Product List */}
