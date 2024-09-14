@@ -6,24 +6,35 @@ import Image from "next/image";
 // import "../app/global.css";
 
 export const Navbar: React.FC = () => {
-  const [placeholder, setPlaceholder] = useState<string>("Search");
+  // const [currentIndex, setCurrentIndex] = useState<string>("Search");
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const placeholders: string[] = [
-    "Search",
-    "Search Phones",
-    "Search Accessories",
-    "Search Deals",
-  ];
+  // const placeholders: string[] = [
+  //   "Search",
+  //   "Search Phones",
+  //   "Search Accessories",
+  //   "Search Deals",
+  // ];
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setPlaceholder((prev) => {
+  //       const currentIndex = placeholders.indexOf(prev);
+  //       const nextIndex = (currentIndex + 1) % placeholders.length;
+  //       return placeholders[nextIndex];
+  //     });
+  //   }, 3000);
+
+  //   return () => clearInterval(interval);
+  // }, []);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const placeholders = ["Phones", "Accessories", "Deals", "Offers"];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setPlaceholder((prev) => {
-        const currentIndex = placeholders.indexOf(prev);
-        const nextIndex = (currentIndex + 1) % placeholders.length;
-        return placeholders[nextIndex];
-      });
-    }, 3000);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % placeholders.length);
+    }, 1000); // Change every 3 seconds
 
     return () => clearInterval(interval);
   }, []);
@@ -127,9 +138,16 @@ export const Navbar: React.FC = () => {
               </svg>
             </button>
           </div>
+          <div className="search-wrapper text-black">
+            <span className="static-text">Search </span>
+            <span className="dynamic-text-wrapper">
+              <span className="dynamic-text fade-up">
+                {placeholders[currentIndex]}
+              </span>
+            </span>
+          </div>
           <input
             type="text"
-            placeholder={placeholder}
             className="border rounded-3xl px-4 py-2 pr-10 w-64"
           />
         </div>
