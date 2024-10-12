@@ -71,7 +71,7 @@ body {
 
 @font-face {
   font-family: "VivoTypeRegular";
-  src: url("../public/fonts/vivotypeEN-Regular.TTF") format("truetype");
+  src: url("../public/fonts/vivotypeEN-Regular.ttf") format("truetype");
   font-weight: normal;
 }
 
