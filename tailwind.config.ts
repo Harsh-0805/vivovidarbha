@@ -18,6 +18,14 @@ const config: Config = {
         "slide-in": "slide-in 0.3s ease-in-out forwards",
       },
       textDecoration: ["hover"],
+      fontFamily: {
+        vivoBold: ["VivoBold", "sans-serif"],
+        vivoRegular: ["VivoRegular", "sans-serif"],
+        vivoLight: ["VivoLight", "sans-serif"],
+        vivoMedium: ["VivoMedium", "sans-serif"],
+        vivoTypeBold: ["VivoTypeBold", "sans-serif"],
+        vivoTypeRegular: ["VivoTypeRegular", "sans-serif"],
+      },
     },
   },
   plugins: [

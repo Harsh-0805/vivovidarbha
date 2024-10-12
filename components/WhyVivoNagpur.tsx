@@ -27,7 +27,7 @@ const features: Feature[] = [
 export const WhyVivoNagpur: React.FC = () => {
   return (
     <section className="py-12 bg-gray-100">
-      <h2 className="text-3xl sm:text-4xl text-center font-normal text-black mb-8">
+      <h2 className="text-3xl sm:text-4xl text-center font-vivoRegular text-black mb-8">
         Why vivo Nagpur
       </h2>
       <div className="mx-auto text-center px-6 sm:px-0">
@@ -46,7 +46,7 @@ export const WhyVivoNagpur: React.FC = () => {
                   objectFit="contain"
                 />
               </div>
-              <h3 className="text-lg font-normal text-black">
+              <h3 className="text-lg font-vivoRegular text-black">
                 {feature.title}
               </h3>
             </div>

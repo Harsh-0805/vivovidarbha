@@ -24,6 +24,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  font-family: "VivoRegular", sans-serif;
 }
 
 @layer utilities {
@@ -31,6 +32,50 @@ body {
     text-wrap: balance;
   }
 }
+
+@font-face {
+  font-family: "VivoBold";
+  src: url("../public/fonts/vivo-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "VivoRegular";
+  src: url("../public/fonts/vivo-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "VivoLight";
+  src: url("../public/fonts/vivobeta1-Light.ttf") format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "VivoMedium";
+  src: url("../public/fonts/vivobeta1-Regular.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "VivoTypeBold";
+  src: url("../public/fonts/vivotypeEN-Bold.TTF") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "VivoTypeLight";
+  src: url("../public/fonts/vivotypeEN-Light.TTF") format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "VivoTypeRegular";
+  src: url("../public/fonts/vivotypeEN-Regular.TTF") format("truetype");
+  font-weight: normal;
+}
+
+/* Add more font declarations as needed */
 
 /* NavbarSearch.css */
 

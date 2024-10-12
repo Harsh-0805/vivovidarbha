@@ -1,47 +1,77 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { StaticImageData } from "next/image";
+import Link from "next/link";
+
+interface ColorOption {
+  colorName: string;
+  colorCode: string; // Tailwind CSS color class (e.g., 'bg-red-500')
+  imageSrc: StaticImageData;
+}
 
 interface ProductCardProps {
   name: string;
-  imageSrc: StaticImageData;
+  colorOptions: ColorOption[];
   battery: string;
   price: string;
+  setModalVisible: (visible: boolean) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
   name,
-  imageSrc,
+  colorOptions,
   battery,
   price,
+  setModalVisible,
 }) => {
+  const [selectedColorIndex, setSelectedColorIndex] = useState(0);
+
+  const selectedColorOption = colorOptions[selectedColorIndex];
+
   return (
-    <div className="bg-white rounded-3xl shadow-md p-4 w-[400px]">
-      <div className="flex w-auto h-auto justify-center mb-4">
-        <Image
-          src={imageSrc}
-          alt={name}
-          width={96}
-          height={112}
-          objectFit="contain"
-        />
+    <div className="bg-white rounded-3xl shadow-md p-4 w-full">
+      <div className="flex w-full h-[150px] sm:h-[200px] justify-center items-center mb-4">
+        <div className="relative w-[100px] h-[150px] sm:w-[150px] sm:h-[200px]">
+          <Image
+            src={selectedColorOption.imageSrc}
+            alt={`${name} - ${selectedColorOption.colorName}`}
+            layout="fill"
+            objectFit="contain"
+          />
+        </div>
       </div>
       <div className="flex justify-center space-x-2 mb-4">
-        <span className="h-3 w-3 bg-red-500 rounded-full"></span>
-        <span className="h-3 w-3 bg-green-500 rounded-full"></span>
-        <span className="h-3 w-3 bg-red-500 rounded-full"></span>
+        {colorOptions.map((option, index) => (
+          <span
+            key={index}
+            className={`h-5 w-5 rounded-full cursor-pointer border ${
+              index === selectedColorIndex
+                ? "border-blue-600"
+                : "border-gray-300"
+            } ${option.colorCode}`}
+            onClick={() => setSelectedColorIndex(index)}
+          ></span>
+        ))}
       </div>
       <div className="flex justify-center space-x-2 mb-2">
         <span className="px-3 py-1 text-sm bg-blue-600 text-white rounded-lg">
           {battery}
         </span>
       </div>
-      <h3 className="text-left px-4 text-md font-normal">{name}</h3>
-      <p className="text-left px-4 text-gray-700">{price}</p>
-      <div className="flex justify-end px-4">
-        <button className="text-blue-600 justify-between mt-4 flex items-center">
+      <h3 className="text-left px-2 sm:px-4 text-sm sm:text-md font-vivoRegular">
+        {name}
+      </h3>
+      <p className="text-left px-2 sm:px-4 text-gray-700">{price}</p>
+      <div className="flex flex-col sm:flex-row justify-between px-2 sm:px-4 space-y-2 sm:space-y-0 space-x-0 sm:space-x-4 mt-4">
+        <button
+          onClick={() => setModalVisible(true)}
+          className="text-blue-600 flex items-center"
+        >
+          Quick Look
+        </button>
+        <Link href="../product/V40" className="text-blue-600 flex items-center">
           View
-          <div className="right-0">
+          <div className="ml-1">
             <svg
               width="20"
               height="20"
@@ -55,7 +85,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               />
             </svg>
           </div>
-        </button>
+        </Link>
       </div>
     </div>
   );

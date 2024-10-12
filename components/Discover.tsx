@@ -8,8 +8,8 @@ import Y18iImage from "@/public/assets/Budget.png";
 
 const DiscoverSection: React.FC = () => {
   return (
-    <section className="py-12 text-black bg-gray-50">
-      <h2 className="text-left pl-6 sm:pl-20 text-black text-3xl font-normal mb-8">
+    <section className="py-12 text-black bg-gray-100">
+      <h2 className="text-left pl-6 sm:pl-20 text-black text-3xl font-vivoRegular mb-8">
         Discover
       </h2>
       <div className="columns-1 sm:columns-2 gap-6 px-6 md:px-20 sm:gap-8">
@@ -25,7 +25,7 @@ const DiscoverSection: React.FC = () => {
             />
           </div>
           <div className="p-4">
-            <h3 className="text-lg font-normal">Game On!</h3>
+            <h3 className="text-lg font-vivoRegular">Game On!</h3>
           </div>
         </div>
 
@@ -41,7 +41,9 @@ const DiscoverSection: React.FC = () => {
             />
           </div>
           <div className="p-4">
-            <h3 className="text-lg font-normal">Budget-Friendly Choices</h3>
+            <h3 className="text-lg font-vivoRegular">
+              Budget-Friendly Choices
+            </h3>
           </div>
         </div>
 
@@ -57,7 +59,7 @@ const DiscoverSection: React.FC = () => {
             />
           </div>
           <div className="p-4">
-            <h3 className="text-lg font-normal">Capture Every Moment</h3>
+            <h3 className="text-lg font-vivoRegular">Capture Every Moment</h3>
           </div>
         </div>
 
@@ -73,7 +75,7 @@ const DiscoverSection: React.FC = () => {
             />
           </div>
           <div className="p-4">
-            <h3 className="text-lg font-normal">All-Day Battery</h3>
+            <h3 className="text-lg font-vivoRegular">All-Day Battery</h3>
           </div>
         </div>
 
@@ -89,7 +91,7 @@ const DiscoverSection: React.FC = () => {
             />
           </div>
           <div className="p-4">
-            <h3 className="text-lg font-normal">Elite Picks</h3>
+            <h3 className="text-lg font-vivoRegular">Elite Picks</h3>
           </div>
         </div>
       </div>

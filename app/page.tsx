@@ -5,6 +5,7 @@ import { ShopByCategory } from "@/components/Category";
 import { WhyVivoNagpur } from "@/components/WhyVivoNagpur";
 import MustHaveProducts from "@/components/MustHave";
 import DiscoverSection from "@/components/Discover";
+import Chatbot from "@/components/Chatbot";
 
 const Home: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const Home: React.FC = () => {
       <MustHaveProducts />
       <DiscoverSection />
       <WhyVivoNagpur />
+      <Chatbot />
     </div>
   );
 };

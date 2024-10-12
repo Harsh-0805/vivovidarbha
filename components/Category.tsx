@@ -12,7 +12,6 @@ interface Category {
 
 const categories: Category[] = [
   { name: "Smartphones", imageSrc: Category1.src },
-  { name: "IQOO", imageSrc: Category2.src },
   { name: "Audio", imageSrc: Category3.src },
   { name: "Accessories", imageSrc: Category4.src },
 ];
@@ -20,7 +19,7 @@ const categories: Category[] = [
 export const ShopByCategory: React.FC = () => {
   return (
     <section className="py-12 bg-gray-100">
-      <h2 className="text-left pl-6 sm:pl-20 text-black text-3xl font-normal mb-8">
+      <h2 className="text-left pl-6 sm:pl-20 text-black text-3xl font-vivoNormal mb-8">
         Shop By Category
       </h2>
       <div className="flex flex-wrap justify-center sm:justify-start gap-6 sm:gap-10 px-6 sm:px-20">
@@ -36,7 +35,7 @@ export const ShopByCategory: React.FC = () => {
               width={96}
               height={112}
             />
-            <p className="text-center p-4 text-lg font-normal">
+            <p className="text-center p-4 text-lg font-vivoNormal">
               {category.name}
             </p>
           </div>
