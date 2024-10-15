@@ -1,96 +1,129 @@
+"use client";
 import Image from "next/image";
-import React, { useState } from "react";
-import blue2 from "@/public/assets/ganges-blue2.jpg";
-import blue1 from "@/public/assets/ganges-blue1.jpg";
-import blue3 from "@/public/assets/ganges-blue3.jpg";
-import blue4 from "@/public/assets/ganges-blue4.jpg";
-import blue5 from "@/public/assets/ganges-blue5.jpg";
-import grey1 from "@/public/assets/grey1.jpg";
-import grey2 from "@/public/assets/grey2.jpg";
-import grey3 from "@/public/assets/grey3.jpg";
-import grey4 from "@/public/assets/grey4.jpg";
-import grey5 from "@/public/assets/grey5.jpg";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; // Ensure you import `useRouter` properly
+import { Product } from "@/app/products/page"; // Import the appropriate product interface
 
 interface ModalProps {
+  product: Product;
   onClose: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ onClose }) => {
-  // Image paths as per the provided structure
-  const images = {
-    blue: [blue1, blue2, blue3, blue4, blue5],
-    grey: [grey1, grey2, grey3, grey4, grey5],
-  };
+const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
+  const { name, colorOptions, ramPriceOptions, details } = product;
 
-  const [selectedColor, setSelectedColor] = useState("blue");
-  const [selectedSize, setSelectedSize] = useState("8GB RAM + 256GB");
+  const [selectedColorIndex, setSelectedColorIndex] = useState(0);
+  const [selectedRamPriceIndex, setSelectedRamPriceIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [price, setPrice] = useState(49999);
 
-  const handleSizeChange = (size: string) => {
-    setSelectedSize(size);
-    setPrice(size === "8GB RAM + 256GB" ? 49999 : 54999);
+  const selectedColorOption = colorOptions[selectedColorIndex];
+  const selectedRamPriceOption = ramPriceOptions[selectedRamPriceIndex];
+  const images = selectedColorOption.imageUrls;
+
+  const router = useRouter(); // Call the useRouter hook here, which ensures client-side usage
+
+  const handleColorChange = (index: number) => {
+    setSelectedColorIndex(index);
+    setCurrentImageIndex(0); // Reset image index when color changes
   };
 
-  const handleColorChange = (color: string) => {
-    setSelectedColor(color);
-    setCurrentImageIndex(0); // Reset carousel when changing color
+  const handleSizeChange = (index: number) => {
+    setSelectedRamPriceIndex(index);
   };
 
   const handleNextImage = () => {
-    setCurrentImageIndex(
-      (prevIndex) => (prevIndex + 1) % images[selectedColor].length
-    );
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? images[selectedColor].length - 1 : prevIndex - 1
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   };
+
   // Close modal when clicking outside the modal container
   const handleOverlayClick = (event: React.MouseEvent) => {
-    // Ensure the modal doesn't close when clicking inside the modal content
     if (event.target === event.currentTarget) {
       onClose();
     }
   };
 
+  const checkUserAuthentication = () => {
+    // Example: Check if a token exists in localStorage
+    const token = localStorage.getItem("authToken");
+    return !!token; // Returns true if token exists
+  };
+
+  const handleBookNow = () => {
+    // Check if the user is logged in
+    const isLoggedIn = checkUserAuthentication();
+
+    // if (!isLoggedIn) {
+    // Redirect to login page
+    //   router.push("/login");
+    // } else {
+    // Store selected product data in sessionStorage
+    const selectedProductData = {
+      productId: product.id,
+      name: product.name,
+      price: selectedRamPriceOption.price, // Selected price based on RAM
+      color: selectedColorOption.colorName,
+      size: selectedRamPriceOption.ram, // Selected RAM option
+      imageUrl: selectedColorOption.imageUrls[0], // First image
+    };
+
+    sessionStorage.setItem(
+      "selectedProduct",
+      JSON.stringify(selectedProductData)
+    );
+
+    // Redirect to the address page
+    router.push("/address");
+    // }
+  };
+
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+      className="fixed inset-0 bg-black bg-opacity-50 z-50 px-2 md:px-4 overflow-y-auto"
       onClick={handleOverlayClick}
     >
       <div
-        className="bg-white max-w-4xl w-full h-auto flex rounded-lg shadow-lg relative p-5"
+        className="mx-auto my-8 bg-white max-w-4xl w-full h-auto flex flex-col lg:flex-row rounded-lg shadow-lg relative p-4 md:p-5 max-h-screen overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Left side: Image carousel */}
-        <div className="flex-1 flex justify-center items-center relative">
+        <div className="flex-1 flex justify-center items-center relative mb-4 lg:mb-0">
+          {/* Previous Button */}
           <button
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full"
+            className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full"
             onClick={handlePrevImage}
           >
             &lt;
           </button>
-          <div>
+
+          {/* Current Image */}
+          <div className="w-full max-w-xs sm:max-w-sm md:max-w-md">
             <Image
-              src={images[selectedColor][currentImageIndex]}
-              alt={`Product ${selectedColor}`}
-              width={200}
-              height={200}
-              className="w-[80%] h-[80%] object-contain mx-auto rounded-lg"
+              src={images[currentImageIndex]}
+              alt={`${name} - ${selectedColorOption.colorName}`}
+              width={400}
+              height={400}
+              className="w-full h-auto object-contain mx-auto rounded-lg"
             />
           </div>
+
+          {/* Next Button */}
           <button
-            className="absolute right-5 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full"
+            className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full"
             onClick={handleNextImage}
           >
             &gt;
           </button>
+
+          {/* Image Indicators */}
           <div className="absolute bottom-4 w-full flex justify-center">
-            {images[selectedColor].map((_, index) => (
+            {images.map((_, index) => (
               <span
                 key={index}
                 className={`h-2 w-2 mx-1 rounded-full ${
@@ -104,85 +137,75 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
 
         {/* Right side: Product info */}
         <div className="flex-1 pb-2">
-          <h2 className="text-2xl font-vivoBold text-black text-left">
-            Vivo V40 Pro 5G AI Smartphone
+          <h2 className="text-xl md:text-2xl font-vivoBold text-black text-left">
+            {name}
           </h2>
           <p className="text-xs text-black text-left">
-            MRP(Inclusive of all taxes)
+            MRP (Inclusive of all taxes)
           </p>
-          <p className="text-3xl font-vivoRegular text-black mt-2 text-left">
-            ₹{price.toLocaleString()}
+          <p className="text-2xl md:text-3xl font-vivoRegular text-black mt-2 text-left">
+            ₹{selectedRamPriceOption.price.toLocaleString()}
           </p>
 
+          {/* Color Options */}
           <p className="mt-4 text-black text-left text-xs">
             Color:{" "}
-            <span className="font-vivoMedium capitalize">{selectedColor}</span>
+            <span className="font-vivoMedium capitalize">
+              {selectedColorOption.colorName}
+            </span>
           </p>
           <div className="flex mt-2">
-            <button
-              className={`w-8 h-8 rounded-full mr-2 ${
-                selectedColor === "blue" ? "border-2 border-black" : ""
-              }`}
-              style={{ backgroundColor: "#8fbcd4" }}
-              onClick={() => handleColorChange("blue")}
-            />
-            <button
-              className={`w-8 h-8 rounded-full ${
-                selectedColor === "grey" ? "border-2 border-black" : ""
-              }`}
-              style={{ backgroundColor: "#a0a0a0" }}
-              onClick={() => handleColorChange("grey")}
-            />
+            {colorOptions.map((option, index) => (
+              <button
+                key={index}
+                className={`w-8 h-8 rounded-full mr-2 ${
+                  selectedColorIndex === index ? "border-2 border-black" : ""
+                }`}
+                style={{ backgroundColor: option.colorCode }}
+                onClick={() => handleColorChange(index)}
+              />
+            ))}
           </div>
 
+          {/* Size Options */}
           <p className="mt-4 text-black text-left text-xs">Size:</p>
-          <div className="flex mt-2">
-            <button
-              className={`px-4 py-2 border rounded-lg mr-2 ${
-                selectedSize === "8GB RAM + 256GB"
-                  ? "border-blue-500 text-blue-500"
-                  : "border-gray-300 text-black"
-              }`}
-              onClick={() => handleSizeChange("8GB RAM + 256GB")}
-            >
-              8GB RAM+256GB
-            </button>
-            <button
-              className={`px-4 py-2 border rounded-lg ${
-                selectedSize === "12GB RAM + 512GB"
-                  ? "border-blue-500 text-blue-500"
-                  : "border-gray-300 text-black"
-              }`}
-              onClick={() => handleSizeChange("12GB RAM + 512GB")}
-            >
-              12GB RAM+512GB
-            </button>
+          <div className="flex mt-2 flex-wrap">
+            {ramPriceOptions.map((option, index) => (
+              <button
+                key={index}
+                className={`px-2 py-1 border rounded-lg mr-2 mb-2 ${
+                  selectedRamPriceIndex === index
+                    ? "border-blue-500 text-blue-500"
+                    : "border-gray-300 text-black"
+                }`}
+                onClick={() => handleSizeChange(index)}
+              >
+                {option.ram}
+              </button>
+            ))}
           </div>
 
-          <ul className="mt-8 space-y-1 text-sm list-disc list-inside bg-gray-100 p-4 rounded-lg h-40 overflow-auto text-black text-left">
-            <li>ZEISS Multifocal Portrait</li>
-            <li>ZEISS Style Portrait</li>
-            <li>Ultra-Slim 3D Curved Display</li>
-            <li>ZEISS Cinematic Portrait Video</li>
-            <li>ZEISS Telephoto Portrait Camera</li>
-            <li>India&apos;s slimmest smartphone in the 5500</li>
-            <li>IP68 Dust & Water Resistance</li>
-            <li>AI Eraser</li>
+          {/* Product Details */}
+          <ul className="mt-4 md:mt-8 space-y-1 text-sm list-disc list-inside bg-gray-100 p-4 rounded-lg h-32 md:h-40 overflow-auto text-black text-left">
+            {details.map((detail, index) => (
+              <li key={index}>{detail}</li>
+            ))}
           </ul>
 
-          <div className="mt-6 justify-evenly flex space-x-4">
+          {/* Action Buttons */}
+          <div className="mt-4 md:mt-6 flex flex-col md:flex-row justify-center md:justify-start items-center space-y-2 md:space-y-0 md:space-x-4">
             <Link
-              href=""
-              className="px-12 text-center py-2.5 border border-blue-500 text-blue-500 rounded-full hover:bg-gray-200"
+              href="javascript:void(0)"
+              className="px-6 md:px-12 text-center py-2.5 border border-blue-500 text-blue-500 rounded-full hover:bg-gray-200"
             >
               Learn more
             </Link>
-            <Link
-              href="/address"
-              className="px-12 text-center py-2.5 bg-blue-500 text-white rounded-full hover:bg-blue-600"
+            <button
+              onClick={handleBookNow}
+              className="px-6 md:px-12 text-center py-2.5 bg-blue-500 text-white rounded-full hover:bg-blue-600"
             >
               Book Now
-            </Link>
+            </button>
           </div>
         </div>
 

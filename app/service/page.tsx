@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import service from "@/public/assets/service.png";
-import { Navbar } from "@/components/Navbar";
+import Navbar from "@/components/Navbar";
 
 interface Store {
   name: string;
@@ -14,39 +14,122 @@ interface Store {
 }
 
 const storesData: Record<string, Store[]> = {
-  Nagpur: [
+  Akola: [
     {
-      name: "vivo Experience Center, Dharampeth",
-      address: "Shop No: 7/8, R.B.I Building, WHC Road, Gokulpeth, Dharampeth",
-      phone: "+91 9987654321",
-      timings: "Summer: 10:00 AM TO 08:00 PM, Winter: 11:00 AM TO 08:00 PM",
-      location: "https://maps.google.com",
-    },
-    {
-      name: "vivo Experience Center, Dharampeth",
-      address: "Shop No: 7/8, R.B.I Building, WHC Road, Gokulpeth, Dharampeth",
-      phone: "+91 9987654321",
-      timings: "Summer: 10:00 AM TO 08:00 PM, Winter: 11:00 AM TO 08:00 PM",
-      location: "https://maps.google.com",
-    },
-    {
-      name: "vivo Experience Center, Dharampeth",
-      address: "Shop No: 7/8, R.B.I Building, WHC Road, Gokulpeth, Dharampeth",
-      phone: "+91 9987654321",
-      timings: "Summer: 10:00 AM TO 08:00 PM, Winter: 11:00 AM TO 08:00 PM",
-      location: "https://maps.google.com",
+      name: "Akola Service Center",
+      address:
+        "Shop Block No.205, 2nd Floor, Icon Height Tower Road, Kedia Plots, Akola-444001",
+      phone: "+91 9028004978",
+      timings: "10:00 AM TO 07:00 PM",
+      location: "https://maps.app.goo.gl/aZbMDMHTLgTwpxrt8",
     },
   ],
   Amravati: [
     {
-      name: "vivo Experience Center, Amravati",
-      address: "Shop No: 12, Main Road, XYZ Area",
-      phone: "+91 9876543210",
-      timings: "Summer: 10:00 AM TO 07:00 PM, Winter: 11:00 AM TO 07:00 PM",
-      location: "https://maps.google.com",
+      name: "Amravati Service Center",
+      address:
+        "Jaistambha Square, Ground Floor, Shop No 29, Gulshan Tower, Amravati-444601",
+      phone: "+91 9028004980",
+      timings: "10:00 AM TO 07:00 PM",
+      location: "https://maps.app.goo.gl/AdK5oEBzB9ds5odB7",
     },
   ],
-  // Add more cities and their stores
+  Bhandara: [
+    {
+      name: "Bhandara Service Center",
+      address:
+        "Shop No.9,Vaishnavi Turaskar Complex, Post Office Square Bada Bazar Bhandara-441904",
+      phone: "+91 8956364974",
+      timings: "10:00 AM TO 07:00 PM",
+      location: "https://maps.app.goo.gl/dykYjk4VvssobE1eA",
+    },
+  ],
+  Buldhana: [
+    {
+      name: "Buldhana Service Center",
+      address:
+        "Shop No.10, Jeejamata Sports & Commercial Complex, Buldhana-443001",
+      phone: "+91 9028004984",
+      timings: "10:00 AM TO 07:00 PM",
+      location: "https://maps.app.goo.gl/NxBewQVBiraTYuKt9",
+    },
+  ],
+  Chandrapur: [
+    {
+      name: "Chandrapur Service Center",
+      address: "1st Floor, Tandon Tower, Gandhi Chowk, Chandrapur-442401",
+      phone: "+91 9028004982",
+      timings: "10:00 AM TO 07:00 PM",
+      location: "https://maps.app.goo.gl/yB52SSjTn8SUjas59",
+    },
+  ],
+  Gondia: [
+    {
+      name: "Gondia Service Center",
+      address:
+        "Shop No 1 & 2, First Floor, Shreejee Complex, Near Head Post Office, Shree Talkiz Road, Gondia-441601",
+      phone: "+91 9028004986",
+      timings: "10:00 AM TO 07:00 PM",
+      location: "https://maps.app.goo.gl/k7n99ez8xiYqob1F6",
+    },
+  ],
+  Nagpur: [
+    {
+      name: "Nagpur Sadar Service Center",
+      address:
+        "Shop Block No.113, 1st Floor, Shriram Shyam Towers, Kingsway, Sadar, Nagpur - 440001",
+      phone: "+91 9028004979",
+      timings: "10:00 AM TO 07:00 PM",
+      location: "https://maps.app.goo.gl/bxKyiCtqaiDVJRTAA",
+    },
+    {
+      name: "Nagpur Medical Service Center",
+      address:
+        "Plot No.193, 1st Floor, Agrawal Building, Industrial Area Scheme Of Nit Dahipura & Untkhana Layout, Survey No.314, Medical Square, Nagpur - 440009",
+      phone: "+91 9028004986",
+      timings: "10:00 AM TO 07:00 PM",
+      location: "https://maps.app.goo.gl/MdhSqnW3vjwoX6Ld7",
+    },
+  ],
+  Wardha: [
+    {
+      name: "Wardha Service Center",
+      address:
+        "Ward No. 34, Ground Floor Bachelor Road, Near Santoshi Mata Mandir, Shastri Chowk, Wardha C 442001",
+      phone: "+91 8956364979",
+      timings: "10:00 AM TO 07:00 PM",
+      location: "https://maps.app.goo.gl/PeAob9E3U5rnYxGXA",
+    },
+  ],
+  Washim: [
+    {
+      name: "Washim Service Center",
+      address: "Shop No.38, B-Wing, Patni Commercial Complex Washim-444505",
+      phone: "+91 9028004987",
+      timings: "10:00 AM TO 07:00 PM",
+      location: "https://maps.app.goo.gl/cXi3hiUwg98wvuEZ9",
+    },
+  ],
+  Yavatmal: [
+    {
+      name: "Yavatmal Service Center",
+      address:
+        "Shop No.10, 1St Floor, Inorbit Complex, Maa Durga Dawa Bazar, Yerawar Chowk, Near Azad Maidan, Yavatmal-445001",
+      phone: "+91 9028004988",
+      timings: "10:00 AM TO 07:00 PM",
+      location: "https://maps.app.goo.gl/raRxeu4zvpA3x9Et6",
+    },
+  ],
+  Pusad: [
+    {
+      name: "Pusad Service Center",
+      address:
+        "1st floor, Satyam Complex, Opp Balaji Sweet Mart Near Bus Stop, Pusad, Yawatmal- 445204",
+      phone: "+91 9028004989",
+      timings: "10:00 AM TO 07:00 PM",
+      location: "https://maps.app.goo.gl/DWgjXqeNGUR7DF9F6",
+    },
+  ],
 };
 
 const ServiceLocator: React.FC = () => {

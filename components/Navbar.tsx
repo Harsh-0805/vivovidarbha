@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
-export const Navbar: React.FC = () => {
+const Navbar: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const placeholders = ["Phones", "Accessories", "Deals", "Offers"];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -194,6 +194,19 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
       )}
+      <div className="bg-yellow-400 py-2 overflow-hidden">
+        <div className="scrolling-text text-black font-vivoRegular">
+          www.vivopune.com is an official website of vivo Smartphones in
+          association with vivo India and we deliver all over India. The
+          registered name is HISOA Electronic Private Limited. Our offline
+          markets are present in Pune, Satara, Sangli, Miraj, Baramati, Phaltan,
+          Kolhapur, Ichalkaranji, Ratnagiri, Sindhudurg, Lonavala, Shirur,
+          Chakan, Solapur, Latur, Barshi, Osmanabad, Pandharpur, Ahmednagar,
+          Rahuri, Sangamner, Shrirampur.
+        </div>
+      </div>
     </nav>
   );
 };
+
+export default Navbar;

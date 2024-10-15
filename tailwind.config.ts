@@ -6,6 +6,9 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  images: {
+    remotePatterns: ["example.com"], // Replace with your actual image domain(s)
+  },
   theme: {
     extend: {
       keyframes: {

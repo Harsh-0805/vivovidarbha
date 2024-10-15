@@ -75,58 +75,17 @@ body {
   font-weight: normal;
 }
 
-/* Add more font declarations as needed */
-
-/* NavbarSearch.css */
-
-/* Wrapper for the static 'Search' text and dynamic animated text */
-.search-wrapper {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-/* The static part of the text ('Search') */
-.static-text {
+.scrolling-text {
   white-space: nowrap;
-  margin-right: 4px;
+  display: inline-block; /* Ensures the text does not wrap */
+  animation: scroll-left 40s linear infinite;
 }
 
-/* Dynamic text wrapper to contain the animated text */
-.dynamic-text-wrapper {
-  position: relative;
-  height: 1.2em; /* Adjust based on font size */
-  overflow: hidden;
-  display: inline-block;
-  vertical-align: bottom;
-}
-
-/* The dynamic text itself */
-.dynamic-text {
-  position: absolute;
-  display: inline-block;
-  animation: fadeSlideUp 3s infinite ease-in-out;
-  white-space: nowrap;
-}
-
-/* Fading and sliding up animation */
-@keyframes fadeSlideUp {
+@keyframes scroll-left {
   0% {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  10% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  90% {
-    opacity: 1;
-    transform: translateY(0);
+    transform: translateX(100%); /* Start from 100% (right off-screen) */
   }
   100% {
-    opacity: 0;
-    transform: translateY(-100%);
+    transform: translateX(-100%); /* Move left until it's fully off-screen */
   }
 }
