@@ -1,9 +1,8 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Navbar from "@/components/Navbar"; // Assuming you have a Navbar component
-import ConfirmationPopup from "./ConfirmationPopup"; // Assuming you have a ConfirmationPopup component
+import React, { useEffect, useState } from "react";
+import Navbar from "@/components/Navbar";
+import ConfirmationPopup from "./ConfirmationPopup";
 
 // Address Form Component
 const AddressForm = () => {
@@ -139,16 +138,16 @@ const AddressForm = () => {
           </div>
         </div>
 
-        <div className="flex space-x-8">
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-8">
           <button
             type="submit"
-            className="w-1/3 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
+            className="w-full sm:w-1/3 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
           >
             Book Now
           </button>
           <button
             type="button"
-            className="w-1/3 bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600"
+            className="w-full sm:w-1/3 bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600"
             onClick={() =>
               setFormData({
                 fullName: "",
@@ -201,7 +200,7 @@ const ProductInfo = () => {
         Product Information
       </h2>
 
-      <div className="flex items-start mb-4">
+      <div className="flex flex-col items-center md:flex-row mb-4">
         <Image
           src={product.imageUrl} // Use the image URL from sessionStorage
           alt={product.name}
@@ -209,32 +208,22 @@ const ProductInfo = () => {
           height={128}
           className="w-32 h-32 mr-0"
         />
-        <div>
-          <h3 className="text-lg font-vivoMedium leading-tight text-left">
+        <div className="mt-4 md:mt-0 md:ml-4 text-center md:text-left">
+          <h3 className="text-lg font-vivoMedium leading-tight">
             {product.name}
           </h3>
-          <p className="text-lg text-gray-700 mt-2 text-left">
+          <p className="text-lg text-gray-700 mt-2">
             ₹{product.price.toLocaleString()}
           </p>
-          <h4 className="font-vivoMedium text-base text-left">
+          <h4 className="font-vivoMedium text-base">
             Chosen Color: {product.color}
           </h4>
-          <h4 className="font-vivoMedium text-base text-left mt-2">
+          <h4 className="font-vivoMedium text-base mt-2">
             Chosen Size: {product.size}
           </h4>
         </div>
       </div>
 
-      {/* <div className="mb-4">
-        <h4 className="font-vivoMedium text-base text-left">
-          Chosen Color: {color}
-        </h4>
-        <h4 className="font-vivoMedium text-base text-left mt-2">
-          Chosen Size: {size}
-        </h4>
-      </div> */}
-
-      {/* Coupon Code Section */}
       <div className="flex items-center mb-4">
         <input
           type="text"
@@ -246,11 +235,10 @@ const ProductInfo = () => {
         </button>
       </div>
 
-      {/* Price Breakdown */}
       <div className="border-t border-gray-300 py-4">
         <div className="flex justify-between text-gray-600 mt-1">
           <span>MRP</span>
-          <span>₹11,499.00</span>
+          <span>₹{product.price.toLocaleString()}</span>
         </div>
         <div className="flex justify-between text-gray-600 mt-1">
           <span>Discount</span>
@@ -262,7 +250,6 @@ const ProductInfo = () => {
         </div>
       </div>
 
-      {/* Total Section */}
       <div className="flex justify-between font-vivoMedium text-gray-900 mt-1">
         <span>Total</span>
         <span>₹9,199.20</span>
@@ -275,13 +262,13 @@ const ProductInfo = () => {
 const CheckoutPage = () => {
   return (
     <div className="App bg-gray-100">
-      <main className="main-content">
+      <main className="main-content px-4">
         <Navbar />
-        <div className="py-6 flex justify-center space-x-2">
-          <div className="w-1/2">
+        <div className="py-6 flex flex-col lg:flex-row justify-center lg:space-x-2 space-y-6 lg:space-y-0">
+          <div className="w-full lg:w-1/2">
             <AddressForm />
           </div>
-          <div className="w-1/3 pl-8">
+          <div className="w-full lg:w-1/3">
             <ProductInfo />
           </div>
         </div>
