@@ -10,7 +10,11 @@ import {
 // import phone from "../Assets/370a92f0be2ea0d41d198ab9ba298ee7.png";
 import Image from "next/image";
 
-const ConfirmationPopup = ({ onClose }) => {
+interface ConfirmationPopupProps {
+  onClose: () => void;
+}
+
+const ConfirmationPopup: React.FC<ConfirmationPopupProps> = ({ onClose }) => {
   return (
     <div className="fixed inset-0 text-black bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-lg text-center relative">

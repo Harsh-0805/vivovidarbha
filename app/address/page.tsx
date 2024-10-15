@@ -149,7 +149,16 @@ const AddressForm = () => {
           <button
             type="button"
             className="w-1/3 bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600"
-            onClick={() => setFormData({})} // Reset form on cancel
+            onClick={() =>
+              setFormData({
+                fullName: "",
+                mobileNumber: "",
+                address: "",
+                pincode: "",
+                city: "",
+                saveInfo: false,
+              })
+            } // Reset form on cancel
           >
             Cancel
           </button>
@@ -164,7 +173,15 @@ const AddressForm = () => {
 
 // Product Info Component
 const ProductInfo = () => {
-  const [product, setProduct] = useState(null);
+  interface Product {
+    name: string;
+    price: number;
+    color: string;
+    size: string;
+    imageUrl: string;
+  }
+
+  const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     // Retrieve the selected product data from sessionStorage
@@ -178,8 +195,6 @@ const ProductInfo = () => {
     return <div>Loading product information...</div>;
   }
 
-  const { name, price, color, size, imageUrl } = product;
-
   return (
     <div className="bg-white text-black mt-8 p-8 rounded-lg shadow-md text-sm">
       <h2 className="text-lg font-vivoBold mb-4 text-left">
@@ -188,24 +203,24 @@ const ProductInfo = () => {
 
       <div className="flex items-start mb-4">
         <Image
-          src={imageUrl} // Use the image URL from sessionStorage
-          alt={name}
+          src={product.imageUrl} // Use the image URL from sessionStorage
+          alt={product.name}
           width={128}
           height={128}
           className="w-32 h-32 mr-0"
         />
         <div>
           <h3 className="text-lg font-vivoMedium leading-tight text-left">
-            {name}
+            {product.name}
           </h3>
           <p className="text-lg text-gray-700 mt-2 text-left">
-            ₹{price.toLocaleString()}
+            ₹{product.price.toLocaleString()}
           </p>
           <h4 className="font-vivoMedium text-base text-left">
-            Chosen Color: {color}
+            Chosen Color: {product.color}
           </h4>
           <h4 className="font-vivoMedium text-base text-left mt-2">
-            Chosen Size: {size}
+            Chosen Size: {product.size}
           </h4>
         </div>
       </div>
