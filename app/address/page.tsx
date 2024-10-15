@@ -224,13 +224,13 @@ const ProductInfo = () => {
         </div>
       </div>
 
-      <div className="flex items-center mb-4">
+      <div className="flex flex-col lg:flex-row items-center mb-4">
         <input
           type="text"
           placeholder="VIVO 20"
-          className="border border-gray-300 rounded px-2 py-2 mr-2 w-1/2"
+          className="border border-gray-300 rounded px-2 py-2 mb-2 lg:mb-0 lg:mr-2 w-full"
         />
-        <button className="bg-blue-500 text-white px-4 py-2 rounded">
+        <button className="bg-blue-500 text-white px-4 py-2 rounded w-full">
           Apply
         </button>
       </div>
@@ -262,14 +262,17 @@ const ProductInfo = () => {
 const CheckoutPage = () => {
   return (
     <div className="App bg-gray-100">
+      <Navbar />
       <main className="main-content px-4">
-        <Navbar />
-        <div className="py-6 flex flex-col lg:flex-row justify-center lg:space-x-2 space-y-6 lg:space-y-0">
-          <div className="w-full lg:w-1/2">
-            <AddressForm />
-          </div>
-          <div className="w-full lg:w-1/3">
+        <div className="py-6 flex flex-col gap-4 lg:flex-row justify-center lg:space-x-2 space-y-6 lg:space-y-0">
+          {/* ProductInfo Div */}
+          <div className="w-full lg:w-1/3 order-1 lg:order-2">
             <ProductInfo />
+          </div>
+
+          {/* AddressForm Div */}
+          <div className="w-full lg:w-1/2 order-2 lg:order-1">
+            <AddressForm />
           </div>
         </div>
       </main>
