@@ -94,8 +94,8 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* User Icon for large screens */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <a href="/account" className="user-logo">
+          {/* <div className="hidden  relative group lg:flex items-center space-x-4">
+            <a href="/user" className="user-logo">
               <svg
                 width="28"
                 height="28"
@@ -113,7 +113,28 @@ const Navbar: React.FC = () => {
                 />
               </svg>
             </a>
-          </div>
+
+            <div className="absolute text-black right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10 group-hover:block hidden">
+              <a
+                href="/orders"
+                className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+              >
+                My Orders
+              </a>
+              <a
+                href="/cart"
+                className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+              >
+                Cart
+              </a>
+              <a
+                href="/login"
+                className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+              >
+                Sign in/Register
+              </a>
+            </div>
+          </div> */}
 
           {/* Mobile Menu Button */}
           <div className="flex items-center lg:hidden">
@@ -185,7 +206,7 @@ const Navbar: React.FC = () => {
             </a>
             {/* Mobile User Account Link */}
             <a
-              href="/account"
+              href="/user"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-100"
               onClick={toggleMenu}
             >

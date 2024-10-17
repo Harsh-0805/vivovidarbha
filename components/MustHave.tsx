@@ -22,6 +22,7 @@ interface ColorPictureOption {
 interface RamPriceOption {
   ram: string;
   price: number;
+  mrp: number;
 }
 
 interface Product {
@@ -40,6 +41,79 @@ interface Product {
 // ---------------------------
 const bestSellers: Product[] = [
   {
+    id: "P940",
+    name: "V40 Pro 5G",
+    series: "V Series",
+    model: "V40 Pro",
+    specialFeature: "Mediatek Processor",
+    ramPriceOptions: [
+      {
+        ram: "8GB+256GB",
+        price: 49999,
+        mrp: 54999,
+      },
+      {
+        ram: "12GB+512GB",
+        price: 55999,
+        mrp: 60999,
+      },
+    ],
+
+    colorPictureOptions: [
+      {
+        color: "Titanium Grey",
+        hexcode: "#6c7073",
+        pictures: [
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482652/V40%20Pro/wxkrqa9th7ggus5oqner.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482652/V40%20Pro/afjxohokotovzaar7olf.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482651/V40%20Pro/baru2e4cshupgs33jxmo.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728834558/V40%20Pro/whmb6pgfaz4ryokkjsdn.webp",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728834558/V40%20Pro/imtjvaqcpojdfqgjtqnt.webp",
+          },
+        ],
+      },
+      {
+        color: "Ganges Blue",
+        hexcode: "#96bcb8",
+        pictures: [
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482654/V40%20Pro/ccfihznun0jremgsfp59.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482653/V40%20Pro/wmluhueqymmzvb2vm93p.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482653/V40%20Pro/djaksy4w0d3qp8dc9ety.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482650/V40%20Pro/acwkbo4y6yc8lhb7kzvs.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482650/V40%20Pro/rkkdz2uutljtv2ad7gwo.jpg",
+          },
+        ],
+      },
+    ],
+    details: [
+      "Stunning 6.78 AMOLED Display: High-resolution FHD+ (2800 × 1260) display with vibrant colors and sharp visuals.",
+      "Triple ZEISS Camera System: 50MP main, 50MP wide-angle, and 50MP telephoto with OIS and up to 50x digital zoom for pro-grade photography.",
+      "Powerful Performance: MediaTek Dimensity 9200+ processor with options for 8GB or 12GB RAM, ensuring fast performance.",
+      "All-day Battery: 5500mAh battery with 80W fast charging for minimal downtime.",
+      "Ample Storage: 256GB or 512GB of internal storage, ideal for heavy users.",
+      "In-display Fingerprint Sensor: Fast and secure unlocking with an optical in-display fingerprint sensor.",
+      "Elegant Design: Lightweight (192g) with a sleek glass body, available in Ganges Blue and Titanium Grey.",
+    ],
+  },
+  {
     id: "P389",
     name: "X100",
     series: "X Series",
@@ -49,12 +123,15 @@ const bestSellers: Product[] = [
       {
         ram: "12GB+256GB",
         price: 63999,
+        mrp: 68999,
       },
       {
         ram: "16GB+512GB",
         price: 69999,
+        mrp: 74999,
       },
     ],
+
     colorPictureOptions: [
       {
         color: "Stargaze Blue",
@@ -109,22 +186,23 @@ const bestSellers: Product[] = [
       "Premium Build: Slim design at 8.49mm and weighs 206g.",
     ],
   },
-  // Add more Best Sellers products here if needed
 ];
 
 const latestProducts: Product[] = [
   {
-    id: "P390",
+    id: "P966",
     name: "X100 Pro",
     series: "X Series",
     model: "X100 Pro",
-    specialFeature: "Quantum Dot OLED Display",
+    specialFeature: "50MP Triple AI Camera",
     ramPriceOptions: [
       {
         ram: "16GB+512GB",
         price: 89999,
+        mrp: 96999,
       },
     ],
+
     colorPictureOptions: [
       {
         color: "Aesteroid Black",
@@ -166,8 +244,10 @@ const latestProducts: Product[] = [
       {
         ram: "16GB+512GB",
         price: 159999,
+        mrp: 169999,
       },
     ],
+
     colorPictureOptions: [
       {
         color: "Celestial Black",
@@ -275,9 +355,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onOpenModal }) => {
 
       {/* Product Details */}
       <h3 className="text-left px-4 text-md font-vivoRegular">{name}</h3>
-      <p className="text-left px-4 text-gray-700">
-        ₹{selectedRamPriceOption.price}
-      </p>
+      {/* MRP and Price */}
+      <div className="px-4 text-left">
+        <p className="text-left text-xl text-[#f10313] font-vivoMedium">
+          ₹{selectedRamPriceOption.price}
+        </p>
+        <p className="text-gray-500">
+          MRP (incl.of all taxes): <del>₹{selectedRamPriceOption.mrp}</del>
+        </p>
+      </div>
       <div className="flex justify-end px-4 space-x-4 mt-4">
         <button
           onClick={() => onOpenModal(product)}
@@ -582,7 +668,7 @@ const MustHaveProducts: React.FC = () => {
         </button>
       </div>
 
-      <div className="sm:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+      <div className="sm:px-20 px-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
         {products.map((product) => (
           <div
             key={product.id}

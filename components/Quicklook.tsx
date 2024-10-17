@@ -140,12 +140,15 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
           <h2 className="text-xl md:text-2xl font-vivoBold text-black text-left">
             {name}
           </h2>
-          <p className="text-xs text-black text-left">
-            MRP (Inclusive of all taxes)
-          </p>
-          <p className="text-2xl md:text-3xl font-vivoRegular text-black mt-2 text-left">
-            ₹{selectedRamPriceOption.price.toLocaleString()}
-          </p>
+          {/* MRP and Price */}
+          <div className=" text-left">
+            <p className="text-left text-xl text-[#f10313] font-vivoMedium">
+              ₹{selectedRamPriceOption.price}
+            </p>
+            <p className="text-gray-500">
+              MRP (incl.of all taxes): <del>₹{selectedRamPriceOption.mrp}</del>
+            </p>
+          </div>
 
           {/* Color Options */}
           <p className="mt-4 text-black text-left text-xs">
