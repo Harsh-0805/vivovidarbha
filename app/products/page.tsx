@@ -99,16 +99,40 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickLook }) => {
     <div className="bg-white rounded-3xl shadow-md p-4 w-full">
       {!loading && (
         <>
-          <div className="flex w-full h-[200px] justify-center items-center mb-4">
-            <div className="relative w-[150px] h-[150px]">
-              <Image
-                src={
-                  selectedColorOption.imageUrls?.[0] || "/fallback-image.jpg"
-                } // Use a fallback image if none is available
-                alt={`${name} - ${selectedColorOption.colorName}`}
-                layout="fill"
-                objectFit="contain"
-              />
+          <div className="relative bg-white p-4 w-full">
+            {/* Image and Wishlist Icon */}
+            <div className="flex w-full h-[200px] justify-center items-center mb-4">
+              <div className="relative w-[150px] h-[150px]">
+                <Image
+                  src={
+                    selectedColorOption.imageUrls?.[0] || "/fallback-image.jpg"
+                  }
+                  alt={`${name} - ${selectedColorOption.colorName}`}
+                  layout="fill"
+                  objectFit="contain"
+                />
+              </div>
+
+              {/* Wishlist Icon */}
+              <div
+                className="absolute top-2 right-2 cursor-pointer"
+                onClick={toggleWishlist}
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill={isWishlisted ? "red" : "none"}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M20.3115 4.46071C17.9773 2.08032 15.2743 3.08425 13.6007 4.14593C12.655 4.74582 11.345 4.74582 10.3993 4.14593C8.72564 3.08427 6.02272 2.08035 3.68853 4.46072C-1.85249 10.1114 7.64988 21 12 21C16.3502 21 25.8525 10.1114 20.3115 4.46071Z"
+                    stroke="red"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
 
@@ -135,31 +159,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickLook }) => {
           </div>
 
           {/* Product Details */}
-          <div className="justify-between flex flex-col">
-            <h3 className="text-left px-4 text-md font-vivoRegular">{name}</h3>
-            <div
-              className="flex items-center cursor-pointer"
-              onClick={toggleWishlist}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill={isWishlisted ? "red" : "none"}
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16.5 3.75a5.25 5.25 0 00-4.248 7.853L12 12.75l-.252-.147A5.25 5.25 0 1012 21a5.25 5.25 0 004.5-8.25L12 12l4.5-6.75A5.25 5.25 0 0016.5 3.75z"
-                />
-              </svg>
-              <span className="ml-2">
-                {isWishlisted ? "Remove from Wishlist" : "Add to Wishlist"}
-              </span>
-            </div>
-          </div>
+
+          <h3 className="text-left px-4 text-md font-vivoRegular">{name}</h3>
 
           {/* MRP and Price */}
           <div className="px-4 text-left">
@@ -172,7 +173,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickLook }) => {
           </div>
 
           {/* Wishlist and Book Now Buttons */}
-          <div className="flex justify-between items-center mt-2">
+          <div className="flex justify-end items-center mt-2">
             <div className="text-blue-600 flex items-center">
               <button
                 onClick={() => onQuickLook(product)}
@@ -427,26 +428,20 @@ const TabbedNavigationWithFilter: React.FC = () => {
       return true;
     })
     .sort((a, b) => {
-      // Sorting logic as previously defined
       let priceA = 0;
       let priceB = 0;
 
-      if (
-        a.ramPriceOptions &&
-        a.ramPriceOptions.length > 0 &&
-        a.ramPriceOptions[0].price !== undefined
-      ) {
-        priceA = Number(a.ramPriceOptions[0].price);
+      if (a.ramPriceOptions && a.ramPriceOptions.length > 0) {
+        // Clean the price string by removing commas and converting to a number
+        priceA = Number(a.ramPriceOptions[0].price.replace(/,/g, ""));
       }
 
-      if (
-        b.ramPriceOptions &&
-        b.ramPriceOptions.length > 0 &&
-        b.ramPriceOptions[0].price !== undefined
-      ) {
-        priceB = Number(b.ramPriceOptions[0].price);
+      if (b.ramPriceOptions && b.ramPriceOptions.length > 0) {
+        // Clean the price string by removing commas and converting to a number
+        priceB = Number(b.ramPriceOptions[0].price.replace(/,/g, ""));
       }
 
+      // Perform sorting based on the selected option
       if (sortOption === "Price (Lowest to Highest)") {
         return priceA - priceB;
       } else if (sortOption === "Price (Highest to Lowest)") {
