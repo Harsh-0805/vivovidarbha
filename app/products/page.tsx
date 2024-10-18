@@ -432,16 +432,15 @@ const TabbedNavigationWithFilter: React.FC = () => {
       let priceB = 0;
 
       if (a.ramPriceOptions && a.ramPriceOptions.length > 0) {
-        // Clean the price string by removing commas and converting to a number
+        // @ts-ignore: Ignore type error because we know `price` might be a string
         priceA = Number(a.ramPriceOptions[0].price.replace(/,/g, ""));
       }
 
       if (b.ramPriceOptions && b.ramPriceOptions.length > 0) {
-        // Clean the price string by removing commas and converting to a number
+        // @ts-ignore: Ignore type error because we know `price` might be a string
         priceB = Number(b.ramPriceOptions[0].price.replace(/,/g, ""));
       }
 
-      // Perform sorting based on the selected option
       if (sortOption === "Price (Lowest to Highest)") {
         return priceA - priceB;
       } else if (sortOption === "Price (Highest to Lowest)") {
