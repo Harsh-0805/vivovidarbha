@@ -342,12 +342,21 @@ const TabbedNavigationWithFilter: React.FC = () => {
           "₹40,000 to ₹50,000": [40000, 50000],
           "Above ₹50,000": [50000, Infinity],
         };
+
         const [minPrice, maxPrice] = priceRanges[selectedPrice];
 
-        // Check if any of the product's price options fall within the selected price range
-        const hasPriceInRange = product.ramPriceOptions.some(
-          (option) => option.price >= minPrice && option.price <= maxPrice
-        );
+        // Make sure the price is properly formatted as a number
+        const hasPriceInRange = product.ramPriceOptions.some((option) => {
+          // Handle cases where the price might be stored as a string with commas
+          const price =
+            typeof option.price === "string"
+              ? // @ts-ignore: Ignore type error because we know `price` might be a string
+                Number(option.price.replace(/,/g, "")) // Remove commas and convert to number
+              : option.price;
+
+          return price >= minPrice && price <= maxPrice;
+        });
+
         if (!hasPriceInRange) {
           return false;
         }
@@ -355,10 +364,9 @@ const TabbedNavigationWithFilter: React.FC = () => {
 
       // **RAM Filter**
       if (selectedRAM) {
-        // Extract numeric value from RAM string (e.g., "4 GB" -> 4)
-        const selectedRAMValue = parseInt(selectedRAM);
+        const selectedRAMValue = parseInt(selectedRAM); // Convert selected RAM to number
         const hasSelectedRAM = product.ramPriceOptions.some((option) => {
-          const ramValue = parseInt(option.ram);
+          const ramValue = parseInt(option.ram); // Convert the option's RAM to number
           return ramValue === selectedRAMValue;
         });
         if (!hasSelectedRAM) {
@@ -368,11 +376,11 @@ const TabbedNavigationWithFilter: React.FC = () => {
 
       // **Storage Filter**
       if (selectedStorage) {
-        const selectedStorageValue = parseInt(selectedStorage);
+        const selectedStorageValue = parseInt(selectedStorage); // Convert selected storage to number
         const hasSelectedStorage = product.ramPriceOptions.some((option) => {
-          const storageMatch = option.ram.match(/\+(\d+)/);
+          const storageMatch = option.ram.match(/\+(\d+)/); // Match the storage part (e.g., +128)
           if (storageMatch) {
-            const storageValue = parseInt(storageMatch[1]);
+            const storageValue = parseInt(storageMatch[1]); // Extract numeric storage
             return storageValue === selectedStorageValue;
           }
           return false;
@@ -384,13 +392,11 @@ const TabbedNavigationWithFilter: React.FC = () => {
 
       // **Battery Filter**
       if (selectedBattery) {
-        // Assuming battery information is in `details`
-        // We'll need to parse `details` to find battery capacity
-        const selectedBatteryValue = parseInt(selectedBattery);
+        const selectedBatteryValue = parseInt(selectedBattery); // Convert selected battery to number
         const hasSelectedBattery = product.details.some((detail) => {
-          const batteryMatch = detail.match(/(\d+)\s*mAh/i);
+          const batteryMatch = detail.match(/(\d+)\s*mAh/i); // Match battery capacity (e.g., 5000 mAh)
           if (batteryMatch) {
-            const batteryValue = parseInt(batteryMatch[1]);
+            const batteryValue = parseInt(batteryMatch[1]); // Extract numeric battery capacity
             return batteryValue === selectedBatteryValue;
           }
           return false;
@@ -402,7 +408,6 @@ const TabbedNavigationWithFilter: React.FC = () => {
 
       // **Camera Filter**
       if (selectedCamera) {
-        // Define camera ranges
         const cameraRanges: { [key: string]: [number, number] } = {
           "Basic Camera (Up to 12 MP)": [0, 12],
           "Standard Camera (13 MP - 32 MP)": [13, 32],
@@ -412,7 +417,7 @@ const TabbedNavigationWithFilter: React.FC = () => {
         const [minMP, maxMP] = cameraRanges[selectedCamera];
 
         const hasCameraInRange = product.details.some((detail) => {
-          const cameraMatches = detail.match(/(\d+)\s*MP/i);
+          const cameraMatches = detail.match(/(\d+)\s*MP/i); // Match the camera megapixels
           if (cameraMatches) {
             const cameraMP = parseInt(cameraMatches[1]);
             return cameraMP >= minMP && cameraMP <= maxMP;
