@@ -59,28 +59,28 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
     // Check if the user is logged in
     const isLoggedIn = checkUserAuthentication();
 
-    // if (!isLoggedIn) {
-    // Redirect to login page
-    //   router.push("/login");
-    // } else {
-    // Store selected product data in sessionStorage
-    const selectedProductData = {
-      productId: product.id,
-      name: product.name,
-      price: selectedRamPriceOption.price, // Selected price based on RAM
-      color: selectedColorOption.colorName,
-      size: selectedRamPriceOption.ram, // Selected RAM option
-      imageUrl: selectedColorOption.imageUrls[0], // First image
-    };
+    if (!isLoggedIn) {
+      // Redirect to login page
+      router.push("/auth");
+    } else {
+      // Store selected product data in sessionStorage
+      const selectedProductData = {
+        productId: product.id,
+        name: product.name,
+        price: selectedRamPriceOption.price, // Selected price based on RAM
+        color: selectedColorOption.colorName,
+        size: selectedRamPriceOption.ram, // Selected RAM option
+        imageUrl: selectedColorOption.imageUrls[0], // First image
+      };
 
-    sessionStorage.setItem(
-      "selectedProduct",
-      JSON.stringify(selectedProductData)
-    );
+      sessionStorage.setItem(
+        "selectedProduct",
+        JSON.stringify(selectedProductData)
+      );
 
-    // Redirect to the address page
-    router.push("/address");
-    // }
+      // Redirect to the address page
+      router.push("/address");
+    }
   };
 
   return (
