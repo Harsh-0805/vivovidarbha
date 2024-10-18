@@ -109,7 +109,7 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
               alt={`${name} - ${selectedColorOption.colorName}`}
               width={400}
               height={400}
-              className="w-full h-auto object-contain mx-auto rounded-lg"
+              className="w-full object-contain mx-auto rounded-lg"
             />
           </div>
 

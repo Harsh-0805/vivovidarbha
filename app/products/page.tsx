@@ -22,6 +22,18 @@ interface RamPriceOption {
   mrp: number; // From "price" in backend data
 }
 
+type CompareInfo = {
+  price: string;
+  screenSize: string;
+  rearCamera: string;
+  frontCamera: string;
+  ramRom: string;
+  processor: string;
+  battery: string;
+  fastCharging: string;
+  fiveg: string;
+};
+
 // Update the Product interface
 export interface Product {
   _id: string;
@@ -33,6 +45,7 @@ export interface Product {
   ramPriceOptions: RamPriceOption[];
   colorOptions: ColorOption[];
   details: string[];
+  compare: CompareInfo[];
 }
 
 interface ProductCardProps {
