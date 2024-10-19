@@ -25,7 +25,7 @@ const AccountSection: React.FC = () => {
     if (session?.user?.name && session?.user?.email) {
       setLoadingTransactions(true);
       try {
-        const response = await axios.get("http://localhost:9000/showTransactions", { // Update the backend URL
+        const response = await axios.get("https://vivo-project-backend.vercel.app/showTransactions", { // Update the backend URL
           params: {
             username: session.user.name,
             email: session.user.email,
