@@ -1,11 +1,35 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useSession, signOut } from "next-auth/react"; // Import signOut
 import user from "@/public/assets/user.jpg";
 
 const AccountSection: React.FC = () => {
   const [activeSection, setActiveSection] = useState("details");
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  // Check if the user is logged in
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      // Redirect to the auth page if not logged in
+      router.push("/auth");
+    }
+  }, [status, router]);
+
+  // If the session is being checked (loading state)
+  if (status === "loading") {
+    return <p>Loading...</p>; // Or you can add a spinner or a more complex loading state
+  }
+
+  // Logout handler
+  const handleLogout = () => {
+    signOut({
+      callbackUrl: "/", // Redirect to home after logging out
+    });
+  };
 
   return (
     <>
@@ -24,8 +48,10 @@ const AccountSection: React.FC = () => {
                     backgroundImage: `url('/assets/user.jpg')`,
                   }}
                 ></div>
-                <h3 className="mt-4 text-lg font-semibold">Devesh Khilnani</h3>
-                <p className="text-gray-500">abc@gmail.com</p>
+                <h3 className="mt-4 text-lg font-semibold">
+                  {session?.user?.name || "User Name"}
+                </h3>
+                <p className="text-gray-500">{session?.user?.email || "Email"}</p>
               </div>
               <ul>
                 <li
@@ -60,9 +86,12 @@ const AccountSection: React.FC = () => {
                 </li>
               </ul>
               <div className="mt-10 flex justify-center">
-                <a href="#" className="text-indigo-500 font-semibold">
+                <button
+                  onClick={handleLogout} // Call handleLogout on button click
+                  className="text-indigo-500 font-semibold"
+                >
                   Logout &#8594;
-                </a>
+                </button>
               </div>
             </div>
 
@@ -89,6 +118,8 @@ const AccountSection: React.FC = () => {
                           type="text"
                           id="fullName"
                           placeholder="First Name"
+                          value={session?.user?.name || ""}
+                          readOnly
                         />
                       </div>
                       <div className="w-full md:w-1/2">
