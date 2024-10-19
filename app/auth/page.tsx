@@ -13,7 +13,7 @@ const LoginPage = () => {
   useEffect(() => {
     // Redirect to /address if the session is available (user is logged in)
     if (session) {
-      router.push('/address');
+      router.push('/products');
     }
   }, [session, router]);
 
