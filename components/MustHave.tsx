@@ -646,30 +646,31 @@ const ModalComponent: React.FC<ModalProps> = ({ product, onClose }) => {
   const router = useRouter();
 
   const handleBookNow = () => {
+    // Check if the user is logged in
     const isLoggedIn = checkUserAuthentication();
 
-    // if (!isLoggedIn) {
-    //   // Redirect to login page with redirect back to address page after login
-    //   router.push({
-    //     pathname: "/login",
-    //     query: { redirect: "/address" },
-    //   });
-    // } else {
-    // Store selected product data in sessionStorage
-    const selectedProductData = {
-      productId: product.id,
-      name: product.name,
-      price: selectedRamPriceOption.price,
-      color: selectedColorOption.color,
-      size: selectedRamPriceOption.ram,
-    };
-    sessionStorage.setItem(
-      "selectedProduct",
-      JSON.stringify(selectedProductData)
-    );
-    // Redirect to Address page
-    router.push("/address");
-    // }
+    if (!isLoggedIn) {
+      // Redirect to login page
+      router.push("/auth");
+    } else {
+      // Store selected product data in sessionStorage
+      const selectedProductData = {
+        productId: product.id,
+        name: product.name,
+        price: selectedRamPriceOption.price, // Selected price based on RAM
+        color: selectedColorOption.color,
+        size: selectedRamPriceOption.ram, // Selected RAM option
+        imageUrl: selectedColorOption.pictures[0], // First image
+      };
+
+      sessionStorage.setItem(
+        "selectedProduct",
+        JSON.stringify(selectedProductData)
+      );
+
+      // Redirect to the address page
+      router.push("/products");
+    }
   };
 
   return (
@@ -784,20 +785,20 @@ const ModalComponent: React.FC<ModalProps> = ({ product, onClose }) => {
           </ul>
 
           {/* Action Buttons */}
-          <div className="mt-4 md:mt-6 flex flex-col md:flex-row justify-center md:justify-start items-center space-y-2 md:space-y-0 md:space-x-4">
-            <Link
-              href="#"
+          {/* <div className="mt-4 md:mt-6 flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-4"> */}
+          {/* <Link
+              href="javascript:void(0)"
               className="px-6 md:px-12 text-center py-2.5 border border-blue-500 text-blue-500 rounded-full hover:bg-gray-200"
             >
               Learn more
-            </Link>
-            <button
-              onClick={handleBookNow}
-              className="px-6 md:px-12 text-center py-2.5 bg-blue-500 text-white rounded-full hover:bg-blue-600"
-            >
-              Book Now
-            </button>
-          </div>
+            </Link> */}
+          <button
+            onClick={handleBookNow}
+            className="px-[3rem] mt-4 w-full md:px-[5rem] text-center py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          >
+            Book Now
+          </button>
+          {/* </div> */}
         </div>
 
         {/* Close button */}
