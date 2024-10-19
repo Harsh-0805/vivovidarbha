@@ -3,9 +3,12 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import ConfirmationPopup from "./ConfirmationPopup";
+import axios from "axios"; // Axios for making API requests
+import { useSession } from "next-auth/react"; // Import the NextAuth session hook
 
 // Address Form Component
 const AddressForm = () => {
+  const { data: session, status } = useSession(); // Get session data from NextAuth
   const [formData, setFormData] = useState({
     fullName: "",
     mobileNumber: "",
@@ -13,9 +16,19 @@ const AddressForm = () => {
     pincode: "",
     city: "",
     saveInfo: false,
+    promoCode: "", // Promo Code (optional)
   });
 
   const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
+  const [product, setProduct] = useState(null); // Product data from session
+
+  useEffect(() => {
+    // Retrieve product data from sessionStorage
+    const storedProductData = sessionStorage.getItem("selectedProduct");
+    if (storedProductData) {
+      setProduct(JSON.parse(storedProductData));
+    }
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -25,10 +38,51 @@ const AddressForm = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setShowPopup(true); // Show the popup after form submission
-    console.log("Form Data Submitted:", formData); // Process form data here
+
+    // Ensure product is available before submitting
+    if (!product) {
+      alert("Product information is missing.");
+      return;
+    }
+
+    if (!session) {
+      alert("User not authenticated. Please log in.");
+      return;
+    }
+
+    try {
+      // Remove commas from product price and convert to a number
+      const cleanedProductPrice = parseFloat(product.price.toString().replace(/,/g, ''));
+
+      // Prepare data to send to the API
+      const requestData = {
+        username: session?.user?.name, // Get name from NextAuth session
+        email: session?.user?.email,   // Get email from NextAuth session
+        fullName: formData.fullName,
+        mobileNumber: formData.mobileNumber,
+        address: formData.address,
+        pincode: formData.pincode,
+        city: formData.city,
+        productName: product.name,
+        product_price: cleanedProductPrice,  // Send cleaned product price
+        color: product.color,
+        size: product.size,
+        promoCodeUsed: formData.promoCode || "N/A", // Optional promo code
+      };
+
+      // Send POST request to the API
+      const response = await axios.post("http://localhost:9000/createTransaction", requestData);
+
+      if (response.status === 200) {
+        setShowPopup(true); // Show confirmation popup if successful
+        console.log("Transaction Created Successfully");
+      }
+    } catch (error) {
+      console.error("Error creating transaction:", error);
+      alert("There was an issue creating the transaction.");
+    }
   };
 
   const closePopup = () => {
@@ -42,6 +96,7 @@ const AddressForm = () => {
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Form inputs for user details */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 text-left">
@@ -121,21 +176,19 @@ const AddressForm = () => {
           </div>
         </div>
 
-        <div className="flex items-start">
-          <div className="flex items-center h-5">
-            <input
-              type="checkbox"
-              name="saveInfo"
-              checked={formData.saveInfo}
-              onChange={handleChange}
-              className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-            />
-          </div>
-          <div className="ml-3 text-sm">
-            <label className="font-medium text-gray-700">
-              Save this information for next time
-            </label>
-          </div>
+        {/* Promo Code Field */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 text-left">
+            Promo Code (Optional)
+          </label>
+          <input
+            type="text"
+            name="promoCode"
+            value={formData.promoCode}
+            onChange={handleChange}
+            placeholder="Promo Code"
+            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
         </div>
 
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-8">
@@ -156,15 +209,15 @@ const AddressForm = () => {
                 pincode: "",
                 city: "",
                 saveInfo: false,
+                promoCode: "",
               })
-            } // Reset form on cancel
+            }
           >
             Cancel
           </button>
         </div>
       </form>
 
-      {/* Pop-up Component */}
       {showPopup && <ConfirmationPopup onClose={closePopup} />}
     </div>
   );
@@ -196,9 +249,7 @@ const ProductInfo = () => {
 
   return (
     <div className="bg-white text-black mt-8 p-8 rounded-lg shadow-md text-sm">
-      <h2 className="text-lg font-vivoBold mb-4 text-left">
-        Product Information
-      </h2>
+      <h2 className="text-lg font-bold mb-4 text-left">Product Information</h2>
 
       <div className="flex flex-col items-center md:flex-row mb-4">
         <Image
@@ -209,18 +260,12 @@ const ProductInfo = () => {
           className="w-32 h-32 mr-0"
         />
         <div className="mt-4 md:mt-0 md:ml-4 text-center md:text-left">
-          <h3 className="text-lg font-vivoMedium leading-tight">
-            {product.name}
-          </h3>
+          <h3 className="text-lg font-medium leading-tight">{product.name}</h3>
           <p className="text-lg text-gray-700 mt-2">
             ₹{product.price.toLocaleString()}
           </p>
-          <h4 className="font-vivoMedium text-base">
-            Chosen Color: {product.color}
-          </h4>
-          <h4 className="font-vivoMedium text-base mt-2">
-            Chosen Size: {product.size}
-          </h4>
+          <h4 className="font-medium text-base">Chosen Color: {product.color}</h4>
+          <h4 className="font-medium text-base mt-2">Chosen Size: {product.size}</h4>
         </div>
       </div>
 
@@ -250,7 +295,7 @@ const ProductInfo = () => {
         </div>
       </div>
 
-      <div className="flex justify-between font-vivoMedium text-gray-900 mt-1">
+      <div className="flex justify-between font-medium text-gray-900 mt-1">
         <span>Total</span>
         <span>₹9,199.20</span>
       </div>

@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation"; // Ensure you import `useRouter` properly
-import { Product } from "@/app/products/page"; // Import the appropriate product interface
+import React, { useState } from "react";
+import { useRouter } from "next/navigation"; // Import the useRouter hook for navigation
+import { signIn, useSession } from "next-auth/react"; // Import necessary auth functions
+import { Product } from "@/app/products/page"; // Import your Product interface
 
 interface ModalProps {
   product: Product;
@@ -12,7 +12,6 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
   const { name, colorOptions, ramPriceOptions, details } = product;
-
   const [selectedColorIndex, setSelectedColorIndex] = useState(0);
   const [selectedRamPriceIndex, setSelectedRamPriceIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -21,7 +20,8 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
   const selectedRamPriceOption = ramPriceOptions[selectedRamPriceIndex];
   const images = selectedColorOption.imageUrls;
 
-  const router = useRouter(); // Call the useRouter hook here, which ensures client-side usage
+  const router = useRouter(); // Using the router for navigation
+  const { data: session } = useSession(); // Using next-auth's session to check if the user is logged in
 
   const handleColorChange = (index: number) => {
     setSelectedColorIndex(index);
@@ -42,28 +42,17 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
     );
   };
 
-  // Close modal when clicking outside the modal container
-  const handleOverlayClick = (event: React.MouseEvent) => {
-    if (event.target === event.currentTarget) {
-      onClose();
-    }
-  };
-
-  const checkUserAuthentication = () => {
-    // Example: Check if a token exists in localStorage
-    const token = localStorage.getItem("authToken");
-    return !!token; // Returns true if token exists
-  };
-
   const handleBookNow = () => {
     // Check if the user is logged in
-    const isLoggedIn = checkUserAuthentication();
+    if (!session) {
+      // If the user is not logged in, redirect them to the login page
+      // Store the redirect URL so they go to the address page after login
+      sessionStorage.setItem("redirectAfterLogin", "/address");
 
-    if (!isLoggedIn) {
-      // Redirect to login page
-      router.push("/auth");
+      // Initiate Google sign-in (or another provider)
+      signIn("google");
     } else {
-      // Store selected product data in sessionStorage
+      // If the user is already logged in, store the product data and redirect to the address page
       const selectedProductData = {
         productId: product.id,
         name: product.name,
@@ -72,6 +61,9 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
         size: selectedRamPriceOption.ram, // Selected RAM option
         imageUrl: selectedColorOption.imageUrls[0], // First image
       };
+
+      // Debugging: Log the product data being saved
+      console.log("Product saved in session:", selectedProductData);
 
       sessionStorage.setItem(
         "selectedProduct",
@@ -86,7 +78,7 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-50 z-50 px-2 md:px-4 overflow-y-auto"
-      onClick={handleOverlayClick}
+      onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <div
         className="mx-auto my-8 bg-white max-w-4xl w-full h-auto flex flex-col lg:flex-row rounded-lg shadow-lg relative p-4 md:p-5 max-h-screen overflow-y-auto"
@@ -137,23 +129,25 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
 
         {/* Right side: Product info */}
         <div className="flex-1 pb-2">
-          <h2 className="text-xl md:text-2xl font-vivoBold text-black text-left">
+          <h2 className="text-xl md:text-2xl font-bold text-black text-left">
             {name}
           </h2>
+
           {/* MRP and Price */}
-          <div className=" text-left">
-            <p className="text-left text-xl text-[#f10313] font-vivoMedium">
-              ₹{selectedRamPriceOption.price}
+          <div className="text-left">
+            <p className="text-xl text-[#f10313] font-medium">
+              ₹{selectedRamPriceOption.price.toLocaleString()}
             </p>
             <p className="text-gray-500">
-              MRP (incl.of all taxes): <del>₹{selectedRamPriceOption.mrp}</del>
+              MRP (incl.of all taxes):{" "}
+              <del>₹{selectedRamPriceOption.mrp.toLocaleString()}</del>
             </p>
           </div>
 
           {/* Color Options */}
           <p className="mt-4 text-black text-left text-xs">
             Color:{" "}
-            <span className="font-vivoMedium capitalize">
+            <span className="font-medium capitalize">
               {selectedColorOption.colorName}
             </span>
           </p>
@@ -195,21 +189,13 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
             ))}
           </ul>
 
-          {/* Action Buttons */}
-          {/* <div className="mt-4 md:mt-6 flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-4"> */}
-          {/* <Link
-              href="javascript:void(0)"
-              className="px-6 md:px-12 text-center py-2.5 border border-blue-500 text-blue-500 rounded-full hover:bg-gray-200"
-            >
-              Learn more
-            </Link> */}
+          {/* Book Now Button */}
           <button
             onClick={handleBookNow}
             className="px-[3rem] mt-4 w-full md:px-[5rem] text-center py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
           >
             Book Now
           </button>
-          {/* </div> */}
         </div>
 
         {/* Close button */}

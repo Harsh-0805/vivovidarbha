@@ -11,13 +11,19 @@ const LoginPage = () => {
   const { data: session } = useSession();
 
   useEffect(() => {
-    // Redirect to /address if the session is available (user is logged in)
+    // If the session is available (user is logged in), redirect to the address page
     if (session) {
-      router.push('/products');
+      const redirectUrl = sessionStorage.getItem("redirectAfterLogin");
+      
+      // If there's a URL stored, redirect to it, otherwise go to a default page
+      router.push(redirectUrl || "/");
     }
   }, [session, router]);
 
   const handleLogout = () => {
+    // Clear any stored redirect URL on logout
+    sessionStorage.removeItem("redirectAfterLogin");
+
     // Call signOut and redirect to home page after successful logout
     signOut({
       callbackUrl: '/'

@@ -3,33 +3,53 @@
 import Navbar from "@/components/Navbar";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useSession, signOut } from "next-auth/react"; // Import signOut
-import user from "@/public/assets/user.jpg";
+import { useSession, signOut } from "next-auth/react";
+import axios from "axios"; // For API requests
 
 const AccountSection: React.FC = () => {
   const [activeSection, setActiveSection] = useState("details");
+  const [transactions, setTransactions] = useState([]); // State to store transactions
+  const [loadingTransactions, setLoadingTransactions] = useState(false); // Loading state for transactions
   const { data: session, status } = useSession();
   const router = useRouter();
 
   // Check if the user is logged in
   useEffect(() => {
     if (status === "unauthenticated") {
-      // Redirect to the auth page if not logged in
       router.push("/auth");
     }
   }, [status, router]);
 
-  // If the session is being checked (loading state)
-  if (status === "loading") {
-    return <p>Loading...</p>; // Or you can add a spinner or a more complex loading state
-  }
-
-  // Logout handler
-  const handleLogout = () => {
-    signOut({
-      callbackUrl: "/", // Redirect to home after logging out
-    });
+  // Fetch transactions when "My Bookings" is clicked
+  const fetchTransactions = async () => {
+    if (session?.user?.name && session?.user?.email) {
+      setLoadingTransactions(true);
+      try {
+        const response = await axios.get("http://localhost:9000/showTransactions", { // Update the backend URL
+          params: {
+            username: session.user.name,
+            email: session.user.email,
+          },
+        });
+        setTransactions(response.data); // Set the transactions from the API
+      } catch (error) {
+        console.error("Error fetching transactions:", error);
+      } finally {
+        setLoadingTransactions(false);
+      }
+    }
   };
+
+  // Trigger fetching transactions when the section is switched to "bookings"
+  useEffect(() => {
+    if (activeSection === "bookings") {
+      fetchTransactions();
+    }
+  }, [activeSection]);
+
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
@@ -39,8 +59,6 @@ const AccountSection: React.FC = () => {
           <div className="flex flex-col md:flex-row min-h-full">
             {/* Sidebar */}
             <div className="w-full md:w-1/4 p-5 bg-white rounded shadow-lg min-h-full mb-6 md:mb-0">
-              {" "}
-              {/* Adjusted for responsiveness */}
               <div className="text-center mb-8">
                 <div
                   className="h-24 w-24 bg-cover bg-center rounded-full mx-auto"
@@ -51,7 +69,9 @@ const AccountSection: React.FC = () => {
                 <h3 className="mt-4 text-lg font-semibold">
                   {session?.user?.name || "User Name"}
                 </h3>
-                <p className="text-gray-500">{session?.user?.email || "Email"}</p>
+                <p className="text-gray-500">
+                  {session?.user?.email || "Email"}
+                </p>
               </div>
               <ul>
                 <li
@@ -87,7 +107,7 @@ const AccountSection: React.FC = () => {
               </ul>
               <div className="mt-10 flex justify-center">
                 <button
-                  onClick={handleLogout} // Call handleLogout on button click
+                  onClick={() => signOut({ callbackUrl: "/" })}
                   className="text-indigo-500 font-semibold"
                 >
                   Logout &#8594;
@@ -97,15 +117,11 @@ const AccountSection: React.FC = () => {
 
             {/* Main Content */}
             <div className="w-full md:w-3/4 p-5 bg-white rounded shadow-lg min-h-full md:ml-6">
-              {" "}
-              {/* Adjusted for responsiveness */}
               {activeSection === "details" && (
                 <div>
                   <h2 className="text-2xl font-bold mb-6">My details</h2>
                   <form>
                     <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6">
-                      {" "}
-                      {/* Adjusted for responsiveness */}
                       <div className="w-full md:w-1/2">
                         <label
                           className="block text-gray-700 text-sm font-medium mb-2"
@@ -117,7 +133,7 @@ const AccountSection: React.FC = () => {
                           className="w-full px-4 py-2 border rounded-lg text-sm focus:outline-none focus:border-indigo-500"
                           type="text"
                           id="fullName"
-                          placeholder="First Name"
+                          placeholder="Full Name"
                           value={session?.user?.name || ""}
                           readOnly
                         />
@@ -162,12 +178,31 @@ const AccountSection: React.FC = () => {
                   </form>
                 </div>
               )}
+
+              {/* My Bookings Section */}
               {activeSection === "bookings" && (
                 <div className="bg-white p-1">
                   <h2 className="text-2xl font-bold mb-6">My Bookings</h2>
-                  <p>No bookings available.</p>
+                  {loadingTransactions ? (
+                    <p>Loading transactions...</p>
+                  ) : transactions.length > 0 ? (
+                    <ul>
+                      {transactions.map((transaction, index) => (
+                        <li key={index} className="mb-4 p-4 border rounded-lg">
+                          <p><strong>Product:</strong> {transaction.productName}</p>
+                          <p><strong>Price:</strong> ₹{transaction.product_price}</p>
+                          <p><strong>Color:</strong> {transaction.color}</p>
+                          <p><strong>Size:</strong> {transaction.size}</p>
+                          <p><strong>Transaction Date:</strong> {new Date(transaction.createdAt).toLocaleString()}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>No bookings available.</p>
+                  )}
                 </div>
               )}
+
               {activeSection === "wishlist" && (
                 <div className="bg-white p-1">
                   <h2 className="text-2xl font-bold mb-6">Wishlist</h2>
