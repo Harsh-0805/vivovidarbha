@@ -11,16 +11,24 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    imageMobile: "/assets/vivooffer.jpg", // Mobile version
-    imageDesktop: "/assets/vivooffer1.jpg", // Desktop version
+    imageMobile: "/assets/banner1.jpg", // Mobile version
+    imageDesktop: "/assets/banner1.jpg", // Desktop version
   },
   {
-    imageMobile: "/assets/banner2.png",
-    imageDesktop: "/assets/banner2.png",
+    imageMobile: "/assets/banner2.jpg",
+    imageDesktop: "/assets/banner2.jpg",
   },
   {
-    imageMobile: "/assets/banner3.png",
-    imageDesktop: "/assets/banner3.png",
+    imageMobile: "/assets/banner3.jpg",
+    imageDesktop: "/assets/banner3.jpg",
+  },
+  {
+    imageMobile: "/assets/banner4.jpg", // Mobile version
+    imageDesktop: "/assets/banner4.jpg", // Desktop version
+  },
+  {
+    imageMobile: "/assets/banner5.jpg",
+    imageDesktop: "/assets/banner5.jpg",
   },
 ];
 
@@ -97,15 +105,16 @@ export const HeroSection: React.FC = () => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Displaying the image using the img tag */}
-      <Image
-        src={isMobile ? current.imageMobile : current.imageDesktop}
-        alt={`Slide ${currentSlide}`}
-        width={1920} // Specify the image's width
-        height={1080} // Specify the image's height
-        className="w-full h-full object-cover"
-      />
-
+      <a href="/products">
+        {/* Displaying the image using the img tag */}
+        <Image
+          src={isMobile ? current.imageMobile : current.imageDesktop}
+          alt={`Slide ${currentSlide}`}
+          width={1920} // Specify the image's width
+          height={1080} // Specify the image's height
+          className="w-full h-full object-cover"
+        />
+      </a>
       {/* Arrow Buttons for large screens */}
       <div className="hidden sm:block absolute left-4 top-1/2 transform -translate-y-1/2">
         <button
@@ -129,7 +138,7 @@ export const HeroSection: React.FC = () => {
           <div
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-4 h-4 rounded-full cursor-pointer ${
+            className={`sm:w-4 sm:h-4 h-2 w-2 rounded-full cursor-pointer ${
               index === currentSlide ? "bg-blue-600" : "bg-gray-300"
             }`}
           ></div>

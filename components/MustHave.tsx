@@ -41,76 +41,137 @@ interface Product {
 // ---------------------------
 const bestSellers: Product[] = [
   {
-    id: "P940",
-    name: "V40 Pro 5G",
-    series: "V Series",
-    model: "V40 Pro",
-    specialFeature: "Mediatek Processor",
+    id: "P127",
+    name: "Y300 Plus 5G",
+    series: "Y Series",
+    model: "Y300 Plus 5G",
+    specialFeature: "6.78' 3D curved display",
     ramPriceOptions: [
       {
-        ram: "8GB+256GB",
-        price: 49999,
-        mrp: 54999,
-      },
-      {
-        ram: "12GB+512GB",
-        price: 55999,
-        mrp: 60999,
+        ram: "8GB+128GB",
+        price: 23999,
+        mrp: 29999,
       },
     ],
-
     colorPictureOptions: [
       {
-        color: "Titanium Grey",
-        hexcode: "#6c7073",
+        color: "Silk Black",
+        hexcode: "#000000",
         pictures: [
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482652/V40%20Pro/wxkrqa9th7ggus5oqner.jpg",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729274375/61sBSKyLxXL._SX679__cpyg4y.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482652/V40%20Pro/afjxohokotovzaar7olf.jpg",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729274375/61jbdKeRWLL._SX679__vthjgc.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482651/V40%20Pro/baru2e4cshupgs33jxmo.jpg",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729274375/418XY6ssoRL._SX679__vxtjqv.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728834558/V40%20Pro/whmb6pgfaz4ryokkjsdn.webp",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729274374/51aTToNC1tL._SX679__koxiny.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728834558/V40%20Pro/imtjvaqcpojdfqgjtqnt.webp",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729274376/71D_hKN2VmL._SX679__onfr2r.jpg",
           },
         ],
       },
       {
-        color: "Ganges Blue",
-        hexcode: "#96bcb8",
+        color: "Silk Green",
+        hexcode: " #ccdc9d",
         pictures: [
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482654/V40%20Pro/ccfihznun0jremgsfp59.jpg",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729274417/61Vv9HSxhGL._SX679__an2xjs.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482653/V40%20Pro/wmluhueqymmzvb2vm93p.jpg",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729274417/515mvaMstAL._SX679__cjbs5o.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482653/V40%20Pro/djaksy4w0d3qp8dc9ety.jpg",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729274415/51VFablNHeL._SX679__os3afq.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482650/V40%20Pro/acwkbo4y6yc8lhb7kzvs.jpg",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729274414/41Pa98cmbAL._SX679__rchtio.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482650/V40%20Pro/rkkdz2uutljtv2ad7gwo.jpg",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729274376/71D_hKN2VmL._SX679__onfr2r.jpg",
           },
         ],
       },
     ],
     details: [
-      "Stunning 6.78 AMOLED Display: High-resolution FHD+ (2800 × 1260) display with vibrant colors and sharp visuals.",
-      "Triple ZEISS Camera System: 50MP main, 50MP wide-angle, and 50MP telephoto with OIS and up to 50x digital zoom for pro-grade photography.",
-      "Powerful Performance: MediaTek Dimensity 9200+ processor with options for 8GB or 12GB RAM, ensuring fast performance.",
-      "All-day Battery: 5500mAh battery with 80W fast charging for minimal downtime.",
-      "Ample Storage: 256GB or 512GB of internal storage, ideal for heavy users.",
-      "In-display Fingerprint Sensor: Fast and secure unlocking with an optical in-display fingerprint sensor.",
-      "Elegant Design: Lightweight (192g) with a sleek glass body, available in Ganges Blue and Titanium Grey.",
+      "Full-HD+ resolution with a smooth 120Hz refresh rate for enhanced visuals.",
+      "Dual Rear Camera: 50MP + 2MP for stunning photos",
+      "Front Camera: 32MP Ultra Clear Selfie",
+      "All-day Power: 5000mAh battery with fast charging",
+      "Ample Storage: 128GB expandable to 1TB",
+      "Smooth Performance: Snapdragon 695 Oct-core processor",
+      "Fast Charging: 44W for quick power-ups",
+    ],
+  },
+  {
+    id: "P126",
+    name: "Y200 Pro 5G",
+    series: "Y Series",
+    model: "Y200 Pro 5G",
+    specialFeature: "3D Curved AMOLED Display",
+    ramPriceOptions: [
+      {
+        ram: "8GB+128GB",
+        price: 24999,
+        mrp: 29999,
+      },
+    ],
+    colorPictureOptions: [
+      {
+        color: "Silk Black",
+        hexcode: "#000000",
+        pictures: [
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484975/Y200%20Pro/Silk%20Black/kclto1uqga9hsvqwhpy9.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484975/Y200%20Pro/Silk%20Black/gamv7ffevuag1cima8qn.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484974/Y200%20Pro/Silk%20Black/hu2yn0g5gtndjj7d6sgg.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484973/Y200%20Pro/Silk%20Black/mpxvsmvpgusz3tzqvgco.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484973/Y200%20Pro/Silk%20Black/sgzmqmhomrmkbwaok47a.jpg",
+          },
+        ],
+      },
+      {
+        color: "Silk Green",
+        hexcode: " #ccdc9d",
+        pictures: [
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484979/Y200%20Pro/Silk%20Green/od0tbqo1wxmnkbhgznuu.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484979/Y200%20Pro/Silk%20Green/q3suhpdxghlyhny6uhaj.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484978/Y200%20Pro/Silk%20Green/ic9vo48stb4aovnkzoun.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484977/Y200%20Pro/Silk%20Green/ylwn3hwguxcuddabqd2m.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484976/Y200%20Pro/Silk%20Green/jf7e90nh54jnoxhraqpp.jpg",
+          },
+        ],
+      },
+    ],
+    details: [
+      'Curved AMOLED Display: 6.72" 3D Curved, 120Hz, 1300 nits brightness',
+      "Dual Rear Camera: 64MP + 2MP for stunning photos",
+      "All-day Power: 5000mAh battery with fast charging",
+      "Ample Storage: 128GB expandable to 1TB",
+      "Smooth Performance: Snapdragon 695 processor for lag-free experience",
+      "Fast Charging: 44W for quick power-ups",
+      "Slim Design: Thin 7.42mm build and weighs 172g",
     ],
   },
   {
@@ -131,7 +192,6 @@ const bestSellers: Product[] = [
         mrp: 74999,
       },
     ],
-
     colorPictureOptions: [
       {
         color: "Stargaze Blue",
@@ -190,113 +250,245 @@ const bestSellers: Product[] = [
 
 const latestProducts: Product[] = [
   {
-    id: "P966",
-    name: "X100 Pro",
-    series: "X Series",
-    model: "X100 Pro",
-    specialFeature: "50MP Triple AI Camera",
+    id: "P520",
+    name: "V40 5G",
+    series: "V Series",
+    model: "V40",
+    specialFeature: "Snapdragon 7 Gen 3",
     ramPriceOptions: [
       {
-        ram: "16GB+512GB",
-        price: 89999,
-        mrp: 96999,
+        ram: "8GB+128GB",
+        price: 34999,
+        mrp: 39999,
+      },
+      {
+        ram: "8GB+256GB",
+        price: 36999,
+        mrp: 42999,
+      },
+      {
+        ram: "12GB+512GB",
+        price: 41999,
+        mrp: 48999,
       },
     ],
-
     colorPictureOptions: [
       {
-        color: "Aesteroid Black",
-        hexcode: "#4b515c",
+        color: "Lotus Purple",
+        hexcode: "#685677 ",
         pictures: [
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484904/x100%20pro/gwdtno9reycw9azgbgbq.webp",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728479419/V40/Lotus%20Purple/xd9fe5f7308itprvgz1i.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484903/x100%20pro/t20ktmlgmzq52zvilbtz.webp",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728479418/V40/Lotus%20Purple/i5tlvdtljlus3inmywlm.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484902/x100%20pro/ejxqqzebscfptjtpxjtq.webp",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728479417/V40/Lotus%20Purple/rrlkjgotva1jv3nlfuev.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484901/x100%20pro/ratrzxbuijwzlt2upuck.webp",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728479417/V40/Lotus%20Purple/zgv0sgkooxlyi3cgdp6j.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728484902/x100%20pro/zfrjfxzp6b9hgqc9hyfz.webp",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728479417/V40/Lotus%20Purple/pnikrinorrb49ittpmhl.jpg",
+          },
+        ],
+      },
+      {
+        color: "Ganges Blue",
+        hexcode: "#96bcb8",
+        pictures: [
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728479422/V40/Ganges%20Blue/gmsucwblgjhi4wttczk8.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728479421/V40/Ganges%20Blue/f9ndhqxovwtpghngdtg8.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728479420/V40/Ganges%20Blue/vbav2nizirwraequwohu.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728479420/V40/Ganges%20Blue/i9f4ey6ax1bmhudokpnz.jpg",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728479419/V40/Ganges%20Blue/o5lrca8gphif7sbhm7ql.jpg",
+          },
+        ],
+      },
+      {
+        color: "Titanium Grey",
+        hexcode: "#989009",
+        pictures: [
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728843273/V40/Titanium%20Grey/ieakqec4ibeblczii2ft.webp",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728843273/V40/Titanium%20Grey/ywdnt5yuhgurwzbigbw2.webp",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728843273/V40/Titanium%20Grey/mdmdc3ghogqplbbytnxe.webp",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728843273/V40/Titanium%20Grey/heanu7qsl8so6emqyqeq.webp",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728843273/V40/Titanium%20Grey/asyhzd9dqcrsv7slv097.webp",
           },
         ],
       },
     ],
     details: [
-      "High-performance Processor: Dimensity 9300 5G for seamless multitasking and gaming.",
-      "Ample Storage: 512GB ROM with 16GB extended RAM.",
-      "Quick Charging: 100W flash charging and 50W wireless charging.",
-      "Water-resistant: IP68 rating for protection against water and dust.",
-      "Sleek Design: 8.91mm thickness and weighs 225g.",
+      "Stunning 6.78 AMOLED Display: High-resolution FHD+ (2800 × 1260) display with capacitive multi-touch for vibrant visuals and smooth interaction.",
+      "Powerful Triple Camera System: 50MP main + 50MP wide-angle (ZEISS) rear cameras and 50MP front camera for professional-quality photos and videos.",
+      "Performance Boost: Qualcomm Snapdragon 7 Gen 3 processor paired with 8GB or 12GB RAM for seamless multitasking and gaming.",
+      "All-day Battery: 5500mAh battery with 80W fast charging to keep you powered throughout the day.",
+      "Generous Storage: Options for 128GB, 256GB, and 512GB of internal storage for all your apps, photos, and files.",
+      "In-display Fingerprint Sensor: Fast, secure unlocking with an optical in-display fingerprint sensor.",
+      "Elegant Colors: Available in Ganges Blue, Lotus Purple, and Titanium Grey for a sleek, stylish look.",
     ],
   },
   {
-    id: "P149",
-    name: "X Fold 3 Pro",
-    series: "X Series",
-    model: "X Fold 3 Pro",
-    specialFeature: "8 inch Foldable AMOLED",
+    id: "P940",
+    name: "V40 Pro 5G",
+    series: "V Series",
+    model: "V40 Pro",
+    specialFeature: "Mediatek Processor",
     ramPriceOptions: [
       {
-        ram: "16GB+512GB",
-        price: 159999,
-        mrp: 169999,
+        ram: "8GB+256GB",
+        price: 49999,
+        mrp: 54999,
+      },
+      {
+        ram: "12GB+512GB",
+        price: 55999,
+        mrp: 60999,
       },
     ],
-
     colorPictureOptions: [
       {
-        color: "Celestial Black",
-        hexcode: "#000000",
+        color: "Titanium Grey",
+        hexcode: "#6c7073",
         pictures: [
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728732396/X%20Fold3%20Pro/Black/mq3yukhimygpdw7s0bns.jpg",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482652/V40%20Pro/wxkrqa9th7ggus5oqner.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728732396/X%20Fold3%20Pro/Black/djs5gxyak1ddaf8ogrm2.jpg",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482652/V40%20Pro/afjxohokotovzaar7olf.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728732395/X%20Fold3%20Pro/Black/lvecdiob1vteup4sxbnz.jpg",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482651/V40%20Pro/baru2e4cshupgs33jxmo.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728732395/X%20Fold3%20Pro/Black/lomgj06rkbbbfrkx1ngk.webp",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728834558/V40%20Pro/whmb6pgfaz4ryokkjsdn.webp",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728732394/X%20Fold3%20Pro/Black/hzaydqn0qi8nlgvwro9d.webp",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728834558/V40%20Pro/imtjvaqcpojdfqgjtqnt.webp",
           },
         ],
       },
       {
-        color: "Lunar White",
-        hexcode: "#FFFFFF",
+        color: "Ganges Blue",
+        hexcode: "#96bcb8",
         pictures: [
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728732394/X%20Fold3%20Pro/White/wmgyauwonttqtlmwlvbi.webp",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482654/V40%20Pro/ccfihznun0jremgsfp59.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728732394/X%20Fold3%20Pro/White/jmmzzhxunx4hgtcc5dpl.webp",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482653/V40%20Pro/wmluhueqymmzvb2vm93p.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728732393/X%20Fold3%20Pro/White/dq7nfsi195b9rawtk2hr.webp",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482653/V40%20Pro/djaksy4w0d3qp8dc9ety.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728732393/X%20Fold3%20Pro/White/pxfgxyfftgy9n6h0wpth.webp",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482650/V40%20Pro/acwkbo4y6yc8lhb7kzvs.jpg",
           },
           {
-            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728732393/X%20Fold3%20Pro/White/mebwr8fs6vsvmrdckyfv.webp",
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1728482650/V40%20Pro/rkkdz2uutljtv2ad7gwo.jpg",
           },
         ],
       },
     ],
     details: [
-      "High-resolution Front Camera: 32MP front camera with Super Night Selfie, Aura Screen Light, and cinematic video options for perfect selfies.",
-      "Massive Storage & Performance: 16GB RAM + 512GB ROM with Extended RAM 3.0 for seamless multitasking. Powered by Snapdragon 8 Gen3, delivering top-tier performance.",
-      "Battery & Charging: 5700mAh battery for long-lasting power. Supports 100W Flash Charge and 50W Wireless Charging for quick and efficient charging.",
-      "Durability & Design : IPX8 water resistance, ensuring protection against water exposure. Slim build with 11.2mm thickness when folded and just 5.2mm when unfolded. Weighs 236g, combining sturdiness with portability.",
+      "Stunning 6.78 AMOLED Display: High-resolution FHD+ (2800 × 1260) display with vibrant colors and sharp visuals.",
+      "Triple ZEISS Camera System: 50MP main, 50MP wide-angle, and 50MP telephoto with OIS and up to 50x digital zoom for pro-grade photography.",
+      "Powerful Performance: MediaTek Dimensity 9200+ processor with options for 8GB or 12GB RAM, ensuring fast performance.",
+      "All-day Battery: 5500mAh battery with 80W fast charging for minimal downtime.",
+      "Ample Storage: 256GB or 512GB of internal storage, ideal for heavy users.",
+      "In-display Fingerprint Sensor: Fast and secure unlocking with an optical in-display fingerprint sensor.",
+      "Elegant Design: Lightweight (192g) with a sleek glass body, available in Ganges Blue and Titanium Grey.",
+    ],
+  },
+  {
+    id: "P941",
+    name: "V40e 5G",
+    series: "V Series",
+    model: "V40e",
+    specialFeature: "4K Video Camera",
+    ramPriceOptions: [
+      {
+        ram: "8GB+128GB",
+        price: 28999,
+        mrp: 33999,
+      },
+      {
+        ram: "8GB+256GB",
+        price: 30999,
+        mrp: 35999,
+      },
+    ],
+    colorPictureOptions: [
+      {
+        color: "Mint Green",
+        hexcode: "#d5e5d9",
+        pictures: [
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729273388/zz146ztcykgsfxhw6xvs.webp",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729273388/guwqh9eljlewqunlgnos.webp",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729273387/hakahs266uucyyhzh2is.webp",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729273387/srb6s6bh5lxkmv7a9bit.webp",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729273387/v9qfstfnvrsap29iiveb.webp",
+          },
+        ],
+      },
+      {
+        color: "Royal Bronze",
+        hexcode: "#b48e81",
+        pictures: [
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729273919/v40e/msyehmshtwqxgwmkk6sy.webp",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729273919/v40e/h0fdeqhdsvz56unymmtv.webp",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729274120/v40e/ulu2ojovyxptyzbhlfw9.webp",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729274120/v40e/khsgzxfzxvvsnfnftfmj.webp",
+          },
+          {
+            url: "https://res.cloudinary.com/dgyc9r5ye/image/upload/v1729274120/v40e/hd4f6umiyokrubjrzrcx.webp",
+          },
+        ],
+      },
+    ],
+    details: [
+      "6.77' FHD+ AMOLED Display: Stunning visuals with 2392 x 1080 resolution and smooth multi-touch interaction.",
+      "50MP Rear Camera: Sony IMX882 OIS Main Camera + 8MP Ultra Wide-Angle for clear and stable photography.",
+      "50MP Selfie Camera: Ultra Wide-Angle front camera with autofocus for detailed selfies",
+      "Powerful Performance: MediaTek Dimensity 7300 processor with 8GB RAM and up to 256GB storage",
+      "All-day Battery: 5500mAh battery with 80W fast charging for minimal downtime",
+      "In-display Fingerprint Sensor: Fast, secure optical fingerprint unlocking",
+      "Elegant Colors: Available in Royal Bronze and Mint Green for a sleek look",
     ],
   },
 ];
@@ -537,12 +729,14 @@ const ModalComponent: React.FC<ModalProps> = ({ product, onClose }) => {
           <h2 className="text-xl md:text-2xl font-vivoBold text-black text-left">
             {name}
           </h2>
-          <p className="text-xs text-black text-left">
-            MRP (Inclusive of all taxes)
-          </p>
-          <p className="text-2xl md:text-3xl font-vivoRegular text-black mt-2 text-left">
-            ₹{selectedRamPriceOption.price.toLocaleString()}
-          </p>
+          <div className=" text-left">
+            <p className="text-left text-xl text-[#f10313] font-vivoMedium">
+              ₹{selectedRamPriceOption.price}
+            </p>
+            <p className="text-gray-500">
+              MRP (incl.of all taxes): <del>₹{selectedRamPriceOption.mrp}</del>
+            </p>
+          </div>
 
           {/* Color Options */}
           <p className="mt-4 text-black text-left text-xs">

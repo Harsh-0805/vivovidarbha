@@ -2,82 +2,17 @@ import React from "react";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-10">
+    <footer className="bg-gray-900 text-gray-300 pt-10">
       {/* Upper Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap justify-between space-y-8 md:space-y-0">
-          {/* Popular Links */}
-          <div className="w-full md:w-1/4">
-            <h3 className="text-lg font-semibold text-white mb-4">
-              Popular Links
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-blue-500 transition duration-300"
-                >
-                  T3 5G
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-blue-500 transition duration-300"
-                >
-                  T3 Lite 5G
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-blue-500 transition duration-300"
-                >
-                  T3X 5G
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-blue-500 transition duration-300"
-                >
-                  Y58 5G
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-blue-500 transition duration-300"
-                >
-                  Y18
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-blue-500 transition duration-300"
-                >
-                  Y28 5G
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-blue-500 transition duration-300"
-                >
-                  Enterprise sales
-                </a>
-              </li>
-            </ul>
-          </div>
-
           {/* Support Links */}
           <div className="w-full md:w-1/4">
             <h3 className="text-lg font-semibold text-white mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
                 <a
-                  href="#"
+                  href="/service"
                   className="hover:text-blue-500 transition duration-300"
                 >
                   Service Center
@@ -85,7 +20,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/about"
                   className="hover:text-blue-500 transition duration-300"
                 >
                   About Us
@@ -93,7 +28,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/warranty"
                   className="hover:text-blue-500 transition duration-300"
                 >
                   Warranty Terms
@@ -110,7 +45,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="#"
+                  href="/terms&conditions"
                   className="hover:text-blue-500 transition duration-300"
                 >
                   Terms and Conditions
@@ -118,7 +53,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/privacypolicy"
                   className="hover:text-blue-500 transition duration-300"
                 >
                   Privacy Policy
@@ -134,7 +69,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/warranty"
                   className="hover:text-blue-500 transition duration-300"
                 >
                   Warranty Terms
@@ -142,15 +77,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
-                  className="hover:text-blue-500 transition duration-300"
-                >
-                  Shipping Policy
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
+                  href="/return&refund"
                   className="hover:text-blue-500 transition duration-300"
                 >
                   Return & Refund Policy
@@ -161,18 +88,20 @@ export const Footer: React.FC = () => {
 
           {/* Corporate Office Info */}
           <div className="w-full md:w-1/4">
-            <h3 className="text-lg font-semibold text-white mb-4">vivo pune</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">
+              vivo nagpur
+            </h3>
             <p className="text-sm">
               Corporate Office
               <br />
-              HISOA Electronic Pvt Ltd. Suyog Platinum Tower 1, Naylor Rd,
+              UNIMAY Electronics Pvt Ltd. Suyog Platinum Tower 1, Naylor Rd,
               Sangamvadi, Pune,
               <br />
               Maharashtra 411001
             </p>
             <p className="mt-4 text-sm">Email Us (Reply in 24h)</p>
             <a href="mailto:info@vivopune.com" className="hover:text-blue-500">
-              info@vivopune.com
+              info@vivonagpur.com
             </a>
 
             <p className="mt-4 text-sm">Call Us</p>
@@ -199,7 +128,7 @@ export const Footer: React.FC = () => {
       <div className="bg-gray-800 py-4 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-400">
           <p>
-            © 2024 HISOA Electronic Pvt Ltd (A division of vivo). All rights
+            © 2024 UNIMAY Electronics Pvt Ltd (A division of vivo). All rights
             reserved.
           </p>
         </div>

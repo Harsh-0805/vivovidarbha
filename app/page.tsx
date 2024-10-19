@@ -13,7 +13,7 @@ const Home: React.FC = () => {
     <div>
       <Navbar />
       <HeroSection />
-      <ShopByCategory />
+      {/* <ShopByCategory /> */}
       <MustHaveProducts />
       <DiscoverSection />
       <WhyVivoNagpur />

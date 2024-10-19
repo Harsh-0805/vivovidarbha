@@ -196,20 +196,20 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
           </ul>
 
           {/* Action Buttons */}
-          <div className="mt-4 md:mt-6 flex flex-col md:flex-row justify-center md:justify-start items-center space-y-2 md:space-y-0 md:space-x-4">
-            <Link
+          {/* <div className="mt-4 md:mt-6 flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-4"> */}
+          {/* <Link
               href="javascript:void(0)"
               className="px-6 md:px-12 text-center py-2.5 border border-blue-500 text-blue-500 rounded-full hover:bg-gray-200"
             >
               Learn more
-            </Link>
-            <button
-              onClick={handleBookNow}
-              className="px-6 md:px-12 text-center py-2.5 bg-blue-500 text-white rounded-full hover:bg-blue-600"
-            >
-              Book Now
-            </button>
-          </div>
+            </Link> */}
+          <button
+            onClick={handleBookNow}
+            className="px-[3rem] mt-4 w-full md:px-[5rem] text-center py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          >
+            Book Now
+          </button>
+          {/* </div> */}
         </div>
 
         {/* Close button */}
