@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
 
 // ---------------------------
 // Interfaces
@@ -21,8 +22,8 @@ interface ColorPictureOption {
 
 interface RamPriceOption {
   ram: string;
-  price: number;
-  mrp: number;
+  price: string;
+  mrp: string;
 }
 
 interface Product {
@@ -49,8 +50,8 @@ const bestSellers: Product[] = [
     ramPriceOptions: [
       {
         ram: "8GB+128GB",
-        price: 23999,
-        mrp: 29999,
+        price: "23,999",
+        mrp: "29,999",
       },
     ],
     colorPictureOptions: [
@@ -116,8 +117,8 @@ const bestSellers: Product[] = [
     ramPriceOptions: [
       {
         ram: "8GB+128GB",
-        price: 24999,
-        mrp: 29999,
+        price: "24,999",
+        mrp: "29,999",
       },
     ],
     colorPictureOptions: [
@@ -183,13 +184,13 @@ const bestSellers: Product[] = [
     ramPriceOptions: [
       {
         ram: "12GB+256GB",
-        price: 63999,
-        mrp: 68999,
+        price: "63,999",
+        mrp: "68,999",
       },
       {
         ram: "16GB+512GB",
-        price: 69999,
-        mrp: 74999,
+        price: "69,999",
+        mrp: "74,999",
       },
     ],
     colorPictureOptions: [
@@ -258,18 +259,18 @@ const latestProducts: Product[] = [
     ramPriceOptions: [
       {
         ram: "8GB+128GB",
-        price: 34999,
-        mrp: 39999,
+        price: "34,999",
+        mrp: "39,999",
       },
       {
         ram: "8GB+256GB",
-        price: 36999,
-        mrp: 42999,
+        price: "36,999",
+        mrp: "42,999",
       },
       {
         ram: "12GB+512GB",
-        price: 41999,
-        mrp: 48999,
+        price: "41,999",
+        mrp: "48,999",
       },
     ],
     colorPictureOptions: [
@@ -356,13 +357,13 @@ const latestProducts: Product[] = [
     ramPriceOptions: [
       {
         ram: "8GB+256GB",
-        price: 49999,
-        mrp: 54999,
+        price: "49,999",
+        mrp: "54,999",
       },
       {
         ram: "12GB+512GB",
-        price: 55999,
-        mrp: 60999,
+        price: "55,999",
+        mrp: "60,999",
       },
     ],
     colorPictureOptions: [
@@ -428,13 +429,13 @@ const latestProducts: Product[] = [
     ramPriceOptions: [
       {
         ram: "8GB+128GB",
-        price: 28999,
-        mrp: 33999,
+        price: "28,999",
+        mrp: "33,999",
       },
       {
         ram: "8GB+256GB",
-        price: 30999,
-        mrp: 35999,
+        price: "30,999",
+        mrp: "35,999",
       },
     ],
     colorPictureOptions: [
@@ -645,24 +646,30 @@ const ModalComponent: React.FC<ModalProps> = ({ product, onClose }) => {
   };
 
   const router = useRouter();
+  const { data: session } = useSession();
 
   const handleBookNow = () => {
     // Check if the user is logged in
-    const isLoggedIn = checkUserAuthentication();
+    if (!session) {
+      // If the user is not logged in, redirect them to the login page
+      // Store the redirect URL so they go to the address page after login
+      sessionStorage.setItem("redirectAfterLogin", "/address");
 
-    if (!isLoggedIn) {
-      // Redirect to login page
-      router.push("/auth");
+      // Initiate Google sign-in (or another provider)
+      signIn("google");
     } else {
-      // Store selected product data in sessionStorage
+      // If the user is already logged in, store the product data and redirect to the address page
       const selectedProductData = {
         productId: product.id,
         name: product.name,
         price: selectedRamPriceOption.price, // Selected price based on RAM
         color: selectedColorOption.color,
         size: selectedRamPriceOption.ram, // Selected RAM option
-        imageUrl: selectedColorOption.pictures[0], // First image
+        imageUrl: selectedColorOption.pictures[0].url, // First image
       };
+
+      // Debugging: Log the product data being saved
+      console.log("Product saved in session:", selectedProductData);
 
       sessionStorage.setItem(
         "selectedProduct",
@@ -670,7 +677,7 @@ const ModalComponent: React.FC<ModalProps> = ({ product, onClose }) => {
       );
 
       // Redirect to the address page
-      router.push("/products");
+      router.push("/address");
     }
   };
 

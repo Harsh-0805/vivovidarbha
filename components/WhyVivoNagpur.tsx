@@ -1,6 +1,6 @@
 import React from "react";
 import Image, { StaticImageData } from "next/image";
-import ServiceIcon from "@/public/assets/24service.png";
+import Star from "@/public/assets/star.png";
 import SupportIcon from "@/public/assets/person.png";
 import DiscountIcon from "@/public/assets/discount.png";
 
@@ -11,12 +11,12 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    icon: ServiceIcon,
-    title: "Personalized In-Home Service",
+    icon: Star,
+    title: "Loyalty Perks & Benefits",
   },
   {
     icon: SupportIcon,
-    title: "24/7 Service Support",
+    title: "Brand Service Support",
   },
   {
     icon: DiscountIcon,
