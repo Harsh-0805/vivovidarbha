@@ -20,7 +20,14 @@ const AddressForm = () => {
   });
 
   const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
-  const [product, setProduct] = useState(null); // Product data from session
+  interface Product {
+    name: string;
+    price: number;
+    color: string;
+    size: string;
+  }
+
+  const [product, setProduct] = useState<Product | null>(null); // Product data from session
 
   useEffect(() => {
     // Retrieve product data from sessionStorage
@@ -73,7 +80,7 @@ const AddressForm = () => {
       };
 
       // Send POST request to the API
-      const response = await axios.post("https://vivo-project-backend.vercel.app/createTransaction", requestData);
+      const response = await axios.post("http://localhost:9000/createTransaction", requestData);
 
       if (response.status === 200) {
         setShowPopup(true); // Show confirmation popup if successful
