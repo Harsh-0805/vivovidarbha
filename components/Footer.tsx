@@ -26,14 +26,6 @@ export const Footer: React.FC = () => {
                   About Us
                 </a>
               </li>
-              <li>
-                <a
-                  href="/warranty"
-                  className="hover:text-blue-500 transition duration-300"
-                >
-                  Warranty Terms
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -67,14 +59,7 @@ export const Footer: React.FC = () => {
                   Cookie Policy
                 </a>
               </li>
-              <li>
-                <a
-                  href="/warranty"
-                  className="hover:text-blue-500 transition duration-300"
-                >
-                  Warranty Terms
-                </a>
-              </li>
+
               <li>
                 <a
                   href="/Return"

@@ -1,7 +1,14 @@
 // app/layout.tsx
-import './globals.css';
-import ClientSessionProvider from './ClientSessionProvider';
-import Script from 'next/script';
+import "./globals.css";
+import ClientSessionProvider from "./ClientSessionProvider";
+import Script from "next/script";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Vivo Nagpur",
+  description:
+    "Vivo Nagpur is a leading mobile phone store in Nagpur. We offer a wide range of smartphones, accessories, and services.",
+};
 
 export default function RootLayout({
   children,
@@ -36,7 +43,8 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
-        <ClientSessionProvider>{children}</ClientSessionProvider> {/* Wrap children */}
+        <ClientSessionProvider>{children}</ClientSessionProvider>{" "}
+        {/* Wrap children */}
       </body>
     </html>
   );

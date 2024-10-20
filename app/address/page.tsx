@@ -251,6 +251,7 @@ const ProductInfo = () => {
 
   // Function to convert string price with commas into a number
   const convertPriceToNumber = (priceString: string) => {
+    // @ts-ignore: Ignore type error because we know `price` might be a string
     const numericPrice = priceString.replace(/,/g, ""); // Remove commas
     return parseFloat(numericPrice); // Convert to number
   };
