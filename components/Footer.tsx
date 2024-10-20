@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="/terms&conditions"
+                  href="/Terms&Conditions"
                   className="hover:text-blue-500 transition duration-300"
                 >
                   Terms and Conditions
@@ -53,7 +53,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="/privacypolicy"
+                  href="/Privacy"
                   className="hover:text-blue-500 transition duration-300"
                 >
                   Privacy Policy
@@ -61,7 +61,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/cookie"
                   className="hover:text-blue-500 transition duration-300"
                 >
                   Cookie Policy
@@ -77,7 +77,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="/return&refund"
+                  href="/Return"
                   className="hover:text-blue-500 transition duration-300"
                 >
                   Return & Refund Policy
