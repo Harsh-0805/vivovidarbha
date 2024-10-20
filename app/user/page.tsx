@@ -8,7 +8,15 @@ import axios from "axios"; // For API requests
 
 const AccountSection: React.FC = () => {
   const [activeSection, setActiveSection] = useState("details");
-  const [transactions, setTransactions] = useState([]); // State to store transactions
+  interface Transaction {
+    productName: string;
+    product_price: number;
+    color: string;
+    size: string;
+    createdAt: string;
+  }
+
+  const [transactions, setTransactions] = useState<Transaction[]>([]); // State to store transactions
   const [loadingTransactions, setLoadingTransactions] = useState(false); // Loading state for transactions
   const { data: session, status } = useSession();
   const router = useRouter();
