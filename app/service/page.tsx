@@ -142,7 +142,7 @@ const ServiceLocator: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#FDFBF8]">
+    <div className="bg-gray-100">
       {/* Header Section */}
       <Navbar />
       <div className="relative h-auto">
@@ -160,7 +160,7 @@ const ServiceLocator: React.FC = () => {
         </h2>
 
         {/* City Dropdown */}
-        <div className="relative bg-white rounded-lg shadow-md max-w-xl mx-auto">
+        <div className="relative bg-white rounded-lg shadow hover:shadow-lg max-w-xl mx-auto">
           {/* Dropdown Trigger */}
           <button
             className="bg-gray-200 w-full flex justify-between items-center px-4 py-3 text-lg font-vivoMedium text-gray-600 rounded-t-lg"
@@ -210,7 +210,7 @@ const ServiceLocator: React.FC = () => {
               {storesData[selectedCity].map((store, index) => (
                 <div
                   key={index}
-                  className="bg-white p-6 rounded-lg shadow-md border border-gray-100"
+                  className="bg-white hover:shadow-lg p-6 rounded-lg shadow-md border border-gray-100"
                 >
                   <h3 className="text-lg font-vivoRegular text-black mb-2">
                     {store.name}

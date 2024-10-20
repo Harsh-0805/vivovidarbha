@@ -549,11 +549,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onOpenModal }) => {
       <h3 className="text-left px-4 text-md font-vivoRegular">{name}</h3>
       {/* MRP and Price */}
       <div className="px-4 text-left">
-        <p className="text-left text-xl text-[#f10313] font-vivoMedium">
+        <p className="text-left text-xl text-blue-500 font-vivoMedium">
           ₹{selectedRamPriceOption.price}
         </p>
         <p className="text-gray-500">
-          MRP (incl.of all taxes): <del>₹{selectedRamPriceOption.mrp}</del>
+          MRP (incl.of all taxes):{" "}
+          <del className="text-[#f10313]">₹{selectedRamPriceOption.mrp}</del>
         </p>
       </div>
       <div className="flex justify-end px-4 space-x-4 mt-4">
@@ -693,13 +694,14 @@ const ModalComponent: React.FC<ModalProps> = ({ product, onClose }) => {
           </button>
 
           {/* Current Image */}
-          <div className="w-full max-w-xs sm:max-w-sm md:max-w-md">
+          <div className="w-full max-w-[400px] h-[400px] mx-auto">
             <Image
               src={images[currentImageIndex].url}
               alt={`${name} - ${selectedColorOption.color}`}
-              width={400}
-              height={400}
-              className="w-full h-auto object-contain mx-auto rounded-lg"
+              width={400} // Fixed width
+              height={400} // Fixed height
+              objectFit="contain" // Ensure image fits within the container
+              className="w-fit h-full mx-auto rounded-lg" // Enforce the image to fully fit inside the div
             />
           </div>
 
@@ -731,11 +733,14 @@ const ModalComponent: React.FC<ModalProps> = ({ product, onClose }) => {
             {name}
           </h2>
           <div className=" text-left">
-            <p className="text-left text-xl text-[#f10313] font-vivoMedium">
+            <p className="text-left text-xl text-blue-500 font-vivoMedium">
               ₹{selectedRamPriceOption.price}
             </p>
             <p className="text-gray-500">
-              MRP (incl.of all taxes): <del>₹{selectedRamPriceOption.mrp}</del>
+              MRP (incl.of all taxes):{" "}
+              <del className="text-[#f10313]">
+                ₹{selectedRamPriceOption.mrp}
+              </del>
             </p>
           </div>
 

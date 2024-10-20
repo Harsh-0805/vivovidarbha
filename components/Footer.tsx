@@ -94,10 +94,10 @@ export const Footer: React.FC = () => {
             <p className="text-sm">
               Corporate Office
               <br />
-              UNIMAY Electronics Pvt Ltd. Suyog Platinum Tower 1, Naylor Rd,
-              Sangamvadi, Pune,
+              UNIMAY Electronics Pvt Ltd. 6th Floor, Riaan House, LIC Square,
+              Kingsway Rd, opp. KP ground, Mohan Nagar, Nagpur
               <br />
-              Maharashtra 411001
+              Maharashtra 440001
             </p>
             <p className="mt-4 text-sm">Email Us (Reply in 24h)</p>
             <a href="mailto:info@vivopune.com" className="hover:text-blue-500">

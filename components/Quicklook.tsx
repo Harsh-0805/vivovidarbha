@@ -95,13 +95,14 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
           </button>
 
           {/* Current Image */}
-          <div className="w-full max-w-xs sm:max-w-sm md:max-w-md">
+          <div className="w-full max-w-[400px] h-[400px] mx-auto">
             <Image
               src={images[currentImageIndex]}
               alt={`${name} - ${selectedColorOption.colorName}`}
-              width={400}
-              height={400}
-              className="w-full object-contain mx-auto rounded-lg"
+              width={400} // Fixed width
+              height={400} // Fixed height
+              objectFit="contain" // Ensure image fits within the container
+              className="w-fit h-full mx-auto rounded-lg" // Enforce the image to fully fit inside the div
             />
           </div>
 
@@ -135,12 +136,14 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
 
           {/* MRP and Price */}
           <div className="text-left">
-            <p className="text-xl text-[#f10313] font-medium">
+            <p className="text-xl text-blue-500 font-medium">
               ₹{selectedRamPriceOption.price.toLocaleString()}
             </p>
             <p className="text-gray-500">
               MRP (incl.of all taxes):{" "}
-              <del>₹{selectedRamPriceOption.mrp.toLocaleString()}</del>
+              <del className="text-[#f10313]">
+                ₹{selectedRamPriceOption.mrp.toLocaleString()}
+              </del>
             </p>
           </div>
 

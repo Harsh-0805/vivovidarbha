@@ -16,7 +16,9 @@ const Home: React.FC = () => {
       <Navbar />
       <HeroSection />
       {/* <ShopByCategory /> */}
-      <div className="relative w-full h-[500px] bg-gray-100 flex items-center justify-center overflow-hidden">
+
+      <MustHaveProducts />
+      <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] bg-gray-100 flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <Image
           src={working} // Make sure to match the file path
@@ -26,7 +28,7 @@ const Home: React.FC = () => {
           className="absolute pt-10 rounded-3xl" // Ensures the image is behind the content
         />
       </div>
-      <MustHaveProducts />
+
       <DiscoverSection />
       <WhyVivoNagpur />
       {/* <Chatbot /> */}
