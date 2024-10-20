@@ -39,7 +39,7 @@ const AccountSection: React.FC = () => {
       if (session?.user?.email) {
         setLoading(true);
         try {
-          const response = await axios.get("http://localhost:9000/getUserProfile", {
+          const response = await axios.get("https://vivo-project-backend.vercel.app/getUserProfile", {
             params: { email: session.user.email },
           });
           setMobile(response.data.phoneNumber || "");
@@ -60,7 +60,7 @@ const AccountSection: React.FC = () => {
     if (session?.user?.name && session?.user?.email) {
       setLoadingTransactions(true);
       try {
-        const response = await axios.get("http://localhost:9000/showTransactions", {
+        const response = await axios.get("https://vivo-project-backend.vercel.app/showTransactions", {
           params: {
             username: session.user.name,
             email: session.user.email,
@@ -98,7 +98,7 @@ const AccountSection: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:9000/updateUserProfile", {
+      const response = await axios.post("https://vivo-project-backend.vercel.app/updateUserProfile", {
         email: session?.user?.email,
         phoneNumber: mobile,
         address,

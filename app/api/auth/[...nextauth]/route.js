@@ -19,7 +19,7 @@ const handler = NextAuth({
 
       // Send user data to your Express backend
       try {
-        const res = await fetch('http://localhost:9000/createUser', {
+        const res = await fetch('https://vivo-project-backend.vercel.app/createUser', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

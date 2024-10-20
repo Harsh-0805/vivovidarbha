@@ -86,7 +86,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ promoCode }) => {
 
       // Send POST request to the API
       const response = await axios.post(
-        "http://localhost:9000/createTransaction",
+        "https://vivo-project-backend.vercel.app/createTransaction",
         requestData
       );
 
