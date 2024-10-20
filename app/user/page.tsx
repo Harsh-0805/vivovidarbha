@@ -8,11 +8,16 @@ import axios from "axios"; // For API requests
 
 const AccountSection: React.FC = () => {
   const [activeSection, setActiveSection] = useState("details");
+  const [mobile, setMobile] = useState("");
+  const [address, setAddress] = useState("");
+  const [loading, setLoading] = useState(false);
+
   interface Transaction {
     productName: string;
     product_price: number;
     color: string;
     size: string;
+    convertedOrNot: string;
     createdAt: string;
   }
 
@@ -28,23 +33,56 @@ const AccountSection: React.FC = () => {
     }
   }, [status, router]);
 
+  // Fetch user profile details (mobile number and address)
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      if (session?.user?.email) {
+        setLoading(true);
+        try {
+          const response = await axios.get("http://localhost:9000/getUserProfile", {
+            params: { email: session.user.email },
+          });
+          setMobile(response.data.phoneNumber || "");
+          setAddress(response.data.address || "");
+        } catch (error) {
+          console.error("Error fetching user profile:", error);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchUserProfile();
+  }, [session]);
+
   // Fetch transactions when "My Bookings" is clicked
   const fetchTransactions = async () => {
     if (session?.user?.name && session?.user?.email) {
       setLoadingTransactions(true);
       try {
-        const response = await axios.get("https://vivo-project-backend.vercel.app/showTransactions", { // Update the backend URL
+        const response = await axios.get("http://localhost:9000/showTransactions", {
           params: {
             username: session.user.name,
             email: session.user.email,
           },
         });
         setTransactions(response.data); // Set the transactions from the API
+        console.log(response.data); 
       } catch (error) {
         console.error("Error fetching transactions:", error);
       } finally {
         setLoadingTransactions(false);
       }
+    }
+  };
+  const getStatusClass = (status: string) => {
+    switch (status) {
+      case 'completed':
+        return 'text-green-500';  // Completed status in green
+      case 'cancelled':
+        return 'text-red-500';  // Cancelled status in red
+      default:
+        return 'text-yellow-500';  // In progress status in yellow
     }
   };
 
@@ -55,7 +93,27 @@ const AccountSection: React.FC = () => {
     }
   }, [activeSection]);
 
-  if (status === "loading") {
+  // Handle form submission for updating user profile
+  const handleSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:9000/updateUserProfile", {
+        email: session?.user?.email,
+        phoneNumber: mobile,
+        address,
+      });
+
+      if (response.status === 200) {
+        alert("Profile updated successfully!");
+      }
+    } catch (error) {
+      console.error("Error updating user profile:", error);
+      alert("Failed to update profile.");
+    }
+  };
+
+  if (status === "loading" || loading) {
     return <p>Loading...</p>;
   }
 
@@ -71,8 +129,8 @@ const AccountSection: React.FC = () => {
                 <div
                   className="h-24 w-24 bg-cover bg-center rounded-full mx-auto"
                   style={{
-                    backgroundImage: `url('/assets/user.jpg')`,
-                  }}
+                    backgroundImage: `url('${session?.user?.image || '/assets/user.jpg'}')`,
+                  }}                  
                 ></div>
                 <h3 className="mt-4 text-lg font-semibold">
                   {session?.user?.name || "User Name"}
@@ -128,7 +186,7 @@ const AccountSection: React.FC = () => {
               {activeSection === "details" && (
                 <div>
                   <h2 className="text-2xl font-bold mb-6">My details</h2>
-                  <form>
+                  <form onSubmit={handleSave}>
                     <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6">
                       <div className="w-full md:w-1/2">
                         <label
@@ -158,6 +216,8 @@ const AccountSection: React.FC = () => {
                           type="text"
                           id="mobile"
                           placeholder="Mobile Number"
+                          value={mobile}
+                          onChange={(e) => setMobile(e.target.value)}
                         />
                       </div>
                     </div>
@@ -174,6 +234,8 @@ const AccountSection: React.FC = () => {
                         type="text"
                         id="address"
                         placeholder="Complete Address"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
                       />
                     </div>
 
@@ -201,6 +263,10 @@ const AccountSection: React.FC = () => {
                           <p><strong>Price:</strong> ₹{transaction.product_price}</p>
                           <p><strong>Color:</strong> {transaction.color}</p>
                           <p><strong>Size:</strong> {transaction.size}</p>
+                          <p className={getStatusClass(transaction.convertedOrNot)}>
+                          <strong>Status:</strong> {transaction.convertedOrNot === 'in progress' ? 'In Progress' : transaction.convertedOrNot === 'completed' ? 'Completed' : 'Cancelled'}
+                          </p>
+
                           <p><strong>Transaction Date:</strong> {new Date(transaction.createdAt).toLocaleString()}</p>
                         </li>
                       ))}

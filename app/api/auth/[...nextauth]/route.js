@@ -19,7 +19,7 @@ const handler = NextAuth({
 
       // Send user data to your Express backend
       try {
-        const res = await fetch('https://vivo-project-backend.vercel.app/createUser', {
+        const res = await fetch('http://localhost:9000/createUser', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -27,12 +27,12 @@ const handler = NextAuth({
           body: JSON.stringify({
             email: session.user.email,
             name: session.user.name,
-            phoneNumber: session.user.id,
-            address: {
-              addressLine1: "gigu", // Replace with actual data if available
-              pincode: "hjghg",     // Replace with actual data if available
-              city: "ggfhjf"        // Replace with actual data if available
-            }
+            // phoneNumber: session.user.id,
+            // address: {
+            //   addressLine1: "gigu", // Replace with actual data if available
+            //   pincode: "hjghg",     // Replace with actual data if available
+            //   city: "ggfhjf"        // Replace with actual data if available
+            // }
           }),
         });
 
