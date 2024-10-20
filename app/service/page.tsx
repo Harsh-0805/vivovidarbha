@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import service from "@/public/assets/service.png";
 import Navbar from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 interface Store {
   name: string;
@@ -299,6 +300,7 @@ const ServiceLocator: React.FC = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

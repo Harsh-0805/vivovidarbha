@@ -6,6 +6,7 @@ import Modal from "@/components/Quicklook";
 import Image from "next/image";
 import Link from "next/link";
 import ContentLoader from "react-content-loader";
+import { Footer } from "@/components/Footer";
 
 // Define the interfaces
 // Update the ColorOption interface
@@ -1015,6 +1016,7 @@ const TabbedNavigationWithFilter: React.FC = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

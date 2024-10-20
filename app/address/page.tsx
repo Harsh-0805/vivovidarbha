@@ -61,26 +61,31 @@ const AddressForm = () => {
 
     try {
       // Remove commas from product price and convert to a number
-      const cleanedProductPrice = parseFloat(product.price.toString().replace(/,/g, ''));
+      const cleanedProductPrice = parseFloat(
+        product.price.toString().replace(/,/g, "")
+      );
 
       // Prepare data to send to the API
       const requestData = {
         username: session?.user?.name, // Get name from NextAuth session
-        email: session?.user?.email,   // Get email from NextAuth session
+        email: session?.user?.email, // Get email from NextAuth session
         fullName: formData.fullName,
         mobileNumber: formData.mobileNumber,
         address: formData.address,
         pincode: formData.pincode,
         city: formData.city,
         productName: product.name,
-        product_price: cleanedProductPrice,  // Send cleaned product price
+        product_price: cleanedProductPrice, // Send cleaned product price
         color: product.color,
         size: product.size,
         promoCodeUsed: formData.promoCode || "N/A", // Optional promo code
       };
 
       // Send POST request to the API
-      const response = await axios.post("http://localhost:9000/createTransaction", requestData);
+      const response = await axios.post(
+        "http://localhost:9000/createTransaction",
+        requestData
+      );
 
       if (response.status === 200) {
         setShowPopup(true); // Show confirmation popup if successful
@@ -183,21 +188,6 @@ const AddressForm = () => {
           </div>
         </div>
 
-        {/* Promo Code Field */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 text-left">
-            Promo Code (Optional)
-          </label>
-          <input
-            type="text"
-            name="promoCode"
-            value={formData.promoCode}
-            onChange={handleChange}
-            placeholder="Promo Code"
-            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
-        </div>
-
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-8">
           <button
             type="submit"
@@ -234,13 +224,22 @@ const AddressForm = () => {
 const ProductInfo = () => {
   interface Product {
     name: string;
-    price: number;
+    price: string; // Price is a string from backend, e.g., "25,999"
     color: string;
     size: string;
     imageUrl: string;
   }
 
   const [product, setProduct] = useState<Product | null>(null);
+  const [promoCode, setPromoCode] = useState<string>(""); // State to track entered promo code
+  const [discount, setDiscount] = useState<number>(0); // State to track applied discount
+  const [isPromoValid, setIsPromoValid] = useState<boolean | null>(null); // Track if promo code is valid
+
+  // Define a list of valid promo codes with corresponding discount percentages
+  const promoCodes: Record<string, number> = {
+    VIVO20: 20, // 20% discount
+    SAVE10: 10, // 10% discount
+  };
 
   useEffect(() => {
     // Retrieve the selected product data from sessionStorage
@@ -250,9 +249,34 @@ const ProductInfo = () => {
     }
   }, []);
 
+  // Function to convert string price with commas into a number
+  const convertPriceToNumber = (priceString: string) => {
+    const numericPrice = priceString.replace(/,/g, ""); // Remove commas
+    return parseFloat(numericPrice); // Convert to number
+  };
+
+  // Function to apply promo code
+  const applyPromoCode = () => {
+    if (promoCodes[promoCode.toUpperCase()]) {
+      // Valid promo code
+      const discountPercentage = promoCodes[promoCode.toUpperCase()];
+      setDiscount(discountPercentage);
+      setIsPromoValid(true);
+    } else {
+      // Invalid promo code
+      setDiscount(0);
+      setIsPromoValid(false);
+    }
+  };
+
   if (!product) {
     return <div>Loading product information...</div>;
   }
+
+  // Convert product price from string to number for calculations
+  const productPrice = convertPriceToNumber(product.price) || 0;
+  const discountAmount = (productPrice * discount) / 100;
+  const discountedPrice = productPrice - discountAmount;
 
   return (
     <div className="bg-white text-black mt-8 p-8 rounded-lg shadow-md text-sm">
@@ -269,32 +293,57 @@ const ProductInfo = () => {
         <div className="mt-4 md:mt-0 md:ml-4 text-center md:text-left">
           <h3 className="text-lg font-medium leading-tight">{product.name}</h3>
           <p className="text-lg text-gray-700 mt-2">
-            ₹{product.price.toLocaleString()}
+            ₹{productPrice.toLocaleString()}{" "}
+            {/* Display price as localized string */}
           </p>
-          <h4 className="font-medium text-base">Chosen Color: {product.color}</h4>
-          <h4 className="font-medium text-base mt-2">Chosen Size: {product.size}</h4>
+          <h4 className="font-medium text-base">
+            Chosen Color: {product.color}
+          </h4>
+          <h4 className="font-medium text-base mt-2">
+            Chosen Size: {product.size}
+          </h4>
         </div>
       </div>
 
+      {/* Promo Code Input */}
       <div className="flex flex-col lg:flex-row items-center mb-4">
         <input
           type="text"
-          placeholder="VIVO 20"
+          placeholder="Enter Promo Code"
+          value={promoCode}
+          onChange={(e) => setPromoCode(e.target.value)} // Update promo code state
           className="border border-gray-300 rounded px-2 py-2 mb-2 lg:mb-0 lg:mr-2 w-full"
         />
-        <button className="bg-blue-500 text-white px-4 py-2 rounded w-full">
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded w-full"
+          onClick={applyPromoCode} // Apply promo code on click
+        >
           Apply
         </button>
       </div>
 
+      {/* Promo code feedback */}
+      {isPromoValid === false && (
+        <p className="text-red-500">Invalid Promo Code</p>
+      )}
+      {isPromoValid === true && (
+        <p className="text-green-500">
+          Promo Code Applied! {discount}% Discount Applied
+        </p>
+      )}
+
       <div className="border-t border-gray-300 py-4">
         <div className="flex justify-between text-gray-600 mt-1">
           <span>MRP</span>
-          <span>₹{product.price.toLocaleString()}</span>
+          <span>₹{productPrice.toLocaleString()}</span>{" "}
+          {/* Display original price */}
         </div>
         <div className="flex justify-between text-gray-600 mt-1">
           <span>Discount</span>
-          <span>- ₹2,299.80 (20%)</span>
+          <span>
+            - ₹{discountAmount.toLocaleString()} ({discount}%)
+          </span>{" "}
+          {/* Display discount */}
         </div>
         <div className="flex justify-between text-gray-600 mt-1">
           <span>Delivery Charges</span>
@@ -304,7 +353,8 @@ const ProductInfo = () => {
 
       <div className="flex justify-between font-medium text-gray-900 mt-1">
         <span>Total</span>
-        <span>₹9,199.20</span>
+        <span>₹{discountedPrice.toLocaleString()}</span>{" "}
+        {/* Display total price after discount */}
       </div>
     </div>
   );
@@ -313,7 +363,7 @@ const ProductInfo = () => {
 // Main Checkout Page
 const CheckoutPage = () => {
   return (
-    <div className="App bg-gray-100">
+    <div className="App bg-gray-100 h-screen">
       <Navbar />
       <main className="main-content px-4">
         <div className="py-6 flex flex-col gap-4 lg:flex-row justify-center lg:space-x-2 space-y-6 lg:space-y-0">
