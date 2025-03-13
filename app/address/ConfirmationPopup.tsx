@@ -26,25 +26,25 @@ const ConfirmationPopup: React.FC<ConfirmationPopupProps> = ({ onClose }) => {
         </button>
 
         <div>
-          <Image
+          {/* <Image
             src=""
             alt="Vivo Logo"
             className="mx-auto mb-4"
             style={{ width: "100px" }}
-          />
+          /> */}
           <h2 className="text-xl font-semibold mb-2">
             Thank you for your interest in Vivo
           </h2>
           <p className="text-gray-600 mb-4">
             Our representative will contact you shortly
           </p>
-          <Image
+          {/* <Image
             src=""
             alt="Vivo V40"
             className="mx-auto mb-4"
             style={{ width: "100px" }}
-          />
-          <h3 className="text-lg font-bold mb-3">VIVO V40</h3>
+          /> */}
+          {/* <h3 className="text-lg font-bold mb-3">VIVO V40</h3> */}
         </div>
 
         <h3 className="text-lg font-semibold mb-8">Our Process</h3>

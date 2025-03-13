@@ -8,7 +8,11 @@ import { useSession } from "next-auth/react"; // Import the NextAuth session hoo
 import Link from "next/link";
 
 // Address Form Component
-const AddressForm = () => {
+interface AddressFormProps {
+  promoCode: string;
+}
+
+const AddressForm: React.FC<AddressFormProps> = ({ promoCode }) => {
   const { data: session, status } = useSession(); // Get session data from NextAuth
   const [formData, setFormData] = useState({
     fullName: "",
@@ -17,7 +21,6 @@ const AddressForm = () => {
     pincode: "",
     city: "",
     saveInfo: false,
-    promoCode: "", // Promo Code (optional)
   });
 
   const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
@@ -79,7 +82,7 @@ const AddressForm = () => {
         product_price: cleanedProductPrice, // Send cleaned product price
         color: product.color,
         size: product.size,
-        promoCodeUsed: formData.promoCode || "N/A", // Optional promo code
+        promoCodeUsed: promoCode || "N/A", // Send promo code from props
       };
 
       // Send POST request to the API
@@ -207,7 +210,6 @@ const AddressForm = () => {
                 pincode: "",
                 city: "",
                 saveInfo: false,
-                promoCode: "",
               })
             }
           >
@@ -222,7 +224,15 @@ const AddressForm = () => {
 };
 
 // Product Info Component
-const ProductInfo = () => {
+interface ProductInfoProps {
+  promoCode: string;
+  setPromoCode: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const ProductInfo: React.FC<ProductInfoProps> = ({
+  promoCode,
+  setPromoCode,
+}) => {
   interface Product {
     name: string;
     price: string; // Price is a string from backend, e.g., "25,999"
@@ -232,7 +242,6 @@ const ProductInfo = () => {
   }
 
   const [product, setProduct] = useState<Product | null>(null);
-  const [promoCode, setPromoCode] = useState<string>(""); // State to track entered promo code
   const [discount, setDiscount] = useState<number>(0); // State to track applied discount
   const [isPromoValid, setIsPromoValid] = useState<boolean | null>(null); // Track if promo code is valid
 
@@ -364,6 +373,8 @@ const ProductInfo = () => {
 
 // Main Checkout Page
 const CheckoutPage = () => {
+  const [promoCode, setPromoCode] = useState<string>("");
+
   return (
     <div className="App bg-gray-100 h-screen">
       <Navbar />
@@ -371,12 +382,12 @@ const CheckoutPage = () => {
         <div className="py-6 flex flex-col gap-4 lg:flex-row justify-center lg:space-x-2 space-y-6 lg:space-y-0">
           {/* ProductInfo Div */}
           <div className="w-full lg:w-1/3 order-1 lg:order-2">
-            <ProductInfo />
+            <ProductInfo promoCode={promoCode} setPromoCode={setPromoCode} />
           </div>
 
           {/* AddressForm Div */}
           <div className="w-full lg:w-1/2 order-2 lg:order-1">
-            <AddressForm />
+            <AddressForm promoCode={promoCode} />
           </div>
         </div>
       </main>
