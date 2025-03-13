@@ -94,6 +94,9 @@ const AddressForm: React.FC<AddressFormProps> = ({ promoCode }) => {
       if (response.status === 200) {
         setShowPopup(true); // Show confirmation popup if successful
         console.log("Transaction Created Successfully");
+
+        // Redirect to the Vivo Nagpur link
+        window.location.href = "https://bit.ly/vivonagpur";
       }
     } catch (error) {
       console.error("Error creating transaction:", error);
