@@ -18,7 +18,8 @@
     "react-burger-menu": "^3.0.9",
     "react-content-loader": "^7.0.2",
     "react-dom": "^18",
-    "react-swipeable": "^7.0.1"
+    "react-swipeable": "^7.0.1",
+    "swiper": "^11.2.4"
   },
   "devDependencies": {
     "@types/node": "^20",

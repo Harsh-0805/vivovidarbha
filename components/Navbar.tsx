@@ -87,7 +87,10 @@ const Navbar: React.FC = () => {
                 </li>
 
                 <li>
-                  <a href="/about" className="hover:text-blue-500 nav-link">
+                  <a
+                    href="/aboutVivoNagpur"
+                    className="hover:text-blue-500 nav-link"
+                  >
                     About Vivo Nagpur
                   </a>
                 </li>
@@ -200,7 +203,7 @@ const Navbar: React.FC = () => {
               Service
             </a>
             <a
-              href="/about"
+              href="/aboutVivoNagpur"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-100"
               onClick={toggleMenu}
             >
@@ -211,11 +214,11 @@ const Navbar: React.FC = () => {
       )}
       <div className="bg-yellow-400 py-2 overflow-hidden">
         <div className="scrolling-text text-black font-vivoRegular">
-          www.vivoNagpur.com is an official website of vivo Smartphones in
-          association with vivo India and we deliver all over India. The
-          registered name is Unimay Electronics Private Limited. Our offline
-          markets are present in Nagpur, Akola, Amravati, Bhandara, Buldhana,
-          Chandrapur, Gondia, Wardha, Washim, Yavatmal, Pusad.
+          www.vivonagpur.com is an official website of vivo Smartphones in
+          association with vivo India. The registered name is Unimay Electronics
+          Private Limited. Our offline markets are present in Nagpur, Akola,
+          Amravati, Bhandara, Buldhana, Chandrapur, Gondia, Wardha, Washim,
+          Yavatmal, Pusad.
         </div>
       </div>
     </nav>

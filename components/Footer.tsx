@@ -79,7 +79,7 @@ export const Footer: React.FC = () => {
             <p className="text-sm">
               Corporate Office
               <br />
-              UNIMAY Electronics Pvt Ltd. 6th Floor, Riaan House, LIC Square,
+              UNIMAY Electronic Pvt Ltd. 6th Floor, Riaan House, LIC Square,
               Kingsway Rd, opp. KP ground, Mohan Nagar, Nagpur
               <br />
               Maharashtra 440001

@@ -39,9 +39,12 @@ const AccountSection: React.FC = () => {
       if (session?.user?.email) {
         setLoading(true);
         try {
-          const response = await axios.get("http://localhost:9000/getUserProfile", {
-            params: { email: session.user.email },
-          });
+          const response = await axios.get(
+            "https://vivo-backend.vercel.app/getUserProfile",
+            {
+              params: { email: session.user.email },
+            }
+          );
           setMobile(response.data.phoneNumber || "");
           setAddress(response.data.address || "");
         } catch (error) {
@@ -60,14 +63,17 @@ const AccountSection: React.FC = () => {
     if (session?.user?.name && session?.user?.email) {
       setLoadingTransactions(true);
       try {
-        const response = await axios.get("http://localhost:9000/showTransactions", {
-          params: {
-            username: session.user.name,
-            email: session.user.email,
-          },
-        });
+        const response = await axios.get(
+          "https://vivo-backend.vercel.app/showTransactions",
+          {
+            params: {
+              username: session.user.name,
+              email: session.user.email,
+            },
+          }
+        );
         setTransactions(response.data); // Set the transactions from the API
-        console.log(response.data); 
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching transactions:", error);
       } finally {
@@ -77,12 +83,12 @@ const AccountSection: React.FC = () => {
   };
   const getStatusClass = (status: string) => {
     switch (status) {
-      case 'completed':
-        return 'text-green-500';  // Completed status in green
-      case 'cancelled':
-        return 'text-red-500';  // Cancelled status in red
+      case "completed":
+        return "text-green-500"; // Completed status in green
+      case "cancelled":
+        return "text-red-500"; // Cancelled status in red
       default:
-        return 'text-yellow-500';  // In progress status in yellow
+        return "text-yellow-500"; // In progress status in yellow
     }
   };
 
@@ -98,11 +104,14 @@ const AccountSection: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:9000/updateUserProfile", {
-        email: session?.user?.email,
-        phoneNumber: mobile,
-        address,
-      });
+      const response = await axios.post(
+        "https://vivo-backend.vercel.app/updateUserProfile",
+        {
+          email: session?.user?.email,
+          phoneNumber: mobile,
+          address,
+        }
+      );
 
       if (response.status === 200) {
         alert("Profile updated successfully!");
@@ -129,8 +138,10 @@ const AccountSection: React.FC = () => {
                 <div
                   className="h-24 w-24 bg-cover bg-center rounded-full mx-auto"
                   style={{
-                    backgroundImage: `url('${session?.user?.image || '/assets/user.jpg'}')`,
-                  }}                  
+                    backgroundImage: `url('${
+                      session?.user?.image || "/assets/user.jpg"
+                    }')`,
+                  }}
                 ></div>
                 <h3 className="mt-4 text-lg font-semibold">
                   {session?.user?.name || "User Name"}
@@ -259,15 +270,35 @@ const AccountSection: React.FC = () => {
                     <ul>
                       {transactions.map((transaction, index) => (
                         <li key={index} className="mb-4 p-4 border rounded-lg">
-                          <p><strong>Product:</strong> {transaction.productName}</p>
-                          <p><strong>Price:</strong> ₹{transaction.product_price}</p>
-                          <p><strong>Color:</strong> {transaction.color}</p>
-                          <p><strong>Size:</strong> {transaction.size}</p>
-                          <p className={getStatusClass(transaction.convertedOrNot)}>
-                          <strong>Status:</strong> {transaction.convertedOrNot === 'in progress' ? 'In Progress' : transaction.convertedOrNot === 'completed' ? 'Completed' : 'Cancelled'}
+                          <p>
+                            <strong>Product:</strong> {transaction.productName}
+                          </p>
+                          <p>
+                            <strong>Price:</strong> ₹{transaction.product_price}
+                          </p>
+                          <p>
+                            <strong>Color:</strong> {transaction.color}
+                          </p>
+                          <p>
+                            <strong>Size:</strong> {transaction.size}
+                          </p>
+                          <p
+                            className={getStatusClass(
+                              transaction.convertedOrNot
+                            )}
+                          >
+                            <strong>Status:</strong>{" "}
+                            {transaction.convertedOrNot === "in progress"
+                              ? "In Progress"
+                              : transaction.convertedOrNot === "completed"
+                              ? "Completed"
+                              : "Cancelled"}
                           </p>
 
-                          <p><strong>Transaction Date:</strong> {new Date(transaction.createdAt).toLocaleString()}</p>
+                          <p>
+                            <strong>Transaction Date:</strong>{" "}
+                            {new Date(transaction.createdAt).toLocaleString()}
+                          </p>
                         </li>
                       ))}
                     </ul>

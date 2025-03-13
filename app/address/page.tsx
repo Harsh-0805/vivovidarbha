@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import ConfirmationPopup from "./ConfirmationPopup";
 import axios from "axios"; // Axios for making API requests
 import { useSession } from "next-auth/react"; // Import the NextAuth session hook
+import Link from "next/link";
 
 // Address Form Component
 const AddressForm = () => {
@@ -83,7 +84,7 @@ const AddressForm = () => {
 
       // Send POST request to the API
       const response = await axios.post(
-        "http://localhost:9000/createTransaction",
+        "https://vivo-backend.vercel.app/createTransaction",
         requestData
       );
 
@@ -93,7 +94,7 @@ const AddressForm = () => {
       }
     } catch (error) {
       console.error("Error creating transaction:", error);
-      alert("There was an issue creating the transaction.");
+      alert("transistion already exists.");
     }
   };
 
@@ -215,7 +216,7 @@ const AddressForm = () => {
         </div>
       </form>
 
-      {showPopup && <ConfirmationPopup onClose={closePopup} />}
+      {showPopup && <Link href="https://bit.ly/vivonagpur" />}
     </div>
   );
 };

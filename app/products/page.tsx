@@ -215,7 +215,7 @@ const TabbedNavigationWithFilter: React.FC = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "https://vivo-project-backend.vercel.app/products"
+          "https://vivo-backend.vercel.app/products"
         );
         const data = await response.json();
 
