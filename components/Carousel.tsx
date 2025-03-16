@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { useSwipeable } from "react-swipeable"; // Importing the swipeable hook
+import { useSwipeable } from "react-swipeable";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Slide {
   imageMobile: string;
@@ -10,89 +11,60 @@ interface Slide {
 }
 
 const slides: Slide[] = [
-  {
-    imageMobile: "/assets/banner1.jpg", // Mobile version
-    imageDesktop: "/assets/banner1.jpg", // Desktop version
-  },
-  {
-    imageMobile: "/assets/banner2.jpg",
-    imageDesktop: "/assets/banner2.jpg",
-  },
-  {
-    imageMobile: "/assets/banner3.jpg",
-    imageDesktop: "/assets/banner3.jpg",
-  },
-  {
-    imageMobile: "/assets/banner4.jpg", // Mobile version
-    imageDesktop: "/assets/banner4.jpg", // Desktop version
-  },
-  {
-    imageMobile: "/assets/banner5.jpg",
-    imageDesktop: "/assets/banner5.jpg",
-  },
+  { imageMobile: "/assets/banner1.jpg", imageDesktop: "/assets/banner1.jpg" },
+  { imageMobile: "/assets/banner2.jpg", imageDesktop: "/assets/banner2.jpg" },
+  { imageMobile: "/assets/banner3.jpg", imageDesktop: "/assets/banner3.jpg" },
+  { imageMobile: "/assets/banner4.jpg", imageDesktop: "/assets/banner4.jpg" },
+  { imageMobile: "/assets/banner5.jpg", imageDesktop: "/assets/banner5.jpg" },
 ];
 
 export const HeroSection: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [hovering, setHovering] = useState(false);
-  const [isMobile, setIsMobile] = useState(false); // To track screen size
+  const [isMobile, setIsMobile] = useState(false);
+  const [direction, setDirection] = useState(1);
   const slideInterval = useRef<NodeJS.Timeout | null>(null);
 
-  // Function to handle screen resize and detect if it's mobile
-  const handleResize = () => {
-    setIsMobile(window.innerWidth < 640); // Tailwind's sm breakpoint is 640px
-  };
+  const handleResize = () => setIsMobile(window.innerWidth < 768); // Tablet breakpoint
 
   useEffect(() => {
-    handleResize(); // Check on component mount
-    window.addEventListener("resize", handleResize); // Add event listener
-
-    return () => {
-      window.removeEventListener("resize", handleResize); // Cleanup on unmount
-    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
     if (!hovering) {
-      slideInterval.current = setInterval(() => {
-        goToNextSlide();
-      }, 5000);
+      slideInterval.current = setInterval(goToNextSlide, 3000);
     }
-
-    return () => {
-      if (slideInterval.current) {
-        clearInterval(slideInterval.current);
-      }
-    };
+    return () => slideInterval.current && clearInterval(slideInterval.current);
   }, [currentSlide, hovering]);
 
   const goToPrevSlide = () => {
+    setDirection(-1);
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
   const goToNextSlide = () => {
+    setDirection(1);
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   };
 
   const goToSlide = (index: number) => {
+    setDirection(index > currentSlide ? 1 : -1);
     setCurrentSlide(index);
   };
 
   const handleMouseEnter = () => {
     setHovering(true);
-    if (slideInterval.current) {
-      clearInterval(slideInterval.current);
-    }
+    slideInterval.current && clearInterval(slideInterval.current);
   };
 
-  const handleMouseLeave = () => {
-    setHovering(false);
-  };
+  const handleMouseLeave = () => setHovering(false);
 
-  // Swipe Handlers using react-swipeable
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => goToNextSlide(),
-    onSwipedRight: () => goToPrevSlide(),
+    onSwipedLeft: goToNextSlide,
+    onSwipedRight: goToPrevSlide,
     trackMouse: true,
   });
 
@@ -100,48 +72,65 @@ export const HeroSection: React.FC = () => {
 
   return (
     <section
-      {...swipeHandlers} // Applying swipe handlers
-      className="relative w-full h-full sm:h-[450px] md:h-[550px] bg-cover bg-center flex justify-center items-center"
+      {...swipeHandlers}
+      className="relative w-full h-[300px] sm:h-[450px] md:h-[550px] flex justify-center items-center overflow-hidden bg-gray-200"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <a href="/products">
-        {/* Displaying the image using the img tag */}
-        <Image
-          src={isMobile ? current.imageMobile : current.imageDesktop}
-          alt={`Slide ${currentSlide}`}
-          width={1920} // Specify the image's width
-          height={1080} // Specify the image's height
-          className="w-full h-full object-cover"
-        />
+      <a href="/products" className="absolute w-full h-full">
+        <AnimatePresence custom={direction}>
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, x: direction * 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -direction * 100 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="absolute w-full h-full"
+          >
+            <Image
+              src={isMobile ? current.imageMobile : current.imageDesktop}
+              alt={`Slide ${currentSlide}`}
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+        </AnimatePresence>
       </a>
-      {/* Arrow Buttons for large screens */}
-      <div className="hidden sm:block absolute left-4 top-1/2 transform -translate-y-1/2">
-        <button
-          onClick={goToPrevSlide}
-          className="bg-blue-600 text-white h-12 w-12 rounded-full"
-        >
-          &larr;
-        </button>
-      </div>
-      <div className="hidden sm:block absolute right-4 top-1/2 transform -translate-y-1/2">
-        <button
-          onClick={goToNextSlide}
-          className="bg-blue-600 text-white h-12 w-12 rounded-full"
-        >
-          &rarr;
-        </button>
-      </div>
+
+      {/* Left Arrow */}
+      <motion.button
+        onClick={goToPrevSlide}
+        whileHover={{ scale: 1.2 }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white h-8 w-8 sm:h-12 sm:w-12 rounded-full flex items-center justify-center shadow-lg"
+      >
+        &larr;
+      </motion.button>
+
+      {/* Right Arrow */}
+      <motion.button
+        onClick={goToNextSlide}
+        whileHover={{ scale: 1.2 }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white h-8 w-8 sm:h-12 sm:w-12 rounded-full flex items-center justify-center shadow-lg"
+      >
+        &rarr;
+      </motion.button>
+
       {/* Indicators */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4">
+      <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4">
         {slides.map((_, index) => (
-          <div
+          <motion.div
             key={index}
             onClick={() => goToSlide(index)}
-            className={`sm:w-4 sm:h-4 h-2 w-2 rounded-full cursor-pointer ${
-              index === currentSlide ? "bg-blue-600" : "bg-gray-300"
+            animate={{ scale: index === currentSlide ? 1.3 : 1 }}
+            transition={{ duration: 0.3 }}
+            className={`cursor-pointer rounded-full ${
+              index === currentSlide
+                ? "bg-blue-600 w-3 h-3 sm:w-4 sm:h-4"
+                : "bg-gray-300 w-2 h-2 sm:w-3 sm:h-3"
             }`}
-          ></div>
+          ></motion.div>
         ))}
       </div>
     </section>
