@@ -215,7 +215,7 @@ const Navbar: React.FC = () => {
       <div className="bg-yellow-400 py-2 overflow-hidden">
         <div className="scrolling-text text-black font-vivoRegular">
           www.vivonagpur.com is an official website of vivo Smartphones in
-          association with vivo India. The registered name is Unimay Electronics
+          association with vivo India. The registered name is Unimay Electronic
           Private Limited. Our offline markets are present in Nagpur, Akola,
           Amravati, Bhandara, Buldhana, Chandrapur, Gondia, Wardha, Washim,
           Yavatmal, Pusad.

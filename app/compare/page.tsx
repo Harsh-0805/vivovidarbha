@@ -59,9 +59,7 @@ const ComparePage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(
-          "https://vivo-project-backend.vercel.app/products"
-        ); // Adjust the API endpoint accordingly
+        const res = await fetch("https://vivo-backend.vercel.app/products"); // Adjust the API endpoint accordingly
         const data = await res.json();
         const formattedProducts = data.reduce((acc: any, product: Product) => {
           acc[product.name] = product;
@@ -172,199 +170,198 @@ const ComparePage = () => {
               </div>
             ))}
           </div>
-        </div>
+          {/* Comparison Table */}
+          <div className="container my-8 max-w-[1200px] w-full sm:mx-auto px-[40px] sm:px-[80px]">
+            <h2 className="text-2xl font-bold mb-6">Specifications</h2>
 
-        {/* Comparison Table */}
-        <div className="container my-8 max-w-[1200px] w-full sm:mx-auto px-[40px] sm:px-[80px]">
-          <h2 className="text-2xl font-bold mb-6">Specifications</h2>
+            {products && Object.keys(products).length > 0 ? (
+              <>
+                <div className="pb-8">
+                  <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b border-gray-300">
+                    Price
+                  </div>
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
+                    {selectedModels.map((model, index) => (
+                      <div
+                        key={index}
+                        className="col-span-1 text-left text-gray-800"
+                      >
+                        {model &&
+                        products[model]?.compare &&
+                        products[model].compare[0]?.price
+                          ? products[model].compare[0].price
+                          : "N/A"}
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-          {products && Object.keys(products).length > 0 ? (
-            <>
-              <div className="pb-8">
-                <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b">
-                  Price
+                {/* Screen Size */}
+                <div className="pb-8">
+                  <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b border-gray-300">
+                    Screen Size
+                  </div>
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
+                    {selectedModels.map((model, index) => (
+                      <div
+                        key={index}
+                        className="col-span-1 text-left text-gray-800"
+                      >
+                        {model &&
+                        products[model]?.compare &&
+                        products[model].compare[0]?.screenSize
+                          ? products[model].compare[0].screenSize
+                          : "N/A"}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
-                  {selectedModels.map((model, index) => (
-                    <div
-                      key={index}
-                      className="col-span-1 text-left text-gray-700"
-                    >
-                      {model &&
-                      products[model]?.compare &&
-                      products[model].compare[0]?.price
-                        ? products[model].compare[0].price
-                        : "N/A"}
-                    </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* Screen Size */}
-              <div className="pb-8">
-                <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b">
-                  Screen Size
+                {/* Battery */}
+                <div className="pb-8">
+                  <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b border-gray-300">
+                    Rear Camera
+                  </div>
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
+                    {selectedModels.map((model, index) => (
+                      <div
+                        key={index}
+                        className="col-span-1 text-left text-gray-800"
+                      >
+                        {model &&
+                        products[model]?.compare &&
+                        products[model].compare[0]?.rearCamera
+                          ? products[model].compare[0].rearCamera
+                          : "N/A"}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
-                  {selectedModels.map((model, index) => (
-                    <div
-                      key={index}
-                      className="col-span-1 text-left text-gray-700"
-                    >
-                      {model &&
-                      products[model]?.compare &&
-                      products[model].compare[0]?.screenSize
-                        ? products[model].compare[0].screenSize
-                        : "N/A"}
-                    </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* Battery */}
-              <div className="pb-8">
-                <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b">
-                  Rear Camera
+                <div className="pb-8">
+                  <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b border-gray-300">
+                    Front Camera
+                  </div>
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
+                    {selectedModels.map((model, index) => (
+                      <div
+                        key={index}
+                        className="col-span-1 text-left text-gray-800"
+                      >
+                        {model &&
+                        products[model]?.compare &&
+                        products[model].compare[0]?.frontCamera
+                          ? products[model].compare[0].frontCamera
+                          : "N/A"}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
-                  {selectedModels.map((model, index) => (
-                    <div
-                      key={index}
-                      className="col-span-1 text-left text-gray-700"
-                    >
-                      {model &&
-                      products[model]?.compare &&
-                      products[model].compare[0]?.rearCamera
-                        ? products[model].compare[0].rearCamera
-                        : "N/A"}
-                    </div>
-                  ))}
-                </div>
-              </div>
 
-              <div className="pb-8">
-                <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b">
-                  Front Camera
+                <div className="pb-8">
+                  <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b border-gray-300">
+                    Ram & Rom
+                  </div>
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
+                    {selectedModels.map((model, index) => (
+                      <div
+                        key={index}
+                        className="col-span-1 text-left text-gray-800"
+                      >
+                        {model &&
+                        products[model]?.compare &&
+                        products[model].compare[0]?.ramRom
+                          ? products[model].compare[0].ramRom
+                          : "N/A"}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
-                  {selectedModels.map((model, index) => (
-                    <div
-                      key={index}
-                      className="col-span-1 text-left text-gray-700"
-                    >
-                      {model &&
-                      products[model]?.compare &&
-                      products[model].compare[0]?.frontCamera
-                        ? products[model].compare[0].frontCamera
-                        : "N/A"}
-                    </div>
-                  ))}
-                </div>
-              </div>
 
-              <div className="pb-8">
-                <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b">
-                  Ram & Rom
+                <div className="pb-8">
+                  <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b border-gray-300">
+                    Processor
+                  </div>
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
+                    {selectedModels.map((model, index) => (
+                      <div
+                        key={index}
+                        className="col-span-1 text-left text-gray-800"
+                      >
+                        {model &&
+                        products[model]?.compare &&
+                        products[model].compare[0]?.processor
+                          ? products[model].compare[0].processor
+                          : "N/A"}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
-                  {selectedModels.map((model, index) => (
-                    <div
-                      key={index}
-                      className="col-span-1 text-left text-gray-700"
-                    >
-                      {model &&
-                      products[model]?.compare &&
-                      products[model].compare[0]?.ramRom
-                        ? products[model].compare[0].ramRom
-                        : "N/A"}
-                    </div>
-                  ))}
-                </div>
-              </div>
 
-              <div className="pb-8">
-                <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b">
-                  Processor
+                <div className="pb-8">
+                  <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b border-gray-300">
+                    Battery
+                  </div>
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
+                    {selectedModels.map((model, index) => (
+                      <div
+                        key={index}
+                        className="col-span-1 text-left text-gray-800"
+                      >
+                        {model &&
+                        products[model]?.compare &&
+                        products[model].compare[0]?.battery
+                          ? products[model].compare[0].battery
+                          : "N/A"}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
-                  {selectedModels.map((model, index) => (
-                    <div
-                      key={index}
-                      className="col-span-1 text-left text-gray-700"
-                    >
-                      {model &&
-                      products[model]?.compare &&
-                      products[model].compare[0]?.processor
-                        ? products[model].compare[0].processor
-                        : "N/A"}
-                    </div>
-                  ))}
-                </div>
-              </div>
 
-              <div className="pb-8">
-                <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b">
-                  Battery
+                <div className="pb-8">
+                  <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b border-gray-300">
+                    Fast Charging
+                  </div>
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
+                    {selectedModels.map((model, index) => (
+                      <div
+                        key={index}
+                        className="col-span-1 text-left text-gray-800"
+                      >
+                        {model &&
+                        products[model]?.compare &&
+                        products[model].compare[0]?.fastCharging
+                          ? products[model].compare[0].fastCharging
+                          : "N/A"}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
-                  {selectedModels.map((model, index) => (
-                    <div
-                      key={index}
-                      className="col-span-1 text-left text-gray-700"
-                    >
-                      {model &&
-                      products[model]?.compare &&
-                      products[model].compare[0]?.battery
-                        ? products[model].compare[0].battery
-                        : "N/A"}
-                    </div>
-                  ))}
-                </div>
-              </div>
 
-              <div className="pb-8">
-                <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b">
-                  Fast Charging
+                <div className="pb-8">
+                  <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b border-gray-300">
+                    5G Support
+                  </div>
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
+                    {selectedModels.map((model, index) => (
+                      <div
+                        key={index}
+                        className="col-span-1 text-left text-gray-800"
+                      >
+                        {model &&
+                        products[model]?.compare &&
+                        products[model].compare[0]?.fiveg
+                          ? products[model].compare[0].fiveg
+                          : "N/A"}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
-                  {selectedModels.map((model, index) => (
-                    <div
-                      key={index}
-                      className="col-span-1 text-left text-gray-700"
-                    >
-                      {model &&
-                      products[model]?.compare &&
-                      products[model].compare[0]?.fastCharging
-                        ? products[model].compare[0].fastCharging
-                        : "N/A"}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pb-8">
-                <div className="col-span-1 text-left font-vivoMedium text-3xl mb-4 pb-4 border-b">
-                  5G Support
-                </div>
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 font-vivoRegular text-lg">
-                  {selectedModels.map((model, index) => (
-                    <div
-                      key={index}
-                      className="col-span-1 text-left text-gray-700"
-                    >
-                      {model &&
-                      products[model]?.compare &&
-                      products[model].compare[0]?.fiveg
-                        ? products[model].compare[0].fiveg
-                        : "N/A"}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </>
-          ) : (
-            <div>Loading specifications...</div>
-          )}
+              </>
+            ) : (
+              <div>Loading specifications...</div>
+            )}
+          </div>
         </div>
       </div>
       <Footer />

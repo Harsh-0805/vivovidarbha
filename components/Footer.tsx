@@ -113,7 +113,7 @@ export const Footer: React.FC = () => {
       <div className="bg-gray-800 py-4 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-400">
           <p>
-            © 2024 UNIMAY Electronics Pvt Ltd (A division of vivo). All rights
+            © 2024 UNIMAY Electronic Pvt Ltd (A division of vivo). All rights
             reserved.
           </p>
         </div>

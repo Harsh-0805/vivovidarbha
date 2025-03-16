@@ -30,10 +30,6 @@ const slides: Slide[] = [
     imageMobile: "/assets/banner5.jpg",
     imageDesktop: "/assets/banner5.jpg",
   },
-  {
-    imageMobile: "/assets/working.jpg", // Mobile version
-    imageDesktop: "/assets/working.jpg", // Desktop version
-  },
 ];
 
 export const HeroSection: React.FC = () => {
