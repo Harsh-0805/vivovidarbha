@@ -37,7 +37,12 @@ export const HeroSection: React.FC = () => {
     if (!hovering) {
       slideInterval.current = setInterval(goToNextSlide, 3000);
     }
-    return () => slideInterval.current && clearInterval(slideInterval.current);
+
+    return () => {
+      if (slideInterval.current) {
+        clearInterval(slideInterval.current);
+      }
+    };
   }, [currentSlide, hovering]);
 
   const goToPrevSlide = () => {
