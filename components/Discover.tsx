@@ -3,11 +3,11 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import T2ProImage from "@/public/assets/GameOn.png";
-import Y75Image from "@/public/assets/AllDayBattery.png";
-import X90Image from "@/public/assets/BestCamera.png";
+import T2ProImage from "@/public/assets/GameOn.jpg";
+import Y75Image from "@/public/assets/AllDayBattery.jpg";
+import X90Image from "@/public/assets/BestCamera.jpg";
 import XFoldProImage from "@/public/assets/Flagship.png";
-import Y18iImage from "@/public/assets/Budget.png";
+import Y18iImage from "@/public/assets/Budget.jpg";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
