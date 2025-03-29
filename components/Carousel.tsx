@@ -16,37 +16,37 @@ const slides: Slide[] = [
   {
     imageMobile: "/assets/banner1.jpg",
     imageDesktop: "/assets/banner1.jpg",
-    objectFit: "cover",
+    objectFit: "contain", // Changed back to contain for full horizontal visibility
     objectPosition: "center",
   },
   {
     imageMobile: "/assets/banner2.jpg",
     imageDesktop: "/assets/banner2.jpg",
-    objectFit: "cover",
+    objectFit: "contain",
     objectPosition: "center",
   },
   {
     imageMobile: "/assets/banner3.jpg",
     imageDesktop: "/assets/banner3.jpg",
-    objectFit: "cover",
+    objectFit: "contain",
     objectPosition: "center",
   },
   {
     imageMobile: "/assets/banner4.jpg",
     imageDesktop: "/assets/banner4.jpg",
-    objectFit: "cover",
+    objectFit: "contain",
     objectPosition: "center",
   },
   {
     imageMobile: "/assets/banner5.jpg",
     imageDesktop: "/assets/banner5.jpg",
-    objectFit: "cover",
+    objectFit: "contain",
     objectPosition: "center",
   },
   {
     imageMobile: "/assets/banner6.jpg",
     imageDesktop: "/assets/banner5.jpg",
-    objectFit: "cover",
+    objectFit: "contain",
     objectPosition: "center",
   },
 ];
@@ -111,7 +111,7 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       {...swipeHandlers}
-      className="relative w-full aspect-[16/9] sm:aspect-[16/7] md:aspect-[16/6] lg:aspect-[16/5] flex justify-center items-center overflow-hidden bg-gray-200"
+      className="relative w-full h-[280px] sm:h-[350px] md:h-[450px] lg:h-[500px] flex justify-center items-center overflow-hidden bg-gray-200"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -123,7 +123,7 @@ export const HeroSection: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -direction * 100 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="absolute w-full h-full"
+            className="absolute w-full h-full flex items-center justify-center"
           >
             <Image
               src={isMobile ? current.imageMobile : current.imageDesktop}
@@ -131,7 +131,7 @@ export const HeroSection: React.FC = () => {
               fill
               sizes="100vw"
               priority
-              className={`object-${current.objectFit || "cover"}`}
+              className={`object-${current.objectFit || "contain"} max-h-full`}
               style={{ objectPosition: current.objectPosition || "center" }}
             />
           </motion.div>
