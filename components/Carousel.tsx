@@ -9,38 +9,45 @@ interface Slide {
   imageMobile: string;
   imageDesktop: string;
   objectFit?: "cover" | "contain" | "fill";
+  objectPosition?: string;
 }
 
 const slides: Slide[] = [
   {
     imageMobile: "/assets/banner1.jpg",
     imageDesktop: "/assets/banner1.jpg",
-    objectFit: "contain",
+    objectFit: "cover",
+    objectPosition: "center",
   },
   {
     imageMobile: "/assets/banner2.jpg",
     imageDesktop: "/assets/banner2.jpg",
-    objectFit: "contain",
+    objectFit: "cover",
+    objectPosition: "center",
   },
   {
     imageMobile: "/assets/banner3.jpg",
     imageDesktop: "/assets/banner3.jpg",
-    objectFit: "contain",
+    objectFit: "cover",
+    objectPosition: "center",
   },
   {
     imageMobile: "/assets/banner4.jpg",
     imageDesktop: "/assets/banner4.jpg",
-    objectFit: "contain",
+    objectFit: "cover",
+    objectPosition: "center",
   },
   {
     imageMobile: "/assets/banner5.jpg",
     imageDesktop: "/assets/banner5.jpg",
-    objectFit: "contain",
+    objectFit: "cover",
+    objectPosition: "center",
   },
   {
     imageMobile: "/assets/banner6.jpg",
     imageDesktop: "/assets/banner5.jpg",
-    objectFit: "contain",
+    objectFit: "cover",
+    objectPosition: "center",
   },
 ];
 
@@ -104,7 +111,7 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       {...swipeHandlers}
-      className="relative w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-[18/9] lg:aspect-[21/9] flex justify-center items-center overflow-hidden bg-gray-200"
+      className="relative w-full aspect-[16/9] sm:aspect-[16/7] md:aspect-[16/6] lg:aspect-[16/5] flex justify-center items-center overflow-hidden bg-gray-200"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -122,9 +129,10 @@ export const HeroSection: React.FC = () => {
               src={isMobile ? current.imageMobile : current.imageDesktop}
               alt={`Slide ${currentSlide}`}
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
+              sizes="100vw"
               priority
-              className={`object-${current.objectFit || "contain"} p-2`}
+              className={`object-${current.objectFit || "cover"}`}
+              style={{ objectPosition: current.objectPosition || "center" }}
             />
           </motion.div>
         </AnimatePresence>
