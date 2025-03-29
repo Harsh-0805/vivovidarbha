@@ -14,7 +14,7 @@ const slides: Slide[] = [
   { imageMobile: "/assets/banner1.jpg", imageDesktop: "/assets/banner1.jpg" },
   { imageMobile: "/assets/banner2.jpg", imageDesktop: "/assets/banner2.jpg" },
   { imageMobile: "/assets/banner3.jpg", imageDesktop: "/assets/banner3.jpg" },
-  { imageMobile: "/assets/banner4.jpg", imageDesktop: "/assets/banner4.jpg" },
+  // { imageMobile: "/assets/banner4.jpg", imageDesktop: "/assets/banner4.jpg" },
   { imageMobile: "/assets/banner5.jpg", imageDesktop: "/assets/banner5.jpg" },
 ];
 
