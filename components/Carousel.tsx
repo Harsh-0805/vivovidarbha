@@ -8,15 +8,40 @@ import { motion, AnimatePresence } from "framer-motion";
 interface Slide {
   imageMobile: string;
   imageDesktop: string;
+  objectFit?: "cover" | "contain" | "fill";
 }
 
 const slides: Slide[] = [
-  { imageMobile: "/assets/banner1.jpg", imageDesktop: "/assets/banner1.jpg" },
-  { imageMobile: "/assets/banner2.jpg", imageDesktop: "/assets/banner2.jpg" },
-  { imageMobile: "/assets/banner3.jpg", imageDesktop: "/assets/banner3.jpg" },
-  { imageMobile: "/assets/banner4.jpg", imageDesktop: "/assets/banner4.jpg" },
-  { imageMobile: "/assets/banner5.jpg", imageDesktop: "/assets/banner5.jpg" },
-  { imageMobile: "/assets/banner6.jpg", imageDesktop: "/assets/banner5.jpg" },
+  {
+    imageMobile: "/assets/banner1.jpg",
+    imageDesktop: "/assets/banner1.jpg",
+    objectFit: "contain",
+  },
+  {
+    imageMobile: "/assets/banner2.jpg",
+    imageDesktop: "/assets/banner2.jpg",
+    objectFit: "contain",
+  },
+  {
+    imageMobile: "/assets/banner3.jpg",
+    imageDesktop: "/assets/banner3.jpg",
+    objectFit: "contain",
+  },
+  {
+    imageMobile: "/assets/banner4.jpg",
+    imageDesktop: "/assets/banner4.jpg",
+    objectFit: "contain",
+  },
+  {
+    imageMobile: "/assets/banner5.jpg",
+    imageDesktop: "/assets/banner5.jpg",
+    objectFit: "contain",
+  },
+  {
+    imageMobile: "/assets/banner6.jpg",
+    imageDesktop: "/assets/banner5.jpg",
+    objectFit: "contain",
+  },
 ];
 
 export const HeroSection: React.FC = () => {
@@ -79,7 +104,7 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       {...swipeHandlers}
-      className="relative w-full h-[300px] sm:h-[450px] md:h-[550px] flex justify-center items-center overflow-hidden bg-gray-200"
+      className="relative w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-[18/9] lg:aspect-[21/9] flex justify-center items-center overflow-hidden bg-gray-200"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -97,7 +122,9 @@ export const HeroSection: React.FC = () => {
               src={isMobile ? current.imageMobile : current.imageDesktop}
               alt={`Slide ${currentSlide}`}
               fill
-              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
+              priority
+              className={`object-${current.objectFit || "contain"} p-2`}
             />
           </motion.div>
         </AnimatePresence>
@@ -108,7 +135,7 @@ export const HeroSection: React.FC = () => {
         onClick={goToPrevSlide}
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.9 }}
-        className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white h-8 w-8 sm:h-12 sm:w-12 rounded-full flex items-center justify-center shadow-lg"
+        className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white h-8 w-8 sm:h-12 sm:w-12 rounded-full flex items-center justify-center shadow-lg z-10"
       >
         &larr;
       </motion.button>
@@ -118,13 +145,13 @@ export const HeroSection: React.FC = () => {
         onClick={goToNextSlide}
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.9 }}
-        className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white h-8 w-8 sm:h-12 sm:w-12 rounded-full flex items-center justify-center shadow-lg"
+        className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white h-8 w-8 sm:h-12 sm:w-12 rounded-full flex items-center justify-center shadow-lg z-10"
       >
         &rarr;
       </motion.button>
 
       {/* Indicators */}
-      <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4">
+      <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4 z-10">
         {slides.map((_, index) => (
           <motion.div
             key={index}
