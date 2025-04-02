@@ -38,12 +38,6 @@ const slides: Slide[] = [
     objectPosition: "center",
   },
   {
-    imageMobile: "/assets/banner5.jpg",
-    imageDesktop: "/assets/banner5.jpg",
-    objectFit: "contain",
-    objectPosition: "center",
-  },
-  {
     imageMobile: "/assets/banner6.jpg",
     imageDesktop: "/assets/banner5.jpg",
     objectFit: "contain",
