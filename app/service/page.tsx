@@ -21,7 +21,7 @@ const storesData: Record<string, Store[]> = {
       address:
         "Shop Block No.205, 2nd Floor, Icon Height Tower Road, Kedia Plots, Akola-444001",
       phone: "+91 9028004978",
-      timings: "10:00 AM TO 07:00 PM",
+      timings: "10:00 AM TO 6:30 PM",
       location: "https://maps.app.goo.gl/aZbMDMHTLgTwpxrt8",
     },
   ],
@@ -31,7 +31,7 @@ const storesData: Record<string, Store[]> = {
       address:
         "Jaistambha Square, Ground Floor, Shop No 29, Gulshan Tower, Amravati-444601",
       phone: "+91 9028004980",
-      timings: "10:00 AM TO 07:00 PM",
+      timings: "10:00 AM TO 6:30 PM",
       location: "https://maps.app.goo.gl/AdK5oEBzB9ds5odB7",
     },
   ],
@@ -41,7 +41,7 @@ const storesData: Record<string, Store[]> = {
       address:
         "Shop No.9,Vaishnavi Turaskar Complex, Post Office Square Bada Bazar Bhandara-441904",
       phone: "+91 8956364974",
-      timings: "10:00 AM TO 07:00 PM",
+      timings: "10:00 AM TO 6:30 PM",
       location: "https://maps.app.goo.gl/dykYjk4VvssobE1eA",
     },
   ],
@@ -51,7 +51,7 @@ const storesData: Record<string, Store[]> = {
       address:
         "Shop No.10, Jeejamata Sports & Commercial Complex, Buldhana-443001",
       phone: "+91 9028004984",
-      timings: "10:00 AM TO 07:00 PM",
+      timings: "10:00 AM TO 6:30 PM",
       location: "https://maps.app.goo.gl/NxBewQVBiraTYuKt9",
     },
   ],
@@ -60,7 +60,7 @@ const storesData: Record<string, Store[]> = {
       name: "Chandrapur Service Center",
       address: "1st Floor, Tandon Tower, Gandhi Chowk, Chandrapur-442401",
       phone: "+91 9028004982",
-      timings: "10:00 AM TO 07:00 PM",
+      timings: "10:00 AM TO 6:30 PM",
       location: "https://maps.app.goo.gl/yB52SSjTn8SUjas59",
     },
   ],
@@ -70,7 +70,7 @@ const storesData: Record<string, Store[]> = {
       address:
         "Shop No 1 & 2, First Floor, Shreejee Complex, Near Head Post Office, Shree Talkiz Road, Gondia-441601",
       phone: "+91 9028004986",
-      timings: "10:00 AM TO 07:00 PM",
+      timings: "10:00 AM TO 6:30 PM",
       location: "https://maps.app.goo.gl/k7n99ez8xiYqob1F6",
     },
   ],
@@ -80,7 +80,7 @@ const storesData: Record<string, Store[]> = {
       address:
         "Shop Block No.113, 1st Floor, Shriram Shyam Towers, Kingsway, Sadar, Nagpur - 440001",
       phone: "+91 9028004979",
-      timings: "10:00 AM TO 07:00 PM",
+      timings: "10:00 AM TO 6:30 PM",
       location: "https://maps.app.goo.gl/bxKyiCtqaiDVJRTAA",
     },
     {
@@ -88,7 +88,7 @@ const storesData: Record<string, Store[]> = {
       address:
         "Plot No.193, 1st Floor, Agrawal Building, Industrial Area Scheme Of Nit Dahipura & Untkhana Layout, Survey No.314, Medical Square, Nagpur - 440009",
       phone: "+91 9028004986",
-      timings: "10:00 AM TO 07:00 PM",
+      timings: "10:00 AM TO 6:30 PM",
       location: "https://maps.app.goo.gl/MdhSqnW3vjwoX6Ld7",
     },
   ],
@@ -98,7 +98,7 @@ const storesData: Record<string, Store[]> = {
       address:
         "Ward No. 34, Ground Floor Bachelor Road, Near Santoshi Mata Mandir, Shastri Chowk, Wardha C 442001",
       phone: "+91 8956364979",
-      timings: "10:00 AM TO 07:00 PM",
+      timings: "10:00 AM TO 6:30 PM",
       location: "https://maps.app.goo.gl/PeAob9E3U5rnYxGXA",
     },
   ],
@@ -107,7 +107,7 @@ const storesData: Record<string, Store[]> = {
       name: "Washim Service Center",
       address: "Shop No.38, B-Wing, Patni Commercial Complex Washim-444505",
       phone: "+91 9028004987",
-      timings: "10:00 AM TO 07:00 PM",
+      timings: "10:00 AM TO 6:30 PM",
       location: "https://maps.app.goo.gl/cXi3hiUwg98wvuEZ9",
     },
   ],
@@ -115,10 +115,10 @@ const storesData: Record<string, Store[]> = {
     {
       name: "Yavatmal Service Center",
       address:
-        "Shop No.10, 1St Floor, Inorbit Complex, Maa Durga Dawa Bazar, Yerawar Chowk, Near Azad Maidan, Yavatmal-445001",
+        "Shop no - 22 Ground floor , WestEnd Mall State bank Square , Dhamangaon Road Yavatmal-445001",
       phone: "+91 9028004988",
-      timings: "10:00 AM TO 07:00 PM",
-      location: "https://maps.app.goo.gl/raRxeu4zvpA3x9Et6",
+      timings: "10:00 AM TO 6:30 PM",
+      location: "https://maps.app.goo.gl/MbtyAMzerA9k5ZmGA",
     },
   ],
   Pusad: [
@@ -127,7 +127,7 @@ const storesData: Record<string, Store[]> = {
       address:
         "1st floor, Satyam Complex, Opp Balaji Sweet Mart Near Bus Stop, Pusad, Yawatmal- 445204",
       phone: "+91 9028004989",
-      timings: "10:00 AM TO 07:00 PM",
+      timings: "10:00 AM TO 6:30 PM",
       location: "https://maps.app.goo.gl/DWgjXqeNGUR7DF9F6",
     },
   ],

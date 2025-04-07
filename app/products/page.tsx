@@ -204,7 +204,7 @@ const TabbedNavigationWithFilter: React.FC = () => {
   const [activeModel, setActiveModel] = useState<string>("All Models");
   const [selectedModel, setSelectedModel] = useState<string>("All Models");
   const [sortOption, setSortOption] = useState<string>(
-    "Price (Lowest to Highest)"
+    "Price (Highest to Lowest)"
   );
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);

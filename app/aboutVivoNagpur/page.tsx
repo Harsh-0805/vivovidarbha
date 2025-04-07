@@ -12,7 +12,7 @@ import { Footer } from "@/components/Footer";
 
 const AboutVivoNagpur = () => {
   const images = [
-    "/assets/aboutvivo1.jpg",
+    // "/assets/aboutvivo1.jpg",
     "/assets/aboutvivo2.jpg",
     "/assets/aboutvivo3.jpg",
     "/assets/aboutvivo4.jpg",
