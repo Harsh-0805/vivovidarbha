@@ -43,6 +43,12 @@ const slides: Slide[] = [
     objectFit: "contain",
     objectPosition: "center",
   },
+  {
+    imageMobile: "/assets/banner6.jpg",
+    imageDesktop: "/assets/banner6.jpg",
+    objectFit: "contain",
+    objectPosition: "center",
+  },
 ];
 
 export const HeroSection: React.FC = () => {
