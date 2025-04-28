@@ -90,7 +90,7 @@ export const Footer: React.FC = () => {
             </a>
 
             <p className="mt-4 text-sm">Call Us</p>
-            <p className="text-sm">+91 86249 09496</p>
+            {/* <p className="text-sm"></p> */}
             <p className="text-sm">Monday – Friday (10am – 5pm)</p>
 
             {/* Social Media Links */}
