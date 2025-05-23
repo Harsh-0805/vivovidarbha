@@ -10,44 +10,58 @@ interface Slide {
   imageDesktop: string;
   objectFit?: "cover" | "contain" | "fill";
   objectPosition?: string;
+  alt: string; // Add alt text property
+  title?: string; // Optional title for SEO
 }
 
 const slides: Slide[] = [
   {
     imageMobile: "/assets/banner1.jpg",
     imageDesktop: "/assets/banner1.jpg",
-    objectFit: "contain", // Changed back to contain for full horizontal visibility
+    objectFit: "contain",
     objectPosition: "center",
+    alt: "Latest Vivo Smartphones in Nagpur - Premium Models at Best Prices",
+    title: "Vivo Premium Smartphones Collection",
   },
   {
     imageMobile: "/assets/banner2.jpg",
     imageDesktop: "/assets/banner2.jpg",
     objectFit: "contain",
     objectPosition: "center",
+    alt: "Vivo X Series - Professional Photography Smartphones in Nagpur",
+    title: "Vivo X Series Smartphones",
   },
   {
     imageMobile: "/assets/banner3.jpg",
     imageDesktop: "/assets/banner3.jpg",
     objectFit: "contain",
     objectPosition: "center",
+    alt: "Vivo V Series - Sleek Design Smartphones Available in Vidarbha Region",
+    title: "Vivo V Series Collection",
   },
   {
     imageMobile: "/assets/banner4.jpg",
     imageDesktop: "/assets/banner4.jpg",
     objectFit: "contain",
     objectPosition: "center",
+    alt: "Vivo Y Series - Budget Friendly Smartphones with Great Features",
+    title: "Affordable Vivo Y Series",
   },
   {
     imageMobile: "/assets/banner5.jpg",
     imageDesktop: "/assets/banner5.jpg",
     objectFit: "contain",
     objectPosition: "center",
+    alt: "Vivo Special Offers - Exclusive Deals on Smartphones in Nagpur",
+    title: "Exclusive Vivo Deals and Offers",
   },
   {
     imageMobile: "/assets/banner6.jpg",
     imageDesktop: "/assets/banner6.jpg",
     objectFit: "contain",
     objectPosition: "center",
+    alt: "Vivo Accessories - Original Vivo Products Available in Nagpur",
+    title: "Genuine Vivo Accessories",
   },
 ];
 
@@ -114,8 +128,13 @@ export const HeroSection: React.FC = () => {
       className="relative w-full h-[280px] sm:h-[350px] md:h-[450px] lg:h-[500px] flex justify-center items-center overflow-hidden bg-gray-200"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      aria-label="Featured Vivo Smartphones and Offers"
     >
-      <a href="/products" className="absolute w-full h-full">
+      <a
+        href="/products"
+        className="absolute w-full h-full"
+        aria-label={`View ${current.title || "featured products"}`}
+      >
         <AnimatePresence custom={direction}>
           <motion.div
             key={currentSlide}
@@ -127,7 +146,8 @@ export const HeroSection: React.FC = () => {
           >
             <Image
               src={isMobile ? current.imageMobile : current.imageDesktop}
-              alt={`Slide ${currentSlide}`}
+              alt={current.alt}
+              title={current.title}
               fill
               sizes="100vw"
               priority
@@ -159,21 +179,28 @@ export const HeroSection: React.FC = () => {
       </motion.button>
 
       {/* Indicators */}
-      <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4 z-10">
-        {slides.map((_, index) => (
-          <motion.div
-            key={index}
-            onClick={() => goToSlide(index)}
-            animate={{ scale: index === currentSlide ? 1.3 : 1 }}
-            transition={{ duration: 0.3 }}
-            className={`cursor-pointer rounded-full ${
-              index === currentSlide
-                ? "bg-blue-600 w-3 h-3 sm:w-4 sm:h-4"
-                : "bg-gray-300 w-2 h-2 sm:w-3 sm:h-3"
-            }`}
-          ></motion.div>
-        ))}
-      </div>
+      <div
+        className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4 z-10"
+        role="tablist"
+        aria-label="Carousel Navigation"
+      ></div>
+      {slides.map((slide, index) => (
+        <motion.div
+          key={index}
+          onClick={() => goToSlide(index)}
+          animate={{ scale: index === currentSlide ? 1.3 : 1 }}
+          transition={{ duration: 0.3 }}
+          className={`cursor-pointer rounded-full ${
+            index === currentSlide
+              ? "bg-blue-600 w-3 h-3 sm:w-4 sm:h-4"
+              : "bg-gray-300 w-2 h-2 sm:w-3 sm:h-3"
+          }`}
+          role="tab"
+          aria-label={`Slide ${index + 1}: ${slide.title || "Featured Item"}`}
+          aria-selected={index === currentSlide}
+          tabIndex={0}
+        ></motion.div>
+      ))}
     </section>
   );
 };

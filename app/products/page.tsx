@@ -7,6 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import ContentLoader from "react-content-loader";
 import { Footer } from "@/components/Footer";
+import Head from "next/head";
+import Script from "next/script";
 
 // Define the interfaces
 // Update the ColorOption interface
@@ -92,40 +94,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickLook }) => {
   return (
     <div className="bg-white hover:shadow-lg rounded-3xl shadow p-4 w-full">
       <>
-        <div className="relative bg-white p-4 w-full">
+        <div className="flex w-full h-[200px] justify-center items-center mb-4">
           {/* Image and Wishlist Icon */}
-          <div className="flex w-full h-[200px] justify-center items-center mb-4">
-            <div className="relative w-[150px] h-[150px]">
-              <Image
-                src={
-                  selectedColorOption.imageUrls?.[0] || "/fallback-image.jpg"
-                }
-                alt={`${name} - ${selectedColorOption.colorName}`}
-                layout="fill"
-                objectFit="contain"
-              />
-            </div>
-
-            {/* Wishlist Icon */}
-            {/* <div
-              className="absolute top-2 right-2 cursor-pointer"
-              onClick={toggleWishlist}
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill={isWishlisted ? "red" : "none"}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.3115 4.46071C17.9773 2.08032 15.2743 3.08425 13.6007 4.14593C12.655 4.74582 11.345 4.74582 10.3993 4.14593C8.72564 3.08427 6.02272 2.08035 3.68853 4.46072C-1.85249 10.1114 7.64988 21 12 21C16.3502 21 25.8525 10.1114 20.3115 4.46071Z"
-                  stroke="red"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div> */}
+          {/* <div className="flex w-full h-[200px] justify-center items-center mb-4"></div> */}
+          <div className="relative w-[150px] h-[150px]">
+            <Image
+              src={selectedColorOption.imageUrls?.[0] || "/fallback-image.jpg"}
+              alt={`${name} - ${selectedColorOption.colorName}`}
+              layout="fill"
+              objectFit="contain"
+            />
           </div>
         </div>
 
@@ -287,7 +265,6 @@ const TabbedNavigationWithFilter: React.FC = () => {
     setIsFilterOpen(!isFilterOpen);
   };
 
-  // const [modalVisible, setModalVisible] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false); // For mobile filter toggle
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -448,575 +425,630 @@ const TabbedNavigationWithFilter: React.FC = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="flex flex-col bg-gray-100 w-full text-black">
-        {/* Tabs Section */}
-        <nav className="hidden sm:flex justify-center flex-wrap space-x-4 sm:space-x-6 lg:space-x-20 py-4 bg-[#E9EAEB]">
-          {Object.keys(tabContent).map((model) =>
-            model === "Compare" ? (
-              <Link href="/compare" key={model}>
-                <p className="pb-2 border-b-[1px] transition-colors duration-300 border-transparent text-black hover:text-blue-500">
-                  Compare
-                </p>
-              </Link>
-            ) : (
-              <button
-                key={model}
-                className={`pb-2 border-b-[1px] transition-colors duration-300 ${
-                  activeModel === model
-                    ? "border-blue-500 text-blue-500 font-vivoRegular"
-                    : "border-transparent text-black hover:text-blue-500"
-                }`}
-                onClick={() => {
-                  setSelectedModel(model), setActiveModel(model);
-                }}
-              >
-                {model}
-              </button>
-            )
-          )}
-        </nav>
+      {/* Add head tags directly in the component */}
+      <Head>
+        <title>
+          Vivo Smartphones in Nagpur | X, V & Y Series | Vivo Nagpur
+        </title>
+        <meta
+          name="description"
+          content="Explore and buy latest Vivo smartphones in Nagpur. Browse X Series, V Series, Y Series models with best prices & offers. Official Vivo dealer in Vidarbha region."
+        />
+        <meta
+          name="keywords"
+          content="vivo smartphones Nagpur, vivo X series, vivo V series, vivo Y series, buy vivo phones, vivo mobile dealer Vidarbha"
+        />
+      </Head>
 
-        {/* Main Layout: Filter Section and Content */}
-        <div className="flex flex-col lg:flex-row w-full">
-          {/* Filter Section */}
-          <div
-            className={`${
-              isFilterOpen ? "block" : "hidden"
-            } lg:block lg:w-1/4 py-4 border-r bg-white lg:bg-transparent z-10 lg:z-auto absolute lg:relative w-full`}
-          >
-            <h3 className="text-lg flex px-4 font-vivoBold mb-4">Filter</h3>
-            <div className="space-y-4 px-4">
-              {/* Models Filter */}
-              <div className="border-b sm:hidden border-gray-300 pb-2">
-                <div
-                  className="flex justify-between px-2 items-center cursor-pointer"
-                  onClick={() => toggleSection("Models")}
-                >
-                  <span className="font-vivoBold">Models</span>
-                  <span>
-                    {isOpen["Models"] ? (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M5 15l7-7 7 7"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    )}
-                  </span>
-                </div>
-                {/* Models Filter Options */}
-                {isOpen["Models"] && (
-                  <div className="mt-2 px-2">
-                    <form className="space-y-2">
-                      {[
-                        "All Models",
-                        "X Series",
-                        "V Series",
-                        "Y Series",
-                        "Series T",
-                        "Accessories",
-                      ].map((model) => (
-                        <div key={model}>
-                          <label className="flex items-center">
-                            <input
-                              type="radio"
-                              name="model"
-                              value={model}
-                              checked={selectedModel === model}
-                              onChange={(e) => setSelectedModel(e.target.value)}
-                              className="form-radio h-4 w-4 text-blue-500"
-                            />
-                            <span className="ml-2">{model}</span>
-                          </label>
-                        </div>
-                      ))}
-                      {/* Compare Option as a Link */}
-                      <div>
-                        <Link href="/compare">
-                          <a className="flex items-center text-blue-500 hover:underline">
-                            Compare
-                          </a>
-                        </Link>
-                      </div>
-                    </form>
-                  </div>
-                )}
-              </div>
-              {/* Price Filter */}
-              <div className="border-b border-gray-300 pb-2">
-                <div
-                  className="flex justify-between px-2 items-center cursor-pointer"
-                  onClick={() => toggleSection("Price")}
-                >
-                  <span className="font-vivoBold">Price</span>
-                  <span>
-                    {isOpen["Price"] ? (
-                      <svg
-                        xmlns="http:www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M5 15l7-7 7 7"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        xmlns="http:www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    )}
-                  </span>
-                </div>
-                {/* Price Filter Options */}
-                {isOpen["Price"] && (
-                  <div className="mt-2">
-                    <form className="space-y-2">
-                      {[
-                        "Upto ₹10,000",
-                        "₹10,000 to ₹20,000",
-                        "₹20,000 to ₹30,000",
-                        "₹30,000 to ₹40,000",
-                        "₹40,000 to ₹50,000",
-                        "Above ₹50,000",
-                      ].map((priceRange) => (
-                        <div key={priceRange}>
-                          <label className="flex items-center">
-                            <input
-                              type="radio"
-                              name="price"
-                              value={priceRange}
-                              checked={selectedPrice === priceRange}
-                              onChange={handlePriceChange}
-                              className="form-radio h-4 w-4 text-blue-500"
-                            />
-                            <span className="ml-2">{priceRange}</span>
-                          </label>
-                        </div>
-                      ))}
-                    </form>
-                  </div>
-                )}
-              </div>
-
-              {/* Camera Filter */}
-              <div className="border-b border-gray-300 pb-2">
-                <div
-                  className="flex justify-between px-2 items-center cursor-pointer"
-                  onClick={() => toggleSection("Camera")}
-                >
-                  <span className="font-vivoBold">Camera</span>
-                  <span>
-                    {isOpen["Camera"] ? (
-                      <svg
-                        xmlns="http:www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M5 15l7-7 7 7"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        xmlns="http:www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    )}
-                  </span>
-                </div>
-                {/* Camera Filter Options */}
-                {isOpen["Camera"] && (
-                  <div className="mt-2 px-2">
-                    <form className="space-y-2">
-                      {[
-                        "Basic Camera (Up to 12 MP)",
-                        "Standard Camera (13 MP - 32 MP)",
-                        "High-Resolution Camera (33 MP - 50 MP)",
-                        "Pro Camera (Above 50 MP)",
-                      ].map((camera) => (
-                        <div key={camera}>
-                          <label className="flex items-center">
-                            <input
-                              type="radio"
-                              name="camera"
-                              value={camera}
-                              checked={selectedCamera === camera}
-                              onChange={handleCameraChange}
-                              className="form-radio h-4 w-4 text-blue-500"
-                            />
-                            <span className="ml-2">{camera}</span>
-                          </label>
-                        </div>
-                      ))}
-                    </form>
-                  </div>
-                )}
-              </div>
-
-              {/* RAM Filter */}
-              <div className="border-b w-full border-gray-300 pb-2">
-                <div
-                  className="flex justify-between px-2 items-center cursor-pointer"
-                  onClick={() => toggleSection("RAM")}
-                >
-                  <span className="font-vivoBold">RAM</span>
-                  <span>
-                    {isOpen["RAM"] ? (
-                      <svg
-                        xmlns="http:www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M5 15l7-7 7 7"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        xmlns="http:www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    )}
-                  </span>
-                </div>
-                {/* RAM Filter Options */}
-                {isOpen["RAM"] && (
-                  <div className="mt-2 px-2">
-                    <form className="space-y-2">
-                      {["4 GB", "6 GB", "8 GB", "12 GB"].map((ram) => (
-                        <div key={ram}>
-                          <label className="flex items-center">
-                            <input
-                              type="radio"
-                              name="ram"
-                              value={ram}
-                              checked={selectedRAM === ram}
-                              onChange={handleRAMChange}
-                              className="form-radio h-4 w-4 text-blue-500"
-                            />
-                            <span className="ml-2">{ram}</span>
-                          </label>
-                        </div>
-                      ))}
-                    </form>
-                  </div>
-                )}
-              </div>
-
-              {/* Storage Filter */}
-              <div className="border-b border-gray-300 pb-2">
-                <div
-                  className="flex justify-between px-2 items-center cursor-pointer"
-                  onClick={() => toggleSection("Storage")}
-                >
-                  <span className="font-vivoBold">Storage Capacity</span>
-                  <span>
-                    {isOpen["Storage"] ? (
-                      <svg
-                        xmlns="http:www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M5 15l7-7 7 7"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        xmlns="http:www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    )}
-                  </span>
-                </div>
-                {/* Storage Filter Options */}
-                {isOpen["Storage"] && (
-                  <div className="mt-2 px-2">
-                    <form className="space-y-2">
-                      {["64 GB", "128 GB", "256 GB", "512 GB"].map(
-                        (storage) => (
-                          <div key={storage}>
-                            <label className="flex items-center">
-                              <input
-                                type="radio"
-                                name="storage"
-                                value={storage}
-                                checked={selectedStorage === storage}
-                                onChange={handleStorageChange}
-                                className="form-radio h-4 w-4 text-blue-500"
-                              />
-                              <span className="ml-2">{storage}</span>
-                            </label>
-                          </div>
-                        )
-                      )}
-                    </form>
-                  </div>
-                )}
-              </div>
-
-              {/* Battery Filter */}
-              <div>
-                <div
-                  className="flex justify-between px-2 items-center cursor-pointer"
-                  onClick={() => toggleSection("Battery")}
-                >
-                  <span className="font-vivoBold">Battery</span>
-                  <span>
-                    {isOpen["Battery"] ? (
-                      <svg
-                        xmlns="http:www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M5 15l7-7 7 7"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        xmlns="http:www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    )}
-                  </span>
-                </div>
-                {/* Battery Filter Options */}
-                {isOpen["Battery"] && (
-                  <div className="mt-2 px-2">
-                    <form className="space-y-2">
-                      {["3000 mAh", "4000 mAh", "5000 mAh", "6000 mAh"].map(
-                        (battery) => (
-                          <div key={battery}>
-                            <label className="flex items-center">
-                              <input
-                                type="radio"
-                                name="battery"
-                                value={battery}
-                                checked={selectedBattery === battery}
-                                onChange={handleBatteryChange}
-                                className="form-radio h-4 w-4 text-blue-500"
-                              />
-                              <span className="ml-2">{battery}</span>
-                            </label>
-                          </div>
-                        )
-                      )}
-                    </form>
-                  </div>
-                )}
-              </div>
-
-              <div className="mt-4 flex flex-col space-y-2">
-                {/* Apply Filters Button for Mobile */}
-                <button
-                  onClick={toggleFilter}
-                  className="w-full bg-blue-600 text-white py-2 rounded-lg lg:hidden"
-                >
-                  Apply Filters
-                </button>
-
-                {/* Reset Filters Button */}
-                <button
-                  onClick={resetFilters}
-                  className="w-full bg-gray-200 text-black py-2 rounded-lg"
-                >
-                  Reset Filters
-                </button>
-              </div>
-
-              {/* {isFilterOpen && (
-                <div
-                  className="fixed inset-0 bg-black opacity-50 lg:hidden"
-                  onClick={toggleFilter}
-                ></div>
-              )} */}
-            </div>
-          </div>
-          {/* Content Section */}
-          <div className="flex-1 p-4">
-            {/* Sort by dropdown */}
-            <div className="flex justify-between items-center mb-4">
-              {/* Show Filter Toggle on Mobile within content area */}
-              <button
-                onClick={toggleFilter}
-                className="flex items-center text-blue-600 lg:hidden"
-              >
-                {/* Filter Icon */}
-                <span className="mr-2">Filter</span>
-                {/* Your SVG icon */}
-              </button>
-
-              <div className="flex items-center">
-                <label htmlFor="sort" className="mr-2">
-                  Rank By
-                </label>
-                <select
-                  id="sort"
-                  value={sortOption}
-                  onChange={(e) => setSortOption(e.target.value)}
-                  className="p-2 border rounded-lg w-auto"
-                >
-                  <option value="Price (Lowest to Highest)">
-                    Price (Lowest to Highest)
-                  </option>
-                  <option value="Price (Highest to Lowest)">
-                    Price (Highest to Lowest)
-                  </option>
-                </select>
-              </div>
-            </div>
-
-            {/* Product List */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
-              {loading ? (
-                // Show skeleton loaders while loading
-                <>
-                  <ProductCardSkeleton />
-                  <ProductCardSkeleton />
-                  <ProductCardSkeleton />
-                  <ProductCardSkeleton />
-                  <ProductCardSkeleton />
-                  <ProductCardSkeleton />
-                </>
-              ) : filteredProducts.length > 0 ? (
-                filteredProducts.map((product) => {
-                  if (
-                    !product.ramPriceOptions ||
-                    product.ramPriceOptions.length === 0 ||
-                    !product.colorOptions ||
-                    product.colorOptions.length === 0
-                  ) {
-                    // Optionally display a message or skip rendering this product
-                    return null;
+      <Script id="product-structured-data" type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": [
+              ${products
+                .map(
+                  (product, index) => `
+                {
+                  "@type": "ListItem",
+                  "position": ${index + 1},
+                  "item": {
+                    "@type": "Product",
+                    "name": "${product.name}",
+                    "description": "${product.details
+                      ?.join(" ")
+                      .substring(0, 200)}...",
+                    "brand": {
+                      "@type": "Brand",
+                      "name": "Vivo"
+                    },
+                    "offers": {
+                      "@type": "Offer",
+                      "price": "${String(
+                        product.ramPriceOptions[0].price
+                      ).replace(/,/g, "")}",
+                      "priceCurrency": "INR",
+                      "availability": "https://schema.org/InStock"
+                    }
                   }
-
-                  return (
-                    <ProductCard
-                      key={product._id}
-                      product={product}
-                      onQuickLook={(product) => {
-                        setSelectedProduct(product);
-                        setModalVisible(true);
-                      }}
-                    />
-                  );
-                })
-              ) : (
-                <p>No products available for this model.</p>
+                }
+              `
+                )
+                .join(",")}
+            ]
+          }
+        `}
+      </Script>
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main>
+          <h1 className="sr-only">
+            Vivo Smartphones in Nagpur - Official Vivo Phone Collection
+          </h1>
+          <div className="flex flex-col bg-gray-100 w-full text-black">
+            {/* Tabs Section */}
+            <nav className="hidden sm:flex justify-center flex-wrap space-x-4 sm:space-x-6 lg:space-x-20 py-4 bg-[#E9EAEB]">
+              {Object.keys(tabContent).map((model) =>
+                model === "Compare" ? (
+                  <Link href="/compare" key={model}>
+                    <p className="pb-2 border-b-[1px] transition-colors duration-300 border-transparent text-black hover:text-blue-500">
+                      Compare
+                    </p>
+                  </Link>
+                ) : (
+                  <button
+                    key={model}
+                    className={`pb-2 border-b-[1px] transition-colors duration-300 ${
+                      activeModel === model
+                        ? "border-blue-500 text-blue-500 font-vivoRegular"
+                        : "border-transparent text-black hover:text-blue-500"
+                    }`}
+                    onClick={() => {
+                      setSelectedModel(model), setActiveModel(model);
+                    }}
+                  >
+                    {model}
+                  </button>
+                )
               )}
-            </div>
+            </nav>
 
-            {modalVisible && selectedProduct && (
-              <Modal
-                product={selectedProduct}
-                onClose={() => setModalVisible(false)}
-              />
-            )}
+            {/* Main Layout: Filter Section and Content */}
+            <div className="flex flex-col lg:flex-row w-full">
+              {/* Filter Section */}
+              <div
+                className={`${
+                  isFilterOpen ? "block" : "hidden"
+                } lg:block lg:w-1/4 py-4 border-r bg-white lg:bg-transparent z-10 lg:z-auto absolute lg:relative w-full`}
+              >
+                <h3 className="text-lg flex px-4 font-vivoBold mb-4">Filter</h3>
+                <div className="space-y-4 px-4">
+                  {/* Models Filter */}
+                  <div className="border-b sm:hidden border-gray-300 pb-2">
+                    <div
+                      className="flex justify-between px-2 items-center cursor-pointer"
+                      onClick={() => toggleSection("Models")}
+                    >
+                      <span className="font-vivoBold">Models</span>
+                      <span>
+                        {isOpen["Models"] ? (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M5 15l7-7 7 7"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        )}
+                      </span>
+                    </div>
+                    {/* Models Filter Options */}
+                    {isOpen["Models"] && (
+                      <div className="mt-2 px-2">
+                        <form className="space-y-2">
+                          {[
+                            "All Models",
+                            "X Series",
+                            "V Series",
+                            "Y Series",
+                            "Series T",
+                            "Accessories",
+                          ].map((model) => (
+                            <div key={model}>
+                              <label className="flex items-center">
+                                <input
+                                  type="radio"
+                                  name="model"
+                                  value={model}
+                                  checked={selectedModel === model}
+                                  onChange={(e) =>
+                                    setSelectedModel(e.target.value)
+                                  }
+                                  className="form-radio h-4 w-4 text-blue-500"
+                                />
+                                <span className="ml-2">{model}</span>
+                              </label>
+                            </div>
+                          ))}
+                          {/* Compare Option as a Link */}
+                          <div>
+                            <Link href="/compare">
+                              <a className="flex items-center text-blue-500 hover:underline">
+                                Compare
+                              </a>
+                            </Link>
+                          </div>
+                        </form>
+                      </div>
+                    )}
+                  </div>
+                  {/* Price Filter */}
+                  <div className="border-b border-gray-300 pb-2">
+                    <div
+                      className="flex justify-between px-2 items-center cursor-pointer"
+                      onClick={() => toggleSection("Price")}
+                    >
+                      <span className="font-vivoBold">Price</span>
+                      <span>
+                        {isOpen["Price"] ? (
+                          <svg
+                            xmlns="http:www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M5 15l7-7 7 7"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            xmlns="http:www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        )}
+                      </span>
+                    </div>
+                    {/* Price Filter Options */}
+                    {isOpen["Price"] && (
+                      <div className="mt-2">
+                        <form className="space-y-2">
+                          {[
+                            "Upto ₹10,000",
+                            "₹10,000 to ₹20,000",
+                            "₹20,000 to ₹30,000",
+                            "₹30,000 to ₹40,000",
+                            "₹40,000 to ₹50,000",
+                            "Above ₹50,000",
+                          ].map((priceRange) => (
+                            <div key={priceRange}>
+                              <label className="flex items-center">
+                                <input
+                                  type="radio"
+                                  name="price"
+                                  value={priceRange}
+                                  checked={selectedPrice === priceRange}
+                                  onChange={handlePriceChange}
+                                  className="form-radio h-4 w-4 text-blue-500"
+                                />
+                                <span className="ml-2">{priceRange}</span>
+                              </label>
+                            </div>
+                          ))}
+                        </form>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Camera Filter */}
+                  <div className="border-b border-gray-300 pb-2">
+                    <div
+                      className="flex justify-between px-2 items-center cursor-pointer"
+                      onClick={() => toggleSection("Camera")}
+                    >
+                      <span className="font-vivoBold">Camera</span>
+                      <span>
+                        {isOpen["Camera"] ? (
+                          <svg
+                            xmlns="http:www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M5 15l7-7 7 7"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            xmlns="http:www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        )}
+                      </span>
+                    </div>
+                    {/* Camera Filter Options */}
+                    {isOpen["Camera"] && (
+                      <div className="mt-2 px-2">
+                        <form className="space-y-2">
+                          {[
+                            "Basic Camera (Up to 12 MP)",
+                            "Standard Camera (13 MP - 32 MP)",
+                            "High-Resolution Camera (33 MP - 50 MP)",
+                            "Pro Camera (Above 50 MP)",
+                          ].map((camera) => (
+                            <div key={camera}>
+                              <label className="flex items-center">
+                                <input
+                                  type="radio"
+                                  name="camera"
+                                  value={camera}
+                                  checked={selectedCamera === camera}
+                                  onChange={handleCameraChange}
+                                  className="form-radio h-4 w-4 text-blue-500"
+                                />
+                                <span className="ml-2">{camera}</span>
+                              </label>
+                            </div>
+                          ))}
+                        </form>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* RAM Filter */}
+                  <div className="border-b w-full border-gray-300 pb-2">
+                    <div
+                      className="flex justify-between px-2 items-center cursor-pointer"
+                      onClick={() => toggleSection("RAM")}
+                    >
+                      <span className="font-vivoBold">RAM</span>
+                      <span>
+                        {isOpen["RAM"] ? (
+                          <svg
+                            xmlns="http:www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M5 15l7-7 7 7"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            xmlns="http:www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        )}
+                      </span>
+                    </div>
+                    {/* RAM Filter Options */}
+                    {isOpen["RAM"] && (
+                      <div className="mt-2 px-2">
+                        <form className="space-y-2">
+                          {["4 GB", "6 GB", "8 GB", "12 GB"].map((ram) => (
+                            <div key={ram}>
+                              <label className="flex items-center">
+                                <input
+                                  type="radio"
+                                  name="ram"
+                                  value={ram}
+                                  checked={selectedRAM === ram}
+                                  onChange={handleRAMChange}
+                                  className="form-radio h-4 w-4 text-blue-500"
+                                />
+                                <span className="ml-2">{ram}</span>
+                              </label>
+                            </div>
+                          ))}
+                        </form>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Storage Filter */}
+                  <div className="border-b border-gray-300 pb-2">
+                    <div
+                      className="flex justify-between px-2 items-center cursor-pointer"
+                      onClick={() => toggleSection("Storage")}
+                    >
+                      <span className="font-vivoBold">Storage Capacity</span>
+                      <span>
+                        {isOpen["Storage"] ? (
+                          <svg
+                            xmlns="http:www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M5 15l7-7 7 7"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            xmlns="http:www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        )}
+                      </span>
+                    </div>
+                    {/* Storage Filter Options */}
+                    {isOpen["Storage"] && (
+                      <div className="mt-2 px-2">
+                        <form className="space-y-2">
+                          {["64 GB", "128 GB", "256 GB", "512 GB"].map(
+                            (storage) => (
+                              <div key={storage}>
+                                <label className="flex items-center">
+                                  <input
+                                    type="radio"
+                                    name="storage"
+                                    value={storage}
+                                    checked={selectedStorage === storage}
+                                    onChange={handleStorageChange}
+                                    className="form-radio h-4 w-4 text-blue-500"
+                                  />
+                                  <span className="ml-2">{storage}</span>
+                                </label>
+                              </div>
+                            )
+                          )}
+                        </form>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Battery Filter */}
+                  <div>
+                    <div
+                      className="flex justify-between px-2 items-center cursor-pointer"
+                      onClick={() => toggleSection("Battery")}
+                    >
+                      <span className="font-vivoBold">Battery</span>
+                      <span>
+                        {isOpen["Battery"] ? (
+                          <svg
+                            xmlns="http:www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M5 15l7-7 7 7"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            xmlns="http:www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        )}
+                      </span>
+                    </div>
+                    {/* Battery Filter Options */}
+                    {isOpen["Battery"] && (
+                      <div className="mt-2 px-2">
+                        <form className="space-y-2">
+                          {["3000 mAh", "4000 mAh", "5000 mAh", "6000 mAh"].map(
+                            (battery) => (
+                              <div key={battery}>
+                                <label className="flex items-center">
+                                  <input
+                                    type="radio"
+                                    name="battery"
+                                    value={battery}
+                                    checked={selectedBattery === battery}
+                                    onChange={handleBatteryChange}
+                                    className="form-radio h-4 w-4 text-blue-500"
+                                  />
+                                  <span className="ml-2">{battery}</span>
+                                </label>
+                              </div>
+                            )
+                          )}
+                        </form>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mt-4 flex flex-col space-y-2">
+                    {/* Apply Filters Button for Mobile */}
+                    <button
+                      onClick={toggleFilter}
+                      className="w-full bg-blue-600 text-white py-2 rounded-lg lg:hidden"
+                    >
+                      Apply Filters
+                    </button>
+
+                    {/* Reset Filters Button */}
+                    <button
+                      onClick={resetFilters}
+                      className="w-full bg-gray-200 text-black py-2 rounded-lg"
+                    >
+                      Reset Filters
+                    </button>
+                  </div>
+                </div>
+              </div>
+              {/* Content Section */}
+              <div className="flex-1 p-4">
+                {/* Sort by dropdown */}
+                <div className="flex justify-between items-center mb-4">
+                  {/* Show Filter Toggle on Mobile within content area */}
+                  <button
+                    onClick={toggleFilter}
+                    className="flex items-center text-blue-600 lg:hidden"
+                  >
+                    {/* Filter Icon */}
+                    <span className="mr-2">Filter</span>
+                  </button>
+
+                  <div className="flex items-center">
+                    <label htmlFor="sort" className="mr-2">
+                      Rank By
+                    </label>
+                    <select
+                      id="sort"
+                      value={sortOption}
+                      onChange={(e) => setSortOption(e.target.value)}
+                      className="p-2 border rounded-lg w-auto"
+                    >
+                      <option value="Price (Lowest to Highest)">
+                        Price (Lowest to Highest)
+                      </option>
+                      <option value="Price (Highest to Lowest)">
+                        Price (Highest to Lowest)
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Product List */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
+                  {loading ? (
+                    // Show skeleton loaders while loading
+                    <>
+                      <ProductCardSkeleton />
+                      <ProductCardSkeleton />
+                      <ProductCardSkeleton />
+                      <ProductCardSkeleton />
+                      <ProductCardSkeleton />
+                      <ProductCardSkeleton />
+                    </>
+                  ) : filteredProducts.length > 0 ? (
+                    filteredProducts.map((product) => {
+                      if (
+                        !product.ramPriceOptions ||
+                        product.ramPriceOptions.length === 0 ||
+                        !product.colorOptions ||
+                        product.colorOptions.length === 0
+                      ) {
+                        // Optionally display a message or skip rendering this product
+                        return null;
+                      }
+
+                      return (
+                        <ProductCard
+                          key={product._id}
+                          product={product}
+                          onQuickLook={(product) => {
+                            setSelectedProduct(product);
+                            setModalVisible(true);
+                          }}
+                        />
+                      );
+                    })
+                  ) : (
+                    <p>No products available for this model.</p>
+                  )}
+                </div>
+
+                {modalVisible && selectedProduct && (
+                  <Modal
+                    product={selectedProduct}
+                    onClose={() => setModalVisible(false)}
+                  />
+                )}
+              </div>
+            </div>
           </div>
-        </div>
+        </main>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };

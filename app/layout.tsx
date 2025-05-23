@@ -5,9 +5,53 @@ import Script from "next/script";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Vivo Nagpur",
+  title: "Vivo Nagpur | Authorized Vivo Smartphones Dealer in Vidarbha Region",
   description:
-    "Vivo Nagpur is a leading mobile phone store in Nagpur. We offer a wide range of smartphones, accessories, and services.",
+    "Official authorized Vivo smartphones dealer in Nagpur & Vidarbha region. Explore latest Vivo X series, V series & Y series phones, accessories & service centers. UNIMAY Electronic Pvt Ltd.",
+  keywords:
+    "Vivo Nagpur, Vivo smartphones, Vivo Vidarbha, UNIMAY Electronic, Vivo mobiles, Vivo service center Nagpur, Vivo X series, Vivo V series, Vivo Y series, buy Vivo Nagpur",
+  openGraph: {
+    title:
+      "Vivo Nagpur | Authorized Vivo Smartphones Dealer in Vidarbha Region",
+    description:
+      "Official authorized Vivo smartphones dealer in Nagpur & Vidarbha region. Explore latest models, accessories & service centers.",
+    url: "https://www.vivonagpur.com",
+    siteName: "Vivo Nagpur",
+    images: [
+      {
+        url: "/assets/vivo-nagpur-og-image.jpg", // Create this image if it doesn't exist
+        width: 1200,
+        height: 630,
+        alt: "Vivo Nagpur official store",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vivo Nagpur | Authorized Vivo Smartphones Dealer",
+    description:
+      "Official Vivo smartphones dealer in Nagpur & Vidarbha region. Explore latest models and accessories.",
+    images: ["/assets/vivo-nagpur-og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://www.vivonagpur.com",
+  },
+  verification: {
+    google: "your-google-verification-code", // Add your verification code
+  },
 };
 
 export default function RootLayout({

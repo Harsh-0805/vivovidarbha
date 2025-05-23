@@ -6,6 +6,11 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  // Add important SEO-related config
+  poweredByHeader: false, // Remove X-Powered-By header for security
+  compress: true, // Enable compression
+  reactStrictMode: true,
+  swcMinify: true,
 };
 
 export default nextConfig;

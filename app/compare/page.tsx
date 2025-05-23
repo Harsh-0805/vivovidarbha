@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import Script from "next/script";
+import Head from "next/head";
 
 type CompareInfo = {
   price: string;
@@ -105,12 +107,64 @@ const ComparePage = () => {
 
   return (
     <>
+      <Head>
+        <title>
+          Compare Vivo Smartphones | Side-by-Side Comparison | Vivo Nagpur
+        </title>
+        <meta
+          name="description"
+          content="Compare Vivo smartphone models side by side. Compare specifications, cameras, battery, performance, and features of different Vivo smartphone models available in Nagpur."
+        />
+        <meta
+          name="keywords"
+          content="compare Vivo phones, Vivo smartphone comparison, Vivo X series vs Y series, Vivo phone specifications, Vivo phones Nagpur comparison"
+        />
+      </Head>
+
+      <Script id="compare-structured-data" type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Compare Vivo Smartphones Side by Side",
+            "description": "Compare different Vivo smartphone models side by side to find the perfect phone for your needs.",
+            "about": {
+              "@type": "Thing",
+              "name": "Smartphone Comparison"
+            },
+            "specialty": "Vivo Smartphone Comparison",
+            "mainEntity": {
+              "@type": "ItemList",
+              "itemListElement": [
+                ${selectedModels
+                  .filter((model) => model && products[model])
+                  .map(
+                    (model, index) => `{
+                      "@type": "ListItem",
+                      "position": ${index + 1},
+                      "item": {
+                        "@type": "Product",
+                        "name": "${products[model]?.name || ""}",
+                        "brand": {
+                          "@type": "Brand",
+                          "name": "Vivo"
+                        }
+                      }
+                    }`
+                  )
+                  .join(",")}
+              ]
+            }
+          }
+        `}
+      </Script>
+
       <Navbar />
-      <div className="bg-gradient-to-b from-gray-200 to-white">
+      <main className="bg-gradient-to-b from-gray-200 to-white">
         <div className="mx-auto py-[100px] bg-gray-200 text-black">
-          <h2 className="text-center text-4xl font-vivoMedium">
-            Which phone is better for you?
-          </h2>
+          <h1 className="text-center text-4xl font-vivoMedium">
+            Which Vivo phone is better for you?
+          </h1>
         </div>
 
         {/* Product Selection Grid */}
@@ -363,7 +417,7 @@ const ComparePage = () => {
             )}
           </div>
         </div>
-      </div>
+      </main>
       <Footer />
     </>
   );

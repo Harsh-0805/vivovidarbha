@@ -9,6 +9,8 @@ import Navbar from "@/components/Navbar";
 import Culture from "@/public/assets/Culture.webp";
 import Vission from "@/public/assets/MissionVission.webp";
 import { Footer } from "@/components/Footer";
+import Script from "next/script";
+import Head from "next/head";
 
 const AboutVivoNagpur = () => {
   const images = [
@@ -21,8 +23,59 @@ const AboutVivoNagpur = () => {
 
   return (
     <>
+      <Head>
+        <title>
+          About Vivo Nagpur | Official Vivo Distributor in Vidarbha Region
+        </title>
+        <meta
+          name="description"
+          content="UNIMAY Electronic Pvt Ltd is the official distributor of Vivo smartphones in Nagpur and Vidarbha region. Learn about our mission, vision, and commitment to customer service."
+        />
+        <meta
+          name="keywords"
+          content="Vivo Nagpur, UNIMAY Electronic, Vivo distributor Vidarbha, Vivo authorized dealer Nagpur, Vivo smartphones Nagpur"
+        />
+      </Head>
+
+      <Script id="about-structured-data" type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "mainEntity": {
+              "@type": "Organization",
+              "name": "Vivo Nagpur - UNIMAY Electronic Pvt Ltd",
+              "description": "Vivo Nagpur is a leading technology distributor, providing and promoting Vivo smartphones and accessories across the Vidarbha region.",
+              "foundingDate": "2018",
+              "founders": [
+                {
+                  "@type": "Person",
+                  "name": "UNIMAY Electronic Management"
+                }
+              ],
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "6th Floor, Riaan House, LIC Square, Kingsway Rd",
+                "addressLocality": "Nagpur",
+                "postalCode": "440001",
+                "addressRegion": "Maharashtra",
+                "addressCountry": "IN"
+              },
+              "url": "https://www.vivonagpur.com",
+              "sameAs": [
+                "https://www.facebook.com/vivonagpur",
+                "https://www.instagram.com/vivonagpur"
+              ]
+            }
+          }
+        `}
+      </Script>
       <Navbar />
-      <div className="w-full">
+      <main className="w-full">
+        <h1 className="sr-only">
+          About Vivo Nagpur - Official Vivo Distributor in Vidarbha Region
+        </h1>
+
         {/* Swiper Carousel */}
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
@@ -106,7 +159,7 @@ const AboutVivoNagpur = () => {
             <Image src={Vission} alt="Brochure 2" fill className="rounded-lg" />
           </div>
         </div>
-      </div>
+      </main>
       <Footer />
     </>
   );
