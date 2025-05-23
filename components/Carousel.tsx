@@ -179,22 +179,22 @@ export const HeroSection: React.FC = () => {
       </motion.button>
 
       {/* Indicators */}
-      <div
+      {/* <div
         className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4 z-10"
         role="tablist"
         aria-label="Carousel Navigation"
-      ></div>
+      ></div> */}
       {slides.map((slide, index) => (
         <motion.div
           key={index}
           onClick={() => goToSlide(index)}
           animate={{ scale: index === currentSlide ? 1.3 : 1 }}
           transition={{ duration: 0.3 }}
-          className={`cursor-pointer rounded-full ${
-            index === currentSlide
-              ? "bg-blue-600 w-3 h-3 sm:w-4 sm:h-4"
-              : "bg-gray-300 w-2 h-2 sm:w-3 sm:h-3"
-          }`}
+          // className={`cursor-pointer rounded-full ${
+          //   index === currentSlide
+          //     ? "bg-blue-600 w-3 h-3 sm:w-4 sm:h-4"
+          //     : "bg-gray-300 w-2 h-2 sm:w-3 sm:h-3"
+          // }`}
           role="tab"
           aria-label={`Slide ${index + 1}: ${slide.title || "Featured Item"}`}
           aria-selected={index === currentSlide}
